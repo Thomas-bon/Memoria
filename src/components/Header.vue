@@ -6,21 +6,31 @@
     <div class="BarHead">
       <div class="alignHeader">
         <div id="logo">
-          <a href="#"><img id="memoriaLogo" src="./Icons/logo.png" alt=""></a>
+          <RouterLink :to="{ name: 'home' }">
+            <img id="memoriaLogo" src="./Icons/logo.png" alt="">
+          </RouterLink>
         </div>
         <div class="linksAlign">
           <div id="boutique">
-            <a href="#">Boutique</a>
+            <RouterLink :to="{ name: 'Shop' }">
+              <h1>Boutique</h1>
+            </RouterLink>
           </div>
           <div id="About">
-            <a href="#">About</a>
+            <RouterLink :to="{ name: 'about' }">
+              <h1>About</h1>
+            </RouterLink>
           </div>
           <div id="Contacts">
-            <a href="#">Contacts</a>
+            <RouterLink :to="{ name: 'Contact' }">
+              <h1>Contact</h1>
+            </RouterLink>
           </div>
         </div>
         <div id="shopLogo">
-          <a href="#"><img id="shopBag" src="./Icons/shopLogo.svg" alt=""></a>
+          <RouterLink :to="{ name: 'Shopping' }">
+            <img id="shopBag" src="./Icons/shopLogo.svg" alt="">
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -28,7 +38,6 @@
 </template>
 
 <style scoped>
-
 header {
   background-color: green;
   backdrop-filter: blur(2px);
@@ -86,7 +95,7 @@ img {
   align-items: center;
 }
 
-#memoriaLogo{
+#memoriaLogo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,4 +107,8 @@ a {
   font-size: 2em;
 }
 
+h1 {
+  color: white;
+  font-size: 1em;
+}
 </style>
