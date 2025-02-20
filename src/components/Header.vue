@@ -46,6 +46,7 @@ header {
   margin: 0;
   position: fixed;
   top: 0;
+  z-index: 20;
 }
 
 .BarHead {
