@@ -10,7 +10,6 @@
     </div>
   </header>
 
-  <RouterView />
 </template>
 
 <style scoped>
