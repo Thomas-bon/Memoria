@@ -4,7 +4,7 @@ import navigationBar from './components/Header.vue';
 
 export default {
   components: {
-    // navigationBar,
+    navigationBar,
     RouterLink,
     RouterView
   }
