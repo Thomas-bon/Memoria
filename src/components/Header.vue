@@ -46,7 +46,8 @@ header {
   margin: 0;
   position: fixed;
   top: 0;
-  z-index: 3;
+  z-index: 20;
+
 }
 
 .BarHead {
@@ -112,4 +113,5 @@ h1 {
   color: white;
   font-size: 1em;
 }
+
 </style>
