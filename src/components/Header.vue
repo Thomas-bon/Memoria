@@ -1,12 +1,9 @@
-<script>
-</script>
-
 <template>
   <header>
     <div class="BarHead">
       <div class="alignHeader">
         <div id="logo">
-          <RouterLink :to="{ name: 'home' }">
+          <RouterLink :to="'/#brand'">
             <img id="memoriaLogo" src="./Icons/logo.png" alt="">
           </RouterLink>
         </div>
@@ -17,12 +14,12 @@
             </RouterLink>
           </div>
           <div id="About">
-            <RouterLink :to="{ name: 'about' }">
+            <RouterLink :to="'/#about'">
               <h1>About</h1>
             </RouterLink>
           </div>
           <div id="Contacts">
-            <RouterLink :to="{ name: 'Contact' }">
+            <RouterLink :to="'/#contact'">
               <h1>Contact</h1>
             </RouterLink>
           </div>
@@ -37,6 +34,20 @@
   </header>
 </template>
 
+<script>
+export default {
+  methods: {
+    // Vous pouvez conserver cette méthode si vous voulez des comportements supplémentaires, mais elle n'est pas nécessaire avec le `RouterLink`
+    scrollToAbout() {
+      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    },
+    scrollToContact() {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    },
+  },
+};
+</script>
+
 <style scoped>
 header {
   background-color: green;
@@ -47,7 +58,6 @@ header {
   position: fixed;
   top: 0;
   z-index: 20;
-
 }
 
 .BarHead {
@@ -67,15 +77,12 @@ header {
   gap: 380px;
 }
 
-
-
 .linksAlign {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 125px;
-
 }
 
 img {
@@ -113,5 +120,4 @@ h1 {
   color: white;
   font-size: 1em;
 }
-
 </style>

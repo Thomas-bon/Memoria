@@ -45,6 +45,19 @@ const router = createRouter({
       component: PersonalizeView,
     },
   ],
-})
+});
 
-export default router
+// Gestion du défilement vers les ancres après chaque navigation
+router.afterEach((to) => {
+  if (to.hash) {
+    // Si un hash est là, on attend la fin du rendu de la page et on effectue le scroll
+    setTimeout(() => {
+      const element = document.getElementById(to.hash.slice(1)); // retire le #
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50); 
+  }
+});
+
+export default router;
