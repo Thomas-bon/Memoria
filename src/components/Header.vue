@@ -4,7 +4,7 @@
       <div class="alignHeader">
         <div id="logo">
           <RouterLink :to="'/#brand'">
-            <img id="memoriaLogo" src="./Icons/logo.png" alt="">
+            <img id="memoriaLogo" src="./Icons/logo2.svg" alt="">
           </RouterLink>
         </div>
         <div class="linksAlign">
@@ -20,13 +20,13 @@
           </div>
           <div id="Contacts">
             <RouterLink :to="'/#contact'">
-              <h1>Contact</h1>
+              <h1>Contacts</h1>
             </RouterLink>
           </div>
         </div>
         <div id="shopLogo">
           <RouterLink :to="{ name: 'Shopping' }">
-            <img id="shopBag" src="./Icons/shopLogo.svg" alt="">
+            <img id="shopBag" src="./Icons/panierLogo.svg" alt="">
           </RouterLink>
         </div>
       </div>
@@ -49,8 +49,17 @@ export default {
 </script>
 
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+
+.paytone-one-regular {
+  font-family: "Paytone One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 header {
-  background-color: green;
+  background-color: #F8F4F4;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   width: 100%;
@@ -74,7 +83,7 @@ header {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 380px;
+  gap: 340px;
 }
 
 .linksAlign {
@@ -97,8 +106,8 @@ img {
 }
 
 #shopBag {
-  height: 55px;
-  width: 55px;
+  height: 45px;
+  width: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,7 +126,8 @@ a {
 }
 
 h1 {
-  color: white;
+  color: #000000;
   font-size: 1em;
+  font-family: "Paytone One", sans-serif;
 }
 </style>
