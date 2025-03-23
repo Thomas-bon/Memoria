@@ -46,8 +46,8 @@ const router = createRouter({
       component: PersonalizeView,
     },
     {
-      path: '/Jeux',
-      name: 'Jeux',
+      path: '/game',
+      name: 'game',
       component: JeuxView,
     },
   ],
