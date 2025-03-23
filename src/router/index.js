@@ -5,6 +5,7 @@ import ContactView from '../views/ContactView.vue'
 import ShopppingView from '../views/ShoppingView.vue'
 import ProductView from '../views/ProductView.vue'
 import PersonalizeView from '../views/PersonalizeView.vue'
+import JeuxView from '../views/JeuxView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,11 @@ const router = createRouter({
       path: '/Personalize',
       name: 'Personalize',
       component: PersonalizeView,
+    },
+    {
+      path: '/Jeux',
+      name: 'Jeux',
+      component: JeuxView,
     },
   ],
 });
