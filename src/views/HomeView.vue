@@ -3,7 +3,7 @@
 export default {
   data() {
     return {
-      isHovered: false, 
+      isHovered: false,
     };
   },
   methods: {
@@ -11,8 +11,8 @@ export default {
     scrollToAbout() {
       const aboutSection = document.getElementById('about');
       aboutSection.scrollIntoView({
-        behavior: 'smooth', 
-        block: 'start', 
+        behavior: 'smooth',
+        block: 'start',
       });
     },
   },
@@ -22,41 +22,29 @@ export default {
 
 <template>
 
+  <!-- <div id="testBG"></div> -->
+
+  <img id="bg" src="../assets/pictures/BGhomepage.svg" alt="">
+
   <div id="brand">
 
-    <h1 id="title">Memoria</H1>
-    <h2>“Gravez votre parcours, portez votre victoire
-      Mémoria, le t-shirt de votre marathon”</h2>
-    <RouterLink :to="{ name: 'Shop' }">
+    <!-- <RouterLink :to="{ name: 'Shop' }">
       <button id="store">Voir boutique</button>
-    </RouterLink>
+    </RouterLink> -->
 
-    <div id="boxArrow" @mouseover="isHovered = true" @mouseleave="isHovered = false" @click="scrollToAbout">
+    <!-- <div id="boxArrow" @mouseover="isHovered = true" @mouseleave="isHovered = false" @click="scrollToAbout">
       <img class="arrow_down" src="../assets/pictures/down-arrow.png" alt="Flèche vers le bas"
         :class="{ 'arrow_down_hover': isHovered }">
-    </div>
+    </div> -->
 
   </div>
 
   <div id="about">
 
-    <div id="history">
-      <div id="imgHistory"></div>
-      <div id="textHistory">
-        <h2>Notre histoire</h2>
-        <p>Memoria est une marque de vêtements de sport qui a vu le jour en 2019.
-          Elle a été créée par deux amis, passionnés de sport et de mode.
-          Leur objectif était de proposer des vêtements de sport de qualité,
-          à la fois confortables et élégants.
-          Ils ont donc décidé de créer leur propre marque,
-          en s’inspirant des tendances actuelles et en y apportant leur touche personnelle.
-          Aujourd’hui, Memoria est devenue une marque reconnue dans le monde du sport,
-          et elle continue de proposer des vêtements de sport de qualité,
-          pour les hommes et les femmes qui veulent allier performance et style.</p>
-      </div>
+    <div id="tshirts">
+      <div class="tshirt" id="tshirt1"></div>
+      <div class="tshirt" id="tshirt2"></div>
     </div>
-    <div id="valor"></div>
-
 
   </div>
 
@@ -91,6 +79,20 @@ export default {
   user-select: none;
 }
 
+#bg {
+  width: 100%;
+  height: auto; /* hauteur automatique selon la largeur */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+
+
+
 template {
   height: 100%;
   width: 100%;
@@ -103,33 +105,24 @@ template {
 
 #brand {
   position: relative;
-  height: 90vh;
+  height: 100vh;
   width: 100%;
   /* background-color: red; */
-  margin-top: 10vh;
+  /* margin-top: 10vh; */
   scroll-margin-top: 0px;
 
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
 }
 
-#title {
-  font-size: 11em;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: rgb(0, 0, 0);
-  text-align: center;
-}
-
-
-
-#boxArrow {
+/* #boxArrow {
   position: absolute;
   bottom: 55px;
   width: 60px;
   height: 100px;
-  /* background-color: red;  */
   border: 3px solid black;
   border-radius: 40px;
 
@@ -140,9 +133,9 @@ template {
   overflow: hidden;
 
 
-}
+} */
 
-#boxArrow::before {
+/* #boxArrow::before {
   content: "";
   position: absolute;
   top: 0;
@@ -153,22 +146,22 @@ template {
   transform: scaleY(0);
   transform-origin: bottom;
   transition: transform 0.3s ease-in-out;
-}
+} */
 
-#boxArrow:hover::before {
+/* #boxArrow:hover::before {
   transform: scaleY(1);
-}
+} */
 
-.arrow_down {
+/* .arrow_down {
   z-index: 12;
   width: 30px;
   transition: 0.3s ease-in-out;
-}
+} */
 
-.arrow_down_hover {
+/* .arrow_down_hover {
   width: 42px;
 
-}
+} */
 
 
 #about {
@@ -178,44 +171,47 @@ template {
   padding-right: 2%;
   padding-left: 2%;
   scroll-margin-top: 100px;
-}
 
-#history {
-  margin-top: 5%;
-  position: relative;
-  height: 60%;
-  width: 60%;
-  /* background-color: blue; */
-
-  /* display: flex; */
-}
-
-#imgHistory {
-  margin-top: 30px;
-  position: absolute;
-  height: 70%;
-  width: 70%;
-  background-color: gray;
-  border-radius: 30px;
-}
-
-#textHistory {
-  position: absolute;
-  height: 60%;
-  width: 60%;
-  bottom: 0;
-  right: 0;
-  border: 3px solid black;
-  border-radius: 10px;
-  background-color: white;
   display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
-  gap: 25px;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+}
+
+#tshirts {
+  width: 60%;
+  height: 80%;
+  /* background-color: aqua; */
+  z-index: 10;
+
+  display: flex;
+}
+
+.tshirt {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s ease-in-out;
+  cursor:pointer;
+}
+
+#tshirt2 {
+  background-image: url(../assets/pictures/tshirt/tshirt_seville_2.svg);
+  width: 42%;
+}
+
+#tshirt2:hover {
+  background-image: url(../assets/pictures/tshirt/tshirt_seville_2_dos.svg);
+  
+}
+
+#tshirt1:hover {
+  background-image: url(../assets/pictures/tshirt/tshirt_seville_1_dos.svg);
+  
+}
+
+#tshirt1 {
+  background-image: url(../assets/pictures/tshirt/tshirt_seville_1.svg);
+  width: 58%;
 }
 
 #contact {

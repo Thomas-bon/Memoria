@@ -5,6 +5,7 @@ import ContactView from '../views/ContactView.vue'
 import ShopppingView from '../views/ShoppingView.vue'
 import ProductView from '../views/ProductView.vue'
 import PersonalizeView from '../views/PersonalizeView.vue'
+import JeuxView from '../views/JeuxView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       name: 'Personalize',
       component: PersonalizeView,
     },
+    {
+      path: '/Game',
+      name: 'Game',
+      component: JeuxView,
+    },
   ],
 });
 
@@ -56,7 +62,7 @@ router.afterEach((to) => {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 50); 
+    }, 50);
   }
 });
 
