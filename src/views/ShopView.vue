@@ -51,6 +51,7 @@
 </template>
 
 <style scoped>
+
 h1 {
   color: #010101;
 }

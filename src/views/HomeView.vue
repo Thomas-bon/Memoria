@@ -105,7 +105,7 @@ template {
 
 #brand {
   position: relative;
-  height: 100vh;
+  height: 210vh;
   width: 100%;
   /* background-color: red; */
   /* margin-top: 10vh; */

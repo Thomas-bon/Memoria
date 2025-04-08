@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :class="{ HomePageHeader: isHomePage, AllOfOthersPageHeader: !isHomePage }">
     <div class="BarHead">
       <div class="alignHeader">
         <div id="logo">
@@ -35,6 +35,9 @@
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+
+
 export default {
   methods: {
     // Vous pouvez conserver cette méthode si vous voulez des comportements supplémentaires, mais elle n'est pas nécessaire avec le `RouterLink`
@@ -45,6 +48,11 @@ export default {
       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     },
   },
+  computed: {
+    isHomePage() {
+      return this.$route.name === 'home'
+    }
+  }
 };
 </script>
 
@@ -59,7 +67,6 @@ export default {
 }
 
 header {
-  background-color: #F8F4F4;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   width: 100%;
@@ -67,7 +74,17 @@ header {
   position: fixed;
   top: 0;
   z-index: 20;
+  transition: background-color 0.5s ease-in-out;
 }
+
+.HomePageHeader {
+  background-color: red;
+}
+
+.AllOfOthersPageHeader {
+  background-color: #F8F4F4;
+}
+
 
 .BarHead {
   width: 100%;
