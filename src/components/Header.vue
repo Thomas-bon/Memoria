@@ -59,13 +59,11 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
-.paytone-one-regular {
-  font-family: "Paytone One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+@font-face {
+  font-family: 'Monomaniac One';
+  src: url('../assets/font/MonomaniacOne-Regular.ttf');
+} 
 
 header {
   backdrop-filter: blur(2px);
@@ -79,12 +77,29 @@ header {
 }
 
 .HomePageHeader {
-  background-color: red;
+  background: linear-gradient(#000000, 60%, transparent);
+  color: #FFFFFF;
+
 }
 
 .AllOfOthersPageHeader {
   background-color: #F8F4F4;
+  color: #000000;
+
 }
+
+.HomePageHeader a {
+  color: white; 
+}
+
+.AllOfOthersPageHeader a {
+  color: black; 
+}
+
+.HomePageHeader h1, .AllOfOthersPageHeader h1 {
+  color: inherit; 
+}
+
 
 
 .BarHead {
@@ -101,7 +116,7 @@ header {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 340px;
+  gap: 240px;
 }
 
 .linksAlign {
@@ -113,8 +128,8 @@ header {
 }
 
 img {
-  height: 75px;
-  width: 75px;
+  height: 195px;
+  width: 195px;
 }
 
 #logo {
@@ -124,8 +139,8 @@ img {
 }
 
 #shopBag {
-  height: 45px;
-  width: 45px;
+  height: 35px;
+  width: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,8 +159,8 @@ a {
 }
 
 h1 {
-  color: #000000;
-  font-size: 1em;
-  font-family: "Paytone One", sans-serif;
+  font-size: 0.8em;
+  font-family: 'Monomaniac One';
+  
 }
 </style>
