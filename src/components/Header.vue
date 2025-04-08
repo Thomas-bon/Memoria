@@ -1,6 +1,7 @@
 <template>
   <header :class="{ HomePageHeader: isHomePage, AllOfOthersPageHeader: !isHomePage }">
     <div class="BarHead">
+      <div class="alignLine">
       <div class="alignHeader">
         <div id="logo">
           <RouterLink :to="'/#brand'">
@@ -32,6 +33,8 @@
           </RouterLink>
         </div>
       </div>
+      <div id="line" v-if="!isHomePage"></div>
+    </div>
     </div>
   </header>
 </template>
@@ -83,7 +86,7 @@ header {
 }
 
 .AllOfOthersPageHeader {
-  background-color: #F8F4F4;
+  background-color: #FFFFFF;
   color: #000000;
 
 }
@@ -162,5 +165,20 @@ h1 {
   font-size: 0.8em;
   font-family: 'Monomaniac One';
   
+}
+
+#line {
+  width: 100%;
+  height: 1px;
+  background-color: #000000;
+  transform: translateY(-50px);
+}
+
+.alignLine {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
 }
 </style>
