@@ -73,7 +73,7 @@ header {
   margin: 0;
   position: fixed;
   top: 0;
-  z-index: 20;
+  z-index: 200;
   transition: background-color 0.5s ease-in-out;
 }
 

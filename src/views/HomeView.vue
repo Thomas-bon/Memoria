@@ -3,19 +3,10 @@
 export default {
   data() {
     return {
-      isHovered: false,
+
     };
   },
-  methods: {
-    // Méthode pour défiler vers la section about
-    scrollToAbout() {
-      const aboutSection = document.getElementById('about');
-      aboutSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    },
-  },
+
 };
 
 </script>
@@ -26,52 +17,29 @@ export default {
 
   <img id="bg" src="../assets/pictures/BGhomepage.svg" alt="">
 
+  <img id="logoHome" src="../assets/pictures/logo.svg" alt="Logo de chaussure memoria">
+
   <div id="brand">
-
-    <!-- <RouterLink :to="{ name: 'Shop' }">
-      <button id="store">Voir boutique</button>
-    </RouterLink> -->
-
-    <!-- <div id="boxArrow" @mouseover="isHovered = true" @mouseleave="isHovered = false" @click="scrollToAbout">
-      <img class="arrow_down" src="../assets/pictures/down-arrow.png" alt="Flèche vers le bas"
-        :class="{ 'arrow_down_hover': isHovered }">
-    </div> -->
-
-  </div>
-
-  <div id="about">
-
-    <div id="tshirts">
-      <div class="tshirt" id="tshirt1"></div>
-      <div class="tshirt" id="tshirt2"></div>
+    <div class="View" id="FirstView">
+      <RouterLink :to="{ name: 'Shop' }">
+        <button id="store"><span>Shop Now</span></button>
+      </RouterLink>
     </div>
-
-  </div>
-
-  <div id="contact">
-
-    <div id="contactForm">
-      <h2>Contactez-nous</h2>
-      <form>
-        <input type="text" placeholder="Nom">
-        <input type="text" placeholder="Prénom">
-        <input type="email" placeholder="Email">
-        <textarea placeholder="Message"></textarea>
-        <button>Envoyer</button>
-      </form>
+    <div class="View" id="SecondView">
+      <p>TRANSFORMEZ VOS MARATHONS EN SOUVENIRS INOUBLIABLES</p>
     </div>
-
-
+    <div id="MotivationSlide">
+      <p>TRANSFORMEZ VOS MARATHONS EN SOUVENIRS INOUBLIABLES</p>
+    </div>
   </div>
-
-
-
-
-
-
 </template>
 
 <style>
+@font-face {
+  font-family: "MonoManiac One";
+  src: url(../assets/font/MonomaniacOne-Regular.ttf);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -79,9 +47,89 @@ export default {
   user-select: none;
 }
 
+.View {
+  height: 100vh;
+  width: 100vw;
+}
+
+#FirstView {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 5%;
+}
+
+#FirstView button {
+  width: 250px;
+  height: 100px;
+  background-color: #73020C;
+  color: white;
+  font-family: "MonoManiac One";
+  font-size: 40px;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+#FirstView button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 1;
+  transition: left 0.4s ease;
+}
+
+#FirstView button:hover::before {
+  left: 0;
+}
+
+#FirstView button span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+#FirstView button:hover span {
+  color: #73020C;
+}
+
+#SecondView {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10%;
+}
+
+#SecondView p {
+  position: relative;
+
+  font-size: 100px;
+  text-align: center;
+  z-index: 5;
+  font-family: "MonoManiac One";
+  font-style: italic;
+  color: white;
+  opacity: 80%;
+}
+
+#MotivationSlide {
+  height: 35vh;
+  width: 100vw;
+  background-color: black;
+  position: relative;
+  z-index: 5;
+}
+
 #bg {
   width: 100%;
-  height: auto; /* hauteur automatique selon la largeur */
+  height: auto;
+  /* hauteur automatique selon la largeur */
   position: absolute;
   top: 0;
   left: 0;
@@ -90,8 +138,23 @@ export default {
   user-select: none;
 }
 
+#logoHome {
+  position: absolute;
+  height: 100px;
+  width: 250px;
+  height: 250px;
+  z-index: 60;
+  top: 23%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-
+#store {
+  z-index: 5;
+  height: 50px;
+  width: 100px;
+  position: relative;
+}
 
 template {
   height: 100%;
@@ -104,65 +167,12 @@ template {
 }
 
 #brand {
-  position: relative;
-  height: 210vh;
+  min-height: 100vh;
   width: 100%;
-  /* background-color: red; */
-  /* margin-top: 10vh; */
   scroll-margin-top: 0px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
+  /* overflow-y: visible; */
+  overflow-x: hidden;
 }
-
-/* #boxArrow {
-  position: absolute;
-  bottom: 55px;
-  width: 60px;
-  height: 100px;
-  border: 3px solid black;
-  border-radius: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-
-
-} */
-
-/* #boxArrow::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.589);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.3s ease-in-out;
-} */
-
-/* #boxArrow:hover::before {
-  transform: scaleY(1);
-} */
-
-/* .arrow_down {
-  z-index: 12;
-  width: 30px;
-  transition: 0.3s ease-in-out;
-} */
-
-/* .arrow_down_hover {
-  width: 42px;
-
-} */
-
 
 #about {
   /* background-color: red; */
@@ -191,7 +201,7 @@ template {
   background-size: contain;
   background-repeat: no-repeat;
   transition: background-image 0.3s ease-in-out;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 #tshirt2 {
@@ -201,12 +211,12 @@ template {
 
 #tshirt2:hover {
   background-image: url(../assets/pictures/tshirt/tshirt_seville_2_dos.svg);
-  
+
 }
 
 #tshirt1:hover {
   background-image: url(../assets/pictures/tshirt/tshirt_seville_1_dos.svg);
-  
+
 }
 
 #tshirt1 {
