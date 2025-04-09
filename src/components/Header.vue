@@ -1,21 +1,23 @@
 <template>
   <header :class="{ HomePageHeader: isHomePage, AllOfOthersPageHeader: !isHomePage }">
     <div class="BarHead">
+      <div class="alignLine">
       <div class="alignHeader">
         <div id="logo">
           <RouterLink :to="'/#brand'">
-            <img id="memoriaLogo" src="./Icons/logo2.svg" alt="">
+            <img v-if="isHomePage" id="memoriaLogo" src="./Icons/logoWhite.svg" alt="">
+            <img v-else id="memoriaLogo" src="./Icons/logoBlack.svg" alt="">
           </RouterLink>
         </div>
         <div class="linksAlign">
           <div id="boutique">
             <RouterLink :to="{ name: 'Shop' }">
-              <h1>Boutique</h1>
+              <h1>Découvrir les T-Shirts</h1>
             </RouterLink>
           </div>
           <div id="About">
             <RouterLink :to="'/#about'">
-              <h1>About</h1>
+              <h1>Notre Mission</h1>
             </RouterLink>
           </div>
           <div id="Contacts">
@@ -26,10 +28,13 @@
         </div>
         <div id="shopLogo">
           <RouterLink :to="{ name: 'Shopping' }">
-            <img id="shopBag" src="./Icons/panierLogo.svg" alt="">
+            <img v-if="isHomePage" id="shopBag" src="./Icons/panierLogoBlanc.svg" alt="">
+            <img v-else id="shopBag" src="./Icons/panierLogoBlack.svg" alt="">
           </RouterLink>
         </div>
       </div>
+      <div id="line" v-if="!isHomePage"></div>
+    </div>
     </div>
   </header>
 </template>
@@ -58,13 +63,10 @@ export default {
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
-
-.paytone-one-regular {
-  font-family: "Paytone One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+@font-face {
+  font-family: 'Monomaniac One';
+  src: url('../assets/font/MonomaniacOne-Regular.ttf');
+} 
 
 header {
   backdrop-filter: blur(2px);
@@ -73,17 +75,34 @@ header {
   margin: 0;
   position: fixed;
   top: 0;
-  z-index: 20;
+  z-index: 200;
   transition: background-color 0.5s ease-in-out;
 }
 
 .HomePageHeader {
-  background-color: red;
+  background: linear-gradient(#000000, 60%, transparent);
+  color: #FFFFFF;
+
 }
 
 .AllOfOthersPageHeader {
-  background-color: #F8F4F4;
+  background-color: #FFFFFF;
+  color: #000000;
+
 }
+
+.HomePageHeader a {
+  color: white; 
+}
+
+.AllOfOthersPageHeader a {
+  color: black; 
+}
+
+.HomePageHeader h1, .AllOfOthersPageHeader h1 {
+  color: inherit; 
+}
+
 
 
 .BarHead {
@@ -100,7 +119,7 @@ header {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 340px;
+  gap: 240px;
 }
 
 .linksAlign {
@@ -112,8 +131,8 @@ header {
 }
 
 img {
-  height: 75px;
-  width: 75px;
+  height: 195px;
+  width: 195px;
 }
 
 #logo {
@@ -123,8 +142,8 @@ img {
 }
 
 #shopBag {
-  height: 45px;
-  width: 45px;
+  height: 35px;
+  width: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,8 +162,23 @@ a {
 }
 
 h1 {
-  color: #000000;
-  font-size: 1em;
-  font-family: "Paytone One", sans-serif;
+  font-size: 0.8em;
+  font-family: 'Monomaniac One';
+  
+}
+
+#line {
+  width: 100%;
+  height: 1px;
+  background-color: #000000;
+  transform: translateY(-50px);
+}
+
+.alignLine {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
 }
 </style>
