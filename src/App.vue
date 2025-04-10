@@ -1,10 +1,12 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import navigationBar from './components/Header.vue';
+import footerComponent from './components/Footer.vue';
 
 export default {
   components: {
     navigationBar,
+    footerComponent,
     RouterLink,
     RouterView
   }
@@ -18,6 +20,10 @@ export default {
   </header>
 
   <RouterView />
+
+  <footerComponent>
+
+  </footerComponent>
 </template>
 
 <style scoped>

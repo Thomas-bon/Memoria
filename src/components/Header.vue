@@ -44,15 +44,6 @@ import { useRoute } from 'vue-router'
 
 
 export default {
-  methods: {
-    // Vous pouvez conserver cette méthode si vous voulez des comportements supplémentaires, mais elle n'est pas nécessaire avec le `RouterLink`
-    scrollToAbout() {
-      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-    },
-    scrollToContact() {
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    },
-  },
   computed: {
     isHomePage() {
       return this.$route.name === 'home'
@@ -163,6 +154,7 @@ a {
 
 h1 {
   font-size: 0.8em;
+  font-weight:100;
   font-family: 'Monomaniac One';
   
 }
