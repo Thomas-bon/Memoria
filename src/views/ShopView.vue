@@ -4,6 +4,7 @@
 
 
 <template>
+  
   <div class="Container">
     <div id="title">
       <h1>BOUTIQUE</h1>
