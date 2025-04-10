@@ -15,18 +15,37 @@ export default {
 </script>
 
 <template>
-  <header>
-    <navigationBar/>
-  </header>
+  <div id="app">
+    <header>
+      <navigationBar />
+    </header>
 
-  <RouterView />
+    <main>
+      <RouterView />
+    </main>
 
-  <footerComponent>
+    <footerComponent>
 
-  </footerComponent>
+    </footerComponent>
+  </div>
 </template>
 
 <style scoped>
+
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
 header {
   line-height: 1.5;
   max-height: 100vh;

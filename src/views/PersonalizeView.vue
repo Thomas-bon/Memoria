@@ -41,6 +41,12 @@ template {
     align-items: center;
     height: 100vh;
     width: 100vw;
+
+    background-image: url(../assets/pictures/BGpersonnalisationpage.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+
 }
 
 .align{

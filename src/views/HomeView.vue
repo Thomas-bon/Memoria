@@ -1,22 +1,26 @@
 <script>
-
 export default {
   data() {
     return {
-
+      mots: ["DISCIPLINE  INSPIRANT", "DÉCOUVERTE  LÉGENDAIRE"],
+      motActuel: 0,
     };
   },
-
+  computed: {
+    motAffiché() {
+      return this.mots[this.motActuel];
+    }
+  },
+  mounted() {
+    setInterval(() => {
+      this.motActuel = (this.motActuel + 1) % this.mots.length;
+    }, 15000); // Changement toutes les 15s
+  },
 };
-
 </script>
 
 <template>
-
-  <!-- <div id="testBG"></div> -->
-
   <img id="bg" src="../assets/pictures/BGhomepage.svg" alt="">
-
   <img id="logoHome" src="../assets/pictures/logo.svg" alt="Logo de chaussure memoria">
 
   <div id="brand">
@@ -29,7 +33,11 @@ export default {
       <p>TRANSFORMEZ VOS MARATHONS EN SOUVENIRS INOUBLIABLES</p>
     </div>
     <div class="View" id="MotivationSlide">
-      <p>TRANSFORMEZ VOS MARATHONS EN SOUVENIRS INOUBLIABLES</p>
+      <div class="marquee-container">
+        <p class="marquee-text" :key="motAffiché">
+          {{ motAffiché }}
+        </p>
+      </div>
     </div>
     <div class="View" id="ThirdView">
       <img src="../assets/pictures/MEMORIA_home_page.svg" alt="">
@@ -38,15 +46,21 @@ export default {
     </div>
     <div class="View" id="FourView">
       <h1>Nos engagements</h1>
-      <p>Conçus en matière technique respirante et confortable, nos t-shirts allient style et performance. 
+      <p>Conçus en matière technique respirante et confortable, nos t-shirts allient style et performance.
         Avec Mémoria, chaque course devient un souvenir à afficher et une fierté à porter.</p>
     </div>
   </div>
 </template>
 
-<style>@font-face {
+<style>
+@font-face {
   font-family: "MonoManiac One";
   src: url(../assets/font/MonomaniacOne-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Fight";
+  src: url(../assets/font/FIGHTT3_.ttf);
 }
 
 @font-face {
@@ -66,6 +80,41 @@ export default {
   width: 100vw;
   position: relative;
   z-index: 5;
+}
+
+#MotivationSlide {
+  height: 40vh;
+  width: 100vw;
+  background-color: #ffff;
+  border-top: #cecece 8px solid;
+  border-bottom: #cecece 8px solid;
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.marquee-text {
+  font-size: 22em;
+  font-family: "Fight";
+  color: #73020C;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+  display: inline-block;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(200%);
+  }
+  100% {
+    transform: translateX(-120%);
+  }
 }
 
 #FirstView {
@@ -133,12 +182,6 @@ export default {
   opacity: 80%;
 }
 
-#MotivationSlide {
-  height: 40vh;
-  width: 100vw;
-  background-color: black;
-}
-
 #ThirdView {
   height: 50vh;
   display: flex;
@@ -159,7 +202,7 @@ export default {
 }
 
 #FourView {
-  height: 80vh;
+  height: 78vh;
   color: white;
   display: flex;
   flex-direction: column;
@@ -225,5 +268,4 @@ template {
   scroll-margin-top: 0px;
   overflow-x: hidden;
 }
-
 </style>
