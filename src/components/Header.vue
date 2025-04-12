@@ -73,7 +73,6 @@ header {
 .HomePageHeader {
   background: linear-gradient(#000000, 60%, transparent);
   color: #FFFFFF;
-
 }
 
 .AllOfOthersPageHeader {

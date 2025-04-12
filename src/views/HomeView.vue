@@ -14,45 +14,47 @@ export default {
   mounted() {
     setInterval(() => {
       this.motActuel = (this.motActuel + 1) % this.mots.length;
-    }, 15000); // Changement toutes les 15s
+    }, 15000);
   },
 };
 </script>
 
 <template>
-  <img id="bg" src="../assets/pictures/BGhomepage.svg" alt="">
-  <img id="logoHome" src="../assets/pictures/logo.svg" alt="Logo de chaussure memoria">
-
   <div id="brand">
-    <div class="View" id="FirstView">
+
+    <section class="View" id="FirstView">
+    <img id="logoHome" src="../assets/pictures/logo.svg" alt="Logo de chaussure memoria" />
+
       <RouterLink :to="{ name: 'Shop' }">
         <button id="store"><span>Shop Now</span></button>
       </RouterLink>
-    </div>
-    <div class="View" id="SecondView">
+    </section>
+
+    <section class="View" id="SecondView">
       <p>TRANSFORMEZ VOS MARATHONS EN SOUVENIRS INOUBLIABLES</p>
-    </div>
-    <div class="View" id="MotivationSlide">
+    </section>
+
+    <section class="View" id="MotivationSlide">
       <div class="marquee-container">
-        <p class="marquee-text" :key="motAffiché">
-          {{ motAffiché }}
-        </p>
+        <p class="marquee-text" :key="motAffiché">{{ motAffiché }}</p>
       </div>
-    </div>
-    <div class="View" id="ThirdView">
+    </section>
+
+    <section class="View" id="ThirdView">
       <img src="../assets/pictures/MEMORIA_home_page.svg" alt="">
       <p>Nous créons des t-shirts personnalisés affichant le tracé exact de votre marathon, la date et votre temps,
         pour que vous puissiez porter fièrement votre performance.</p>
-    </div>
-    <div class="View" id="FourView">
+    </section>
+
+    <section class="View" id="FourView">
       <h1>Nos engagements</h1>
       <p>Conçus en matière technique respirante et confortable, nos t-shirts allient style et performance.
         Avec Mémoria, chaque course devient un souvenir à afficher et une fierté à porter.</p>
-    </div>
+    </section>
   </div>
 </template>
 
-<style>
+<style scoped>
 @font-face {
   font-family: "MonoManiac One";
   src: url(../assets/font/MonomaniacOne-Regular.ttf);
@@ -75,53 +77,32 @@ export default {
   user-select: none;
 }
 
+#brand {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  background-image: url('../assets/pictures/BGhomepage.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+  position: relative;
+  overflow-x: hidden;
+}
+
 .View {
-  height: 100vh;
-  width: 100vw;
+  padding: 25rem 0;
+  width: 100%;
   position: relative;
   z-index: 5;
-}
-
-#MotivationSlide {
-  height: 40vh;
-  width: 100vw;
-  background-color: #ffff;
-  border-top: #cecece 8px solid;
-  border-bottom: #cecece 8px solid;
-}
-
-.marquee-container {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  height: 100%;
-}
-
-.marquee-text {
-  font-size: 22em;
-  font-family: "Fight";
-  color: #73020C;
-  white-space: nowrap;
-  animation: marquee 15s linear infinite;
-  display: inline-block;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(200%);
-  }
-  100% {
-    transform: translateX(-120%);
-  }
 }
 
 #FirstView {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 5%;
+  justify-content: flex-end;
+  padding-bottom: 10vh;
 }
 
 #FirstView button {
@@ -134,7 +115,7 @@ export default {
   border: none;
   overflow: hidden;
   cursor: pointer;
-  transition: color 0.3s ease;
+  position: relative;
 }
 
 #FirstView button::before {
@@ -163,76 +144,85 @@ export default {
   color: #73020C;
 }
 
-#SecondView {
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 10%;
-}
-
 #SecondView p {
-  position: relative;
-  font-size: 100px;
+  font-size: clamp(2rem, 5vw, 6rem);
   text-align: center;
-  z-index: 5;
   font-family: "MonoManiac One";
   font-style: italic;
   color: white;
-  opacity: 80%;
+  opacity: 0.8;
+  z-index: 5;
+}
+
+#MotivationSlide {
+  background-color: #fff;
+  border-top: #cecece 8px solid;
+  border-bottom: #cecece 8px solid;
+  padding: 3rem 0;
+  width: 100%;
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 100vw;
+}
+
+.marquee-text {
+  font-size: clamp(4rem, 15vw, 12em);
+  font-family: "Fight";
+  color: #73020C;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+  display: inline-block;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 #ThirdView {
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 2rem;
+  text-align: center;
+  font-family: "Abel";
+  padding: 4rem 0;
 }
 
 #ThirdView img {
-  height: 45%;
-  width: 40%;
+  max-width: 90%;
+  height: auto;
 }
 
 #ThirdView p {
-  font-size: 40px;
-  text-align: center;
-  width: 60%;
-  font-family: "Abel";
+  font-size: 1.5rem;
+  max-width: 800px;
 }
 
 #FourView {
-  height: 78vh;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 60px;
-  align-items: center;
-  padding-bottom: 8%;
+  gap: 2rem;
+  text-align: center;
   font-family: "Abel";
+  padding: 19rem 0 6rem;
 }
 
 #FourView h1 {
-  font-size: 7em;
+  font-size: clamp(3rem, 6vw, 7em);
   font-weight: 100;
 }
 
 #FourView p {
-  font-size: 2em;
-  text-align: center;
-  width: 70%;
-}
-
-#bg {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  pointer-events: none;
-  user-select: none;
+  font-size: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 #logoHome {
@@ -243,29 +233,5 @@ export default {
   top: 23%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-#store {
-  z-index: 5;
-  height: 50px;
-  width: 100px;
-  position: relative;
-}
-
-template {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#brand {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-  scroll-margin-top: 0px;
-  overflow-x: hidden;
 }
 </style>

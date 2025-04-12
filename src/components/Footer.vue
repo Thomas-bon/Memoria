@@ -16,7 +16,7 @@
             <div id="allSocialMedia">
                 <a href="" class="iconSocialMedia">
                     <img src="../assets/pictures/logo_Social_Media/Facebook.svg" alt="Facebook">
-                </a>                
+                </a>
                 <a href="" class="iconSocialMedia">
                     <img src="../assets/pictures/logo_Social_Media/Telegram.svg" alt="Telegram">
                 </a>
@@ -38,8 +38,8 @@
 }
 
 footer {
-    height: 16vh;
-    width: 100%;
+    height: 10%;
+    width: 140%;
     z-index: 50;
     position: relative;
     display: flex;
@@ -59,7 +59,6 @@ footer {
 
 #privacyFooter {
     width: 67%;
-    height: 100%;
 }
 
 #privacyFooter>div:first-child {
@@ -67,14 +66,14 @@ footer {
 }
 
 #terms_cookies_privacy {
-    height: 80%;
     border-top: #cecece 6px solid;
 
     display: flex;
     justify-content: center;
-    align-items:flex-end;
+    align-items: flex-end;
     padding-bottom: 30px;
     gap: 50px;
+    height: 60%;
 
 }
 
@@ -95,14 +94,15 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 0px;
+    padding-bottom: 10px;
 }
 
 #linkFooter h2 {
     width: 80%;
     text-align: start;
     font-family: "Inter";
-font-weight: 400;
+    font-weight: 400;
 }
 
 #allSocialMedia {
@@ -116,20 +116,20 @@ font-weight: 400;
 
 .iconSocialMedia {
     background-color: white;
-    border-radius: 50%; 
-    height: 50px; 
-    width: 50px; 
-    padding: 15px; 
+    border-radius: 50%;
+    height: 20px;
+    width: 50px;
+    padding: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .iconSocialMedia:hover {
-    transform: scale(1.1); 
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); 
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 .iconSocialMedia img {
