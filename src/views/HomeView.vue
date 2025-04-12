@@ -121,6 +121,7 @@ export default {
   top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 10000;
 }
 
 #FirstView button::before {
@@ -151,7 +152,7 @@ export default {
 
 #SecondView {
   padding: 25rem 0;
-
+  z-index: 2;
 }
 
 #SecondView p {

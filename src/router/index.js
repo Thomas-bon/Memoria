@@ -16,11 +16,6 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/About',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
-    },
-    {
       path: '/Shop',
       name: 'Shop',
       component: ShopView,
@@ -51,6 +46,21 @@ const router = createRouter({
       component: JeuxView,
     },
   ],
+
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const el = document.querySelector(to.hash)
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+          resolve();
+        }, 150);
+      });
+    }
+    return { top: 0 };
+  }
 });
 
 export default router;

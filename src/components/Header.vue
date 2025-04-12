@@ -16,7 +16,7 @@
             </RouterLink>
           </div>
           <div id="About">
-            <RouterLink :to="'/#about'">
+            <RouterLink :to="{ path: '/', hash: '#ThirdView' }">
               <h1>Notre Mission</h1>
             </RouterLink>
           </div>
