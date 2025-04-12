@@ -102,7 +102,9 @@ export default {
 
 #FirstView {
   justify-content: flex-end;
-  padding-bottom: 10vh;
+  padding: 20rem 0;
+  
+  
 }
 
 #FirstView button {
@@ -115,7 +117,10 @@ export default {
   border: none;
   overflow: hidden;
   cursor: pointer;
-  position: relative;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #FirstView button::before {
@@ -142,6 +147,11 @@ export default {
 
 #FirstView button:hover span {
   color: #73020C;
+}
+
+#SecondView {
+  padding: 25rem 0;
+
 }
 
 #SecondView p {
@@ -230,7 +240,7 @@ export default {
   height: 250px;
   width: 250px;
   z-index: 60;
-  top: 23%;
+  top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

@@ -39,11 +39,12 @@
 
 footer {
     height: 10%;
-    width: 140%;
+    width: 100%;
     z-index: 50;
     position: relative;
     display: flex;
     background-color: #D9D9D9;
+    overflow-y: hidden;
 }
 
 #logoFooter {
