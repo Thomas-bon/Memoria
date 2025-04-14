@@ -139,7 +139,7 @@ template {
 
 .Container {
   margin-top: 10vh;
-  width: 100%
+  width: 100%;
 }
 
 #title {
@@ -301,6 +301,7 @@ template {
   align-items: center;
   background-color: #8AA7AE4D;
   width: 100%;
+  max-width: 100%;
 }
 
 #Personalize {
