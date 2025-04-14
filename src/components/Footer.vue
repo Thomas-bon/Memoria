@@ -119,7 +119,7 @@ footer {
     background-color: white;
     border-radius: 50%;
     height: 20px;
-    width: 50px;
+    width: 20px;
     padding: 15px;
     display: flex;
     justify-content: center;
