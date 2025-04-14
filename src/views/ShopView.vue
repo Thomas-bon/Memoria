@@ -139,7 +139,7 @@ template {
 
 .Container {
   margin-top: 10vh;
-  width: 100vw;
+  width: 100%
 }
 
 #title {
