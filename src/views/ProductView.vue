@@ -223,7 +223,7 @@ template {
 .sizes {
     display: flex;
     gap: 8px;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex: 1;
 }
