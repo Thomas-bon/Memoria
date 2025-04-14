@@ -300,6 +300,7 @@ template {
   justify-content: center;
   align-items: center;
   background-color: #8AA7AE4D;
+  width: 100%;
 }
 
 #Personalize {
