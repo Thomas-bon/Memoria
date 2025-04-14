@@ -48,7 +48,7 @@
           <div id="Personalize">
             ↳ Voir le produit
           </div>
-          <img src="../assets/pictures/tshirt/tshirtBlackAnnecy.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_annecy_ black_1.svg" alt="">
           <div id="Price">
             €40
           </div>
@@ -58,7 +58,7 @@
           <div id="Personalize">
             ↳ Voir le produit
           </div>
-          <img src="../assets/pictures/tshirt/tshirtWhiteAnnecy.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_annecy_white_1.svg" alt="">
           <div id="Price">
             €40
           </div>
@@ -169,6 +169,7 @@ template {
   position: absolute;
   width: 100%;
   height: auto;
+  max-height: 85%;
 }
 
 .text-top-left {
