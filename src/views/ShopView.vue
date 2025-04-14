@@ -158,7 +158,7 @@ template {
   justify-content: center;
   align-items: center;
   font-size: 1.7em;
-  margin-top: 805px;
+  margin-top: 85vh;
   height: 19vh;
   background-color: #8AA7AE4D;
   font-family: 'Inter SemiBold';
