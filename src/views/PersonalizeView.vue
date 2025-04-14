@@ -1,20 +1,105 @@
 <template>
     <div class="wrapper">
+        <h1>PERSONNALISER</h1>
+
+        <div id="alignOptions">
+            <div id="options">
+
+                <!-- COULEUR -->
+                <div v-show="!showColorClicked" class="option" id="color"
+                    @click="toggleState('showColorClicked', $event)">
+                    <div class="illustrationOptions">
+                        <img src="../assets/pictures/color_button.svg" alt="">
+                    </div>
+
+                    <p>Couleur</p>
+                </div>
+                <div v-show="showColorClicked" class="option" id="colorClicked" ref="colorClicked">
+                    <div class="illustrationOptionsClicked">
+                        <img src="../assets/pictures/color_button.svg" alt="">
+
+                        <p>Couleur</p>
+                    </div>
+                    <div class="illustrationOptionsClicked" @click="changeColor('white')">
+                        <img src="../assets/pictures/color_white_button.svg" alt="">
+                        <p>Blanc</p>
+                    </div>
+                    <div class="illustrationOptionsClicked" @click="changeColor('black')">
+                        <img src="../assets/pictures/color_black_button.svg" alt="">
+                        <p>Noir</p>
+                    </div>
+                </div>
+
+                <!-- CHRONO -->
+                <div v-show="!showChronoClicked" class="option" id="chrono"
+                    @click="toggleState('showChronoClicked', $event), changeTshirtSrc('right')">
+                    <div class="illustrationOptions">
+                        <img src="../assets/pictures/chrono_button.svg" alt="">
+                    </div>
+
+                    <p>Chrono</p>
+                </div>
+
+                <div v-show="showChronoClicked" class="option" id="chronoClicked" ref="chronoClicked">
+                    <input type="text" name="minute" id="minute" maxlength="2" placeholder="00" v-model="inputMinute">
+                    <p>:</p>
+                    <input type="text" name="seconde" id="seconde" maxlength="2" placeholder="00"
+                        v-model="inputSeconde">
+
+                </div>
+
+
+                <!-- PARKOUR -->
+                <div v-show="!showParkourClicked" class="option" id="parkour"
+                    @click="toggleState('showParkourClicked', $event)">
+                    <div class="illustrationOptions">
+                        <img src="../assets/pictures/parkour_button.svg" alt="">
+                    </div>
+
+                    <p>Tracé</p>
+                </div>
+                <div v-show="showParkourClicked" class="option" id="parkourClicked" ref="parkourClicked">
+                    <div class="illustrationOptionsClicked" id="basebuttonParkour">
+                        <img src="../assets/pictures/parkour_button.svg" alt="">
+                        <p>Tracé</p>
+                    </div>
+
+                </div>
+
+                <!-- IMPRESSION -->
+                <div id="embroidery">
+                    <p :style="{ opacity: !isChecked ? 1 : 0.29 }">Impression</p>
+
+                    <label class="switch">
+                        <input type="checkbox" v-model="isChecked" />
+                        <span class="slider"></span>
+                    </label>
+
+                    <p :style="{ opacity: isChecked ? 1 : 0.29 }">Broderie</p>
+                </div>
+
+
+            </div>
+        </div>
+
         <div id="alignTshirt">
             <div id="tshirt">
                 <div class="navtshirt">
-                    <div class="nav-btn">
+                    <div class="nav-btn" @click="changeTshirtSrc('left')">
                         <img src="../assets/pictures/arrow_left.svg" alt="" />
                     </div>
                     <p>Avant</p>
                 </div>
 
                 <div class="shirt-container">
-                    <img src="/src/assets/pictures/TshirtImg.svg" alt="T-shirt" />
+                    <img :src="tshirtSrc" alt="T-shirt" />
+                    <p>{{ tshirtValue }}</p>
+                    <p v-if="tshirtValue === 2" id="chronoTshirt">{{ `${inputMinute} ' ${inputSeconde}` }}</p>
+
                 </div>
 
                 <div class="navtshirt">
-                    <div class="nav-btn">
+                    <div class="nav-btn" @click="changeTshirtSrc('right')">
                         <img src="../assets/pictures/arrow_right.svg" alt="" />
                     </div>
                     <p>Arrière</p>
@@ -22,121 +107,130 @@
             </div>
         </div>
 
-        <div id="alignOptions">
-            <div id="options">
-                <!-- COULEUR -->
-                <div v-if="!showColorClicked" class="option" id="color" @click="toggleColor">
-                    <div class="illustrationOptions">
-                        <img src="../assets/pictures/color_button.svg" alt="">
-                    </div>
+        <RouterLink :to="{ name: 'Shopping' }">
+            <button id="store"><span>Ajouter à mon panier d'achats</span></button>
+        </RouterLink>
 
-                    <p>Couleur</p>
-                </div>
-                <!-- ///////////////////////////////////////////////////////////////////////////// -->
-                <div v-else class="option" id="colorClicked" ref="colorClicked">
-                    <div class="illustrationOptionsClicked">
-                        <img src="../assets/pictures/color_button.svg" alt="">
-
-                        <p>Couleur</p>
-                    </div>
-                    <div class="illustrationOptionsClicked">
-                        <img src="../assets/pictures/color_button.svg" alt="">
-                    </div>
-                    <div class="illustrationOptionsClicked">
-                        <img src="../assets/pictures/color_button.svg" alt="">
-                    </div>
-
-                </div>
-                <!-- CHRONO -->
-                <div class="option" id="chrono">
-                    <div class="illustrationOptions">
-                        <img src="../assets/pictures/chrono_button.svg" alt="">
-                    </div>
-
-                    <p>Chrono</p>
-                </div>
-                <!-- ///////////////////////////////////////////////////////////////////////////// -->
-                <!-- <div class="option" id="chrono">
-                    <div class="illustrationOptions">
-                        <img src="../assets/pictures/chrono_button.svg" alt="">
-                    </div>
-
-                    <p>Chrono</p>
-                </div> -->
-                <!-- PARKOUR -->
-                <div class="option" id="parkour">
-                    <div class="illustrationOptions">
-                        <img src="../assets/pictures/parkour_button.svg" alt="">
-                    </div>
-
-                    <p>Tracé</p>
-                </div>
-                <!-- ///////////////////////////////////////////////////////////////////////////// -->
-                <!-- <div class="option" id="parkour">
-                    <div class="illustrationOptions">
-                        <img src="../assets/pictures/parkour_button.svg" alt="">
-                    </div>
-
-                    <p>Tracé</p>
-                </div> -->
-                <!-- IMPRESSION -->
-                <div id="embroidery">
-                    <p>Impression</p>
-                    <label class="switch">
-                        <input type="checkbox" v-model="isChecked" />
-                        <span class="slider"></span>
-                    </label>
-                    <p>Broderie</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="alignValidation">
-            <RouterLink :to="{ name: 'Shopping' }">
-                <button id="store"><span>Ajouter à mon panier d'achats</span></button>
-            </RouterLink>
-        </div>
     </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      isChecked: false,
-      showColorClicked: false,
-    };
-  },
-  methods: {
-    toggleColor() {
-      this.showColorClicked = true;
+    data() {
+        return {
+            isChecked: false,
+            showColorClicked: false,
+            showParkourClicked: false,
+            showChronoClicked: false,
+            tshirtSrc: '/src/assets/pictures/tshirt/tshirt_default_black_1.svg',
+            tshirtValue: '1',
+            inputMinute: '',
+            inputSeconde: '',
+        };
+    },
+    methods: {
+        checkTshirtValue() {
+            if (this.tshirtSrc.endsWith('2.svg')) {
+                this.tshirtValue = 2;
+            } else {
+                this.tshirtValue = 1;
+            }
+        },
+        toggleState(stateName, event) {
+            const newState = !this[stateName];
 
-      // On attend un peu avant d'écouter les clics (important pour pas fermer direct)
-      this.$nextTick(() => {
-        setTimeout(() => {
-          document.addEventListener('click', this.handleClickOutside);
-        }, 0);
-      });
+            // Si on clique sur un bouton déjà ouvert
+            if (newState) {
+                // Ferme toutes les autres sections avant d'ouvrir celle demandée
+                this.showColorClicked = stateName === 'showColorClicked' ? newState : false;
+                this.showChronoClicked = stateName === 'showChronoClicked' ? newState : false;
+                this.showParkourClicked = stateName === 'showParkourClicked' ? newState : false;
+
+                // Ajoute l'événement global pour fermer la section quand on clique à l'extérieur
+                this.addClickListener();
+            } else {
+                // Si la section est fermée, on retire l'écouteur d'événement global
+                this.removeClickListener();
+            }
+
+            // Met à jour l'état de la section qui a été cliquée
+            this[stateName] = newState;
+
+            // Empêche la propagation de l'événement afin de ne pas déclencher handleClickOutside
+            event.stopPropagation();
+        },
+
+        addClickListener() {
+            // Ajoute l'événement click pour fermer les sections à l'extérieur
+            document.addEventListener('click', this.handleClickOutside);
+        },
+
+        removeClickListener() {
+            // Retire l'événement click
+            document.removeEventListener('click', this.handleClickOutside);
+        },
+
+        handleClickOutside(event) {
+            const colorClicked = this.$refs.colorClicked;
+            const chronoClicked = this.$refs.chronoClicked;
+            const parkourClicked = this.$refs.parkourClicked;
+
+            // Vérifie si les refs existent avant de les utiliser
+            if (
+                (colorClicked && !colorClicked.contains(event.target)) &&
+                (chronoClicked && !chronoClicked.contains(event.target)) &&
+                (parkourClicked && !parkourClicked.contains(event.target))
+            ) {
+                // Ferme toutes les sections
+                this.showColorClicked = false;
+                this.showChronoClicked = false;
+                this.showParkourClicked = false;
+
+                // Retire l'écouteur d'événement
+                this.removeClickListener();
+            }
+        },
+        changeTshirtSrc(direction) {
+            const currentFileName = this.tshirtSrc.split('/').pop();
+            const baseName = currentFileName.split('.')[0];
+            const currentNumber = parseInt(baseName.match(/\d+$/)[0]);
+            let newNumber = direction === 'left' ? currentNumber - 1 : currentNumber + 1;
+            newNumber = Math.max(1, Math.min(newNumber, 2));
+            const newFileName = baseName.replace(/\d+$/, newNumber);
+            const newTshirtSrc = this.tshirtSrc.replace(currentFileName, `${newFileName}.svg`);
+
+            this.tshirtSrc = newTshirtSrc;
+            this.checkTshirtValue();
+
+        },
+        changeColor(newColor) {
+            if (newColor === "white") {
+                this.tshirtSrc = this.tshirtSrc.replace('black', newColor);
+            }
+            if (newColor === "black") {
+                this.tshirtSrc = this.tshirtSrc.replace('white', newColor);
+            }
+            this.checkTshirtValue();
+        },
     },
-    handleClickOutside(event) {
-      const colorClicked = this.$refs.colorClicked;
-      if (colorClicked && !colorClicked.contains(event.target)) {
-        this.showColorClicked = false;
-        document.removeEventListener('click', this.handleClickOutside);
-      }
+
+
+    beforeUnmount() {
+        // Nettoie l'écouteur d'événement si la composant est détruit
+        this.removeClickListener();
     },
-  },
-  beforeUnmount() {
-    document.removeEventListener('click', this.handleClickOutside);
-  },
 };
-
 </script>
 
 <style scoped>
 @font-face {
     font-family: "Monomaniac";
     src: url(../assets/font/MonomaniacOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url(../assets/font/Inter_18pt-ExtraBold.ttf);
 }
 
 template {
@@ -151,6 +245,19 @@ template {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
+}
+
+.wrapper h1 {
+    color: black;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+
+    font-size: 4em;
+    font-family: "Inter";
+
 }
 
 #alignTshirt {
@@ -168,27 +275,11 @@ template {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-left: 10%;
+    padding-left: 5%;
     position: absolute;
     top: 0;
     height: 100%;
-    width: 100%;
-
-    z-index: 1;
-}
-
-#alignValidation {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    position: absolute;
-    height: 100%;
-    width: 50%;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+    width: 0%;
     z-index: 1;
 }
 
@@ -198,11 +289,67 @@ template {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    z-index: 2000;
+}
+
+#chronoClicked {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+
+#chronoClicked input {
+    width: 100px;
+    height: 100px;
+    font-size: 3.5em;
+    font-family: "Monomaniac", sans-serif;
+    text-align: center;
+    border-radius: 15px;
+    border: 2px solid #86888B;
+    background-color: #f7f7f7;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Effet au survol de l'input */
+#chronoClicked input:hover {
+    background-color: #e1e1e1;
+    border-color: #73020C;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation au focus */
+#chronoClicked input:focus {
+    outline: none;
+    border-color: #73020C;
+    box-shadow: 0px 4px 12px rgba(115, 2, 12, 0.3);
+}
+
+/* Style du séparateur ":" */
+#chronoClicked p {
+    font-size: 6em;
+    font-family: "Monomaniac", sans-serif;
+    margin: 0 10px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+#parkourClicked {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
 .illustrationOptionsClicked {
     width: 30%;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -216,7 +363,27 @@ template {
     flex-direction: column;
     justify-content: center;
     gap: 20px;
-    z-index: 10;
+    z-index: 100;
+    position: relative;
+}
+
+#chronoTshirt {
+    position: absolute;
+    top: 10px;
+    z-index: 1000;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 3.5em;
+}
+
+.shirt-container {
+    position: relative;
+}
+
+#basebuttonParkour {
+    width: 50%;
 }
 
 .nav-btn {
@@ -230,11 +397,9 @@ template {
     cursor: pointer;
     font-size: 20px;
     font-weight: bold;
-
 }
 
-
-#alignValidation button {
+#store {
     width: auto;
     padding-left: 10px;
     padding-right: 10px;
@@ -247,13 +412,13 @@ template {
     overflow: hidden;
     cursor: pointer;
     position: absolute;
-    top: 100%;
+    top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 0;
+    z-index: 100;
 }
 
-#alignValidation button::before {
+#store::before {
     content: '';
     position: absolute;
     top: 0;
@@ -265,27 +430,26 @@ template {
     transition: left 0.4s ease;
 }
 
-#alignValidation button:hover::before {
+#store:hover::before {
     left: 0;
     border: 3px #73020C solid;
 }
 
-#alignValidation button span {
+#store span {
     position: relative;
     z-index: 100;
     transition: color 0.3s ease;
 }
 
-#alignValidation button:hover span {
+#store:hover span {
     color: #73020C;
 }
-
 
 #tshirt {
     display: flex;
     align-items: center;
-    gap: 150px;
-    z-index: 100;
+    gap: 80px;
+    z-index: 50;
 }
 
 .navtshirt {
@@ -307,11 +471,12 @@ template {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 100;
+    z-index: 1000;
     width: 150px;
     padding: 15px;
     gap: 10px;
     cursor: pointer;
+    position: relative;
 }
 
 .option img {
@@ -330,7 +495,6 @@ template {
 .illustrationOptions {
     height: 100%;
     width: 100%;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -345,7 +509,6 @@ template {
     margin-left: 10px;
     margin-top: 2px;
     margin-bottom: 7px;
-
     padding: 0;
 }
 
@@ -398,8 +561,6 @@ input:checked+.slider {
 
 input:checked+.slider:before {
     transform: translateX(90px);
-    /* Décale le check à droite */
     background-color: white;
-    /* Change la couleur du cercle au moment du clic */
 }
 </style>
