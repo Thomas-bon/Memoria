@@ -84,7 +84,7 @@
           <div id="Personalize">
             ↳ Voir le produit
           </div>
-          <img src="../assets/pictures/tshirt/tshirt_seville_1.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_seville_black_1.svg" alt="">
           <div id="Price">
             €40
           </div>
@@ -94,7 +94,7 @@
           <div id="Personalize">
             ↳ Voir le produit
           </div>
-          <img src="../assets/pictures/tshirt/tshirt_seville_2.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_seville_white_1.svg" alt="">
           <div id="Price">
             €40
           </div>
@@ -124,6 +124,9 @@
   src: url('../assets/font/Abel-Regular.ttf');
 }
 
+*{
+  box-sizing: border-box;
+}
 
 h1 {
   color: #010101;
