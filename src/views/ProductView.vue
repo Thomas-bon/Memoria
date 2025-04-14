@@ -1,86 +1,154 @@
+<script>
+export default {
+    data() {
+        return {
+            unitPrice: 40,
+            quantity: 1,
+            selectedSize: null,
+            defaultImage: new URL('../assets/pictures/tshirt/tshirt_seville_2.svg', import.meta.url).href,
+            hoverImage: new URL('../assets/pictures/tshirt/tshirt_seville_2_dos.svg', import.meta.url).href,
+            currentImage: ''
+        }
+    },
+    created() {
+        this.currentImage = this.defaultImage
+    },
+    methods: {
+        selectSize(size) {
+            if (this.selectedSize === size) {
+                this.selectedSize = null; // si je clique encore dessus ça annule
+            } else {
+                this.selectedSize = size;
+            }
+        },
+        changeImage() {
+            this.currentImage = this.hoverImage;
+        },
+        resetImage() {
+            this.currentImage = this.defaultImage;
+        },
+        increaseQuantity() {
+            this.quantity++;
+        },
+        decreaseQuantity() {
+            if (this.quantity > 1) {
+                this.quantity--;
+            }
+        }
+    },
+    computed: {
+        totalPrice() {
+            return this.unitPrice * this.quantity;
+        }
+    }
+}
+
+</script>
+
+
+
 <template>
     <div class="Product">
         <div class="image-container">
-            <img src="/src/assets/pictures/TshirtImg.svg" alt="T-shirt">
+            <img :src="currentImage" alt="T-shirt" @mouseover="changeImage" @mouseout="resetImage">
         </div>
         <div class="content">
-            <h2>T-SHIRT MÉMORIA</h2>
             <div class="Descriptionproduct">
-                <p>Fabriqué dans une matière respirante et légère, ce t-shirt vous garantit un confort optimal même lors
-                    de vos plus longues courses. Le textile, doux au toucher et
-                    à séchage rapide, permet d’évacuer efficacement la transpiration pour
-                    rester au frais en toutes circonstances.</p>
+                <div id="txtDescription">
+                    <p>Fabriqué dans une matière respirante et légère, ce t-shirt vous garantit un confort optimal même
+                        lors
+                        de vos plus longues courses. Le textile, doux au toucher et
+                        à séchage rapide, permet d’évacuer
+                        efficacement la transpiration pour
+                        rester au frais en toutes circonstances.</p>
+                </div>
 
-                <p>Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la date
-                    de votre performance.
-                    <br>
-                    Vous pouvez également y ajouter votre temps ou tout autre détail personnalisé pour un souvenir
-                    unique et durable.
-                    <br> <br>
-                    Son design ergonomique et sa coupe ajustée vous offrent une liberté
-                    de mouvement idéale pour vous dépasser, tout en affichant fièrement votre exploit.
-                </p>
+                <div id="txtDescription">
+                    <p>Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la
+                        date
+                        de votre performance. Vous pouvez également
+                        y ajouter votre temps ou tout autre détail personnalisé pour un souvenir unique et durable.
+                    </p>
+                </div>
             </div>
 
             <div class="InfoProduct">
                 <div class="buyProduct">
-                    <div class="price">€35</div>
+                    <div class="quantity">
+                        <div class="quantity-buttons">
+                            <button @click="decreaseQuantity">-</button>
+                            <span>{{ quantity }}</span>
+                            <button @click="increaseQuantity">+</button>
+                        </div>
+                    </div>
+
                     <div class="sizes">
-                        <button>XS</button>
-                        <button>S</button>
-                        <button>M</button>
-                        <button>L</button>
-                        <button>XL</button>
+                        <button v-for="size in ['XS', 'S', 'M', 'L', 'XL']" :key="size" @click="selectSize(size)"
+                            :class="{ active: selectedSize === size }">
+                            {{ size }}
+                        </button>
                     </div>
                 </div>
-                <RouterLink :to="{ name: 'Personalize' }">
+
                 <div id="Personalize">
-                    <button class="customize">Personnalisé</button>
+                    <div class="price">€{{ totalPrice }}</div>
+                    <RouterLink :to="{ name: 'Personalize' }">
+                        <button class="customize">Personnalisé</button>
+                    </RouterLink>
                 </div>
-            </RouterLink>
+
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+@font-face {
+    font-family: 'Monomaniac One';
+    src: url('../assets/font/MonomaniacOne-Regular.ttf');
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Monomaniac One';
+}
 
 template {
-  height: 90vh;
-  width: 100%;
+    height: 90vh;
+    width: 100%;
 }
 
 .Product {
-    height: 100vh; 
-    width: 100vw;
+    height: 90vh;
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 95px;
     padding: 20px;
-    max-width: 80vw; 
     margin: auto;
+    background-color: #8AA7AE4D;
+    margin-top: 110px;
 }
 
 .image-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    background-color: #A8BFCA;
     padding: 20px;
-    height: 65vh;
+    height: 85vh;
     width: 35vw;
 }
 
 .image-container img {
-    height: 45vh;
+    height: 55vh;
     width: auto;
 }
 
+
 .content {
     flex: 2;
-    max-width: 40vw;
+    max-width: 45vw;
 }
 
 .content h2 {
@@ -94,41 +162,113 @@ template {
 }
 
 .Descriptionproduct {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
     width: 100%;
+}
+
+#txtDescription {
+    font-size: 1.1em;
+    width: 95%;
 }
 
 .buyProduct {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 120px;
+
 }
 
+
 .price {
-    font-size: 24px;
-    font-weight: bold;
-    min-width: 60px;
-    text-align: center;
+    font-size: 5em;
+    min-width: 180px; /* ou width: 200px; selon ce que tu préfères */
 }
+
+.quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 24px;
+    background-color: #D9D9D9;
+    padding: 7px;
+    min-width: 120px;
+}
+
+.quantity-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.6em;
+}
+
+.quantity-buttons>button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+}
+
 
 .sizes {
     display: flex;
     gap: 8px;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
-.sizes button {
+.sizes>button {
     border: 1px solid black;
     padding: 5px 10px;
     background: white;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5em;
+    border: 1px solid black;
+    background: #FFFFFF;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 80px;
+}
+
+.sizes button.active {
+    background-color: #73020C;
+    color: white;
+    border: 2px solid #000;
+}
+
+
+#Personalize {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    justify-content: flex-start;
+    gap: 60px;
+
 }
 
 .customize {
-    background: black;
+    background: #73020C;
     color: white;
     border-radius: 5px;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    height: 9vh;
+    width: 15vw;
+    font-size: 1.8em;
 }
 
 .InfoProduct {
