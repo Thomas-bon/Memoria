@@ -5,8 +5,8 @@ export default {
             unitPrice: 40,
             quantity: 1,
             selectedSize: null,
-            defaultImage: new URL('../assets/pictures/tshirt/tshirt_seville_2.svg', import.meta.url).href,
-            hoverImage: new URL('../assets/pictures/tshirt/tshirt_seville_2_dos.svg', import.meta.url).href,
+            defaultImage: new URL('../assets/pictures/tshirt/tshirt_seville_white_1.svg', import.meta.url).href,
+            hoverImage: new URL('../assets/pictures/tshirt/tshirt_seville_white_2.svg', import.meta.url).href,
             currentImage: ''
         }
     },
