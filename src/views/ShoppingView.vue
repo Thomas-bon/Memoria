@@ -1,49 +1,203 @@
+<script>
+export default {
+    data() {
+        return {
+            showPaymentForm: false,
+            showBankForm: false,
+            currentStep: 1,
+            phoneNumber: ''
+        };
+    },
+    methods: {
+        validateOrder() {
+            this.showPaymentForm = true;
+            this.currentStep = 2;
+        },
+        confirmShipping() {
+            this.showPaymentForm = false;
+            this.showBankForm = true;
+            this.currentStep = 3;
+        },
+        finalizePayment() {
+            this.currentStep = 1;
+            this.showBankForm = false;
+            this.$router.push('/');
+        },
+        formatCardNumber(event) {
+            let value = event.target.value.replace(/\D/g, '');
+            value = value.replace(/(.{4})/g, '$1 ').trim();
+            event.target.value = value;
+        },
+        formatPhone() {
+            let value = this.phoneNumber.replace(/\D/g, '');
+
+            if (value.length === 10) {
+                
+                this.phoneNumber = value.replace(/(\d{2})(?=\d)/g, '$1 ').trim();
+            } else {
+                
+                this.phoneNumber = value;
+            }
+        }
+    }
+};
+</script>
+
+
+
+
 <template>
     <div class="container">
-        <h1>VOS ACHATS</h1>
 
-        <div class="cart-item">
-            <img src="/src/assets/pictures/TshirtImg.svg" alt="T-shirt">
-            <div class="details">
-                <p><strong>T-SHIRT MÉMORIA</strong><br>
-                    TAILLE : M <br>
-                    QUANTITÉ : 1 <br>
-                    PRIX : 35€</p>
+        <div class="steps">
+            <div class="Step" :class="{ activeStep: currentStep === 1 }">
+                <h1>1.</h1>
+                <p>panier</p>
             </div>
-            <div class="close-btn">✖</div>
-        </div>
-        <button class="product-btn">VOIR PRODUIT</button>
-
-        <div class="cart-item">
-            <img src="/src/assets/pictures/TshirtImg.svg " alt="T-shirt">
-            <div class="details">
-                <p><strong>T-SHIRT MÉMORIA</strong><br>
-                    TAILLE : S <br>
-                    QUANTITÉ : 1 <br>
-                    PRIX : 35€</p>
+            <div class="Step" :class="{ activeStep: currentStep === 2 }">
+                <h1>2.</h1>
+                <p>livraison</p>
             </div>
-            <div class="close-btn">✖</div>
+            <div class="Step" :class="{ activeStep: currentStep === 3 }">
+                <h1>3.</h1>
+                <p>virement</p>
+            </div>
         </div>
-        <button class="product-btn">VOIR PRODUIT</button>
 
-        <div class="trash-icon">
-            <img src="/src/assets/pictures/trashIcon.svg" alt="">
+        <div class="content">
+            <!-- Zone Panier -->
+            <div class="youritems">
+                <div id="purchase">
+                    <div id="item">
+                        <img src="../assets/pictures/tshirt/tshirt_seville_black_1.svg" alt="">
+                    </div>
+                    <div id="iteminfo">
+                        <h2>T-SHIRT PERSONNALISÉ</h2>
+                        <h1>MARATHON DE SEVILLE</h1>
+                        <h3>COULEUR NOIRE</h3>
+                        <h3>TAILLE S</h3>
+                        <h1>€40</h1>
+                    </div>
+                </div>
+
+                <div id="line"></div>
+
+                <div id="moreItems" v-if="!showPaymentForm && !showBankForm">
+                    <h1 id="encadre">ET SI ON LE COMPLÉTAIT <br> AVEC VOS EXPLOITS ?</h1>
+                </div>
+
+                <div id="moreItems" v-if="showBankForm">
+                    <h2>Livraison gratuite dès le premier achat</h2>
+                    <h1>MERCI !</h1>
+                </div>
+
+                <div class="gridOthersItems" v-if="!showPaymentForm && !showBankForm">
+                    <img src="../assets/pictures/tshirt/tshirt_annecy_white_1.svg" alt="">
+                    <img src="../assets/pictures/tshirt/tshirt_annecy_ black_1.svg" alt="">
+                    <img src="../assets/pictures/tshirt/tshirt_seville_white_1.svg" alt="">
+                </div>
+            </div>
+
+            <!-- Zone Paiement / Livraison -->
+            <div class="rightPane">
+                <div class="payment" v-if="!showPaymentForm && !showBankForm">
+                    <div class="totalPrices">
+                        <div id="prices">
+                            <h2>montant du panier</h2><span>40€</span>
+                        </div>
+                        <div id="shipping">
+                            <h2>livraison</h2><span>10€</span>
+                        </div>
+                        <div id="total">
+                            <h1>TOTAL</h1><span>50€</span>
+                        </div>
+                    </div>
+
+                    <div id="promoCode">
+                        <input id="inputCode" type="text" placeholder="CODE PROMO">
+                    </div>
+
+                    <div class="paymentButton">
+                        <button id="confirm" @click="validateOrder">
+                            <h1>VALIDER MA COMMANDE</h1>
+                        </button>
+                        <br>
+                        <h2>LIVRAISON OFFERTE DÈS 100€ D'ACHATS</h2>
+                    </div>
+
+                    <div id="contact">
+                        <h2>UNE QUESTION ? <a id="contactUs" href="#">CONTACTEZ-NOUS</a></h2>
+                    </div>
+                </div>
+
+
+                <div class="shippingForm" v-if="showPaymentForm">
+                    <h2>Coordonnées de Livraison</h2>
+                    <form>
+                        <input type="text" placeholder="Nom" required>
+                        <input type="text" placeholder="Prénom" required>
+                        <input type="text" placeholder="Adresse" required>
+                        <input type="number" placeholder="Code Postal" required>
+                        <input type="text" placeholder="Ville" required>
+                        <input type="tel" v-model="phoneNumber" @blur="formatPhone" placeholder="Téléphone" required>
+                        <button type="button" @click="confirmShipping">Confirmer la livraison</button>
+                    </form>
+                </div>
+
+
+                <div class="bankForm" v-if="showBankForm">
+                    <div id="applePay">
+                        <img src="../components/Icons/applePay.svg" alt="">
+                    </div>
+                    <div id="otherOption">
+                        <div id="line2"></div>
+                        <h2>Ou payez par carte</h2>
+                        <div id="line2"></div>
+                    </div>
+                    <form @submit.prevent="finalizePayment">
+                        <label for="mail">E-mail</label>
+                        <input type="email" placeholder="" required>
+
+                        <label for="cardInfo">Information de la carte</label>
+                        <input id="cardCode" type="text" maxlength="19" @input="formatCardNumber"
+                            placeholder="1234 1234 1234 1234" required>
+
+                        <div id="cardInfo">
+                            <input type="date" value="MM/AA" placeholder="MM/AA" required>
+                            <input type="number" placeholder="CVC" required>
+                        </div>
+                        <label for="name">Nom du titulaire de la carte</label>
+                        <input type="text" placeholder="" required>
+
+                        <label for="country">Pays</label>
+                        <input type="text" placeholder="" required>
+
+                        <button type="submit">Payer</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
-    </div>
-
-    <div class="cart-footer">
-        <button class="validate-btn">VALIDER MON PANIER</button>
-        <div class="total">TOTAL : 70€</div>
     </div>
 </template>
 
+
 <style scoped>
+@font-face {
+    font-family: 'Monomaniac One';
+    src: url('../assets/font/MonomaniacOne-Regular.ttf');
+}
+
+* {
+    font-family: 'Monomaniac One';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 template {
     height: 100vh;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .container {
@@ -52,94 +206,396 @@ template {
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 80vh;
-    width: 80%;
+    min-height: 100vh;
+    width: 100%;
     margin: 0 auto;
+    background: linear-gradient(#FFFFFF, #A8BFCA);
+    padding: 40px;
+    margin-top: 50px;
 }
 
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.cart-item {
+.content {
     display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 450px;
+}
+
+.activeStep h1 {
+    color: #73020C;
+}
+
+
+.steps {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    background: #ddd;
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    position: relative;
-    width: 60%;
-}
-
-.cart-item img {
-    width: 60px;
-    margin-right: 15px;
-}
-
-.cart-item .details {
-    flex: 1;
-    font-size: 14px;
-    text-align: left;
-}
-
-.close-btn {
-    font-size: 20px;
+    justify-content: center;
+    gap: 100px;
     font-weight: bold;
-    cursor: pointer;
-    position: absolute;
-    right: 15px;
-    top: 10px;
+    font-size: 1.3em;
+    margin-top: 50px;
 }
 
-.product-btn {
-    background: #ddd;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-bottom: 15px;
+.steps h1 {
+    font-size: 3em;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #D9D9D9;
 }
 
-.cart-footer {
+.Step {
     display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.youritems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 55px;
+    margin-top: 50px;
+}
+
+.youritems,
+.rightPane {
+    flex: 1;
+    max-width: 500px;
+}
+
+#purchase {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+    align-items: flex-start;
+
+}
+
+
+#item {
+    background-color: #A8BFCA;
+    padding: 25px;
+}
+
+#item>img {
+    height: 12vh;
+    width: 12vh;
+}
+
+#iteminfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    font-size: 0.7em;
+    max-width: 250px;
+    word-break: break-word;
+}
+
+#iteminfo h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+
+}
+
+#iteminfo h2 {
+    margin-bottom: 5px;
+}
+
+#line {
+    width: 150%;
+    height: 1px;
+    background-color: #000000;
+    margin-left: 50%;
+}
+
+#moreItems {
+    font-size: 1em;
+    font-weight: bold;
+
+}
+
+#encadre {
+    border: 2px solid black;
+    padding: 10px;
+    display: inline-block;
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.totalPrices {
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+#prices {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background: #ddd;
-    padding: 15px;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+
 }
 
-.validate-btn {
-    background: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
+#prices>span {
+    font-size: 1.3em;
     font-weight: bold;
 }
 
-.total {
-    font-size: 18px;
+#shipping {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+#shipping>span {
+    font-size: 1.3em;
     font-weight: bold;
 }
 
-.trash-icon {
-    width: 80px;
-    height: 80px;
-    background: #ddd;
-    border-radius: 50%;
+
+#total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.3em;
+}
+
+#total>span {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#inputCode {
+    border-color: #000000;
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+    background-color: transparent;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #000000;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input::placeholder {
+    font-weight: bold;
+    opacity: 1;
+    color: #000000;
+}
+
+#confirm {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    background: #73020C;
+    color: white;
+    padding: 10px 20px;
     cursor: pointer;
-    position: absolute;
-    top: 125px;
-    right: 55px;
+    height: 7vh;
+    width: 100%;
+    font-size: 0.8em;
+    border: 2px solid #000000;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+#confirm:hover {
+    background: #590109;
+}
+
+#confirm h1 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #FFFFFF;
+}
+
+.paymentButton>h2 {
+    display: flex;
+    align-items: flex-start;
+    font-size: 1.2em;
+    color: #000000;
+}
+
+#contact {
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.7em;
+}
+
+#contactUs {
+    color: #000000;
+}
+
+.gridOthersItems {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 50px;
+    justify-content: flex-start;
+    margin-left: 105%;
+
+}
+
+.gridOthersItems>img {
+    height: 35vh;
+    width: 33vh;
+    background-color: #92B0C0;
+    padding: 20px;
+}
+
+.shippingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 50px;
+    text-align: left;
+    width: 100%;
+}
+
+.shippingForm input,
+.shippingForm button {
+    padding: 10px;
+    border: 1px solid #D9D9D9;
+    width: 70%;
+}
+
+.shippingForm input::placeholder {
+    color: #AFAFAF;
+}
+
+.shippingForm button {
+    background: #73020C;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.shippingForm button:hover {
+    background: #590109;
+}
+
+
+.bankForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 50px;
+    text-align: left;
+    width: 100%;
+}
+
+.bankForm input,
+.bankForm button {
+    padding: 10px;
+    border: 1px solid #D9D9D9;
+    width: 100%;
+}
+
+.bankForm input::placeholder {
+    color: #AFAFAF;
+}
+
+.bankForm input {
+    margin-bottom: 15px;
+}
+
+.bankForm button {
+    background: #73020C;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.bankForm button:hover {
+    background: #590109;
+}
+
+#cardCode {
+    background-image: url('../components/Icons/giftCardLogo.svg'),
+        url('../components/Icons/masterCard.svg'),
+        url('../components/Icons/visaLogo.svg');
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position: right 10px center, right 45px center, right 80px center;
+
+
+}
+
+label {
+    color: #AFAFAF;
+}
+
+#line2 {
+    width: 29%;
+    height: 1px;
+    background-color: #AFAFAF;
+    margin-top: 20px;
+}
+
+#otherOption {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#otherOption>h2 {
+    font-size: 1.2em;
+    color: #AFAFAF;
+}
+
+#applePay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    padding: 10px 20px;
+    cursor: pointer;
+    height: 7.5vh;
+    width: 100%;
+    text-decoration: none;
+}
+
+#cardInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0;
+}
+
+#cardCode {
+    margin-bottom: 0;
 }
 </style>
