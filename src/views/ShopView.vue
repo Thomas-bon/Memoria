@@ -302,6 +302,7 @@ template {
   background-color: #8AA7AE4D;
   width: 100%;
   max-width: 100%;
+  flex-wrap: wrap;
 }
 
 #Personalize {
