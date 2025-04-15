@@ -5,7 +5,8 @@ export default {
             showPaymentForm: false,
             showBankForm: false,
             currentStep: 1,
-            phoneNumber: ''
+            phoneNumber: '',
+            cvc: ''
         };
     },
     methods: {
@@ -32,12 +33,15 @@ export default {
             let value = this.phoneNumber.replace(/\D/g, '');
 
             if (value.length === 10) {
-                
+
                 this.phoneNumber = value.replace(/(\d{2})(?=\d)/g, '$1 ').trim();
             } else {
-                
+
                 this.phoneNumber = value;
             }
+        },
+        validateCVC() {
+            this.cvc = this.cvc.replace(/\D/g, '').slice(0, 3);
         }
     }
 };
@@ -149,32 +153,46 @@ export default {
                     <div id="applePay">
                         <img src="../components/Icons/applePay.svg" alt="">
                     </div>
+
                     <div id="otherOption">
                         <div id="line2"></div>
                         <h2>Ou payez par carte</h2>
                         <div id="line2"></div>
                     </div>
+
                     <form @submit.prevent="finalizePayment">
-                        <label for="mail">E-mail</label>
-                        <input type="email" placeholder="" required>
-
-                        <label for="cardInfo">Information de la carte</label>
-                        <input id="cardCode" type="text" maxlength="19" @input="formatCardNumber"
-                            placeholder="1234 1234 1234 1234" required>
-
-                        <div id="cardInfo">
-                            <input type="date" value="MM/AA" placeholder="MM/AA" required>
-                            <input type="number" placeholder="CVC" required>
+                        <div class="form-group">
+                            <label for="mail">E-mail</label>
+                            <input type="email" id="mail" required>
                         </div>
-                        <label for="name">Nom du titulaire de la carte</label>
-                        <input type="text" placeholder="" required>
 
-                        <label for="country">Pays</label>
-                        <input type="text" placeholder="" required>
+                        <div class="form-group">
+
+                            <label for="cardCode">Information de la carte</label>
+                            <input id="cardCode" type="text" maxlength="19" @input="formatCardNumber"
+                                placeholder="1234 1234 1234 1234" required>
+
+                            <div id="cardInfo">
+                                <input type="date" value="MM/AA" placeholder="MM/AA" required>
+                                <input type="text" maxlength="3" v-model="cvc" @input="validateCVC" placeholder="CVC"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Nom du titulaire de la carte</label>
+                            <input type="text" id="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Pays</label>
+                            <input type="text" id="country" required>
+                        </div>
 
                         <button type="submit">Payer</button>
                     </form>
                 </div>
+
             </div>
 
         </div>
@@ -508,7 +526,7 @@ input::placeholder {
 .bankForm {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     margin-top: 50px;
     text-align: left;
     width: 100%;
@@ -523,10 +541,6 @@ input::placeholder {
 
 .bankForm input::placeholder {
     color: #AFAFAF;
-}
-
-.bankForm input {
-    margin-bottom: 15px;
 }
 
 .bankForm button {
@@ -548,13 +562,29 @@ input::placeholder {
     background-repeat: no-repeat;
     background-position: right;
     background-position: right 10px center, right 45px center, right 80px center;
-
-
 }
+
+#cardInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#cardInfo input {
+    margin: 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
 
 label {
     color: #AFAFAF;
 }
+
 
 #line2 {
     width: 29%;
