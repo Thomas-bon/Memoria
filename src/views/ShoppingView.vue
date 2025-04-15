@@ -233,13 +233,16 @@ template {
 }
 
 .content {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 50px;
-    gap: 450px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 50px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 50px auto 0 auto;
 }
+
 
 .activeStep h1 {
     color: #73020C;
