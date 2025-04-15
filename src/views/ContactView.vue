@@ -1,229 +1,244 @@
-<template>
-  <div class="contact-wrapper">
-    <h1 class="animated-header">Contactez-nous</h1>
-    
-    <div id="contact-form" class="form-container">
-      <div class="form-section animated-input">
-        <label for="name">Nom :</label>
-        <input type="text" id="name" v-model="form.name" placeholder="Entrez votre nom" required />
-      </div>
-
-      <div class="form-section animated-input">
-        <label for="email">Email :</label>
-        <input type="email" id="email" v-model="form.email" placeholder="Entrez votre email" required />
-      </div>
-
-      <div class="form-section animated-input">
-        <label for="message">Message :</label>
-        <textarea id="message" v-model="form.message" placeholder="Votre message" required></textarea>
-      </div>
-
-      <button @click="submitForm" id="submit-btn" class="animated-btn">Envoyer</button>
-    </div>
-
-    <div id="contact-info" class="animated-info">
-      <p>Nous vous répondrons dans les plus brefs délais.</p>
-      <p>Vous pouvez aussi nous contacter par :</p>
-      <ul>
-        <li>Email: <a href="mailto:support@votresite.com">support@votresite.com</a></li>
-        <li>Téléphone: +1 (555) 123-4567</li>
-      </ul>
-    </div>
-  </div>
-</template>
-
 <script>
-export default {
-  data() {
-    return {
-      form: {
-        name: '',
-        email: '',
-        message: ''
-      }
-    };
-  },
-  methods: {
-    submitForm() {
-      if (this.form.name && this.form.email && this.form.message) {
-        this.$emit('formSubmitted', this.form); // Simuler l'envoi du formulaire
-        alert('Votre message a été envoyé avec succès !');
-        this.resetForm();
-      } else {
-        alert('Veuillez remplir tous les champs.');
-      }
-    },
-    resetForm() {
-      this.form.name = '';
-      this.form.email = '';
-      this.form.message = '';
-    }
-  }
-};
 </script>
 
+<template>
+
+  <body>
+    <div id="alignPage">
+      <h1>CONTACTEZ NOUS</h1>
+      <div id="formAndNews">
+        <form action="" method="">
+          <div class="row">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="tel" name="telephone" placeholder="Téléphone" pattern="[0-9]" required>
+          </div>
+
+          <input type="text" name="nom_prenom" placeholder="Nom, prenom" required>
+
+          <div class="row">
+            <textarea name="message" placeholder="Votre message..." required></textarea>
+          </div>
+
+          <button type="submit">Envoyer</button>
+
+
+        </form>
+        <div id="news">
+          <h2>Nos nouveautés</h2>
+          <a href=""><img src="../assets/pictures/tshirt/tshirt_seville_black_1.svg" alt="" id="tshirtNew"></a>
+        </div>
+      </div>
+      <div id="infoContact">
+        <div class="infoBox">
+          <div>
+            <img src="../assets/pictures/iconTelContactPage.png" alt="">
+            <h2>+66 08 54 60 84</h2>
+          </div>
+          <p>Besoin d’une réponse rapide ? Appelez-nous directement, nous sommes disponibles pour répondre à toutes vos
+            questions.</p>
+        </div>
+        <div class="infoBox">
+          <div>
+            <img style="width: 100px; height: 100px;" src="../assets/pictures/iconMailContactPage.png" alt="">
+            <h2>memoria@gmail.com</h2>
+          </div>
+          <p>Une demande, une collaboration ou un mot d’encouragement ? Écrivez-nous à tout moment, nous vous répondrons
+            dans les plus brefs délais.</p>
+        </div>
+        <div class="infoBox">
+          <div>
+            <img src="../assets/pictures/iconLocationContactPage.png" alt="">
+            <h2>France, Annecy</h2>
+          </div>
+          <p>Notre atelier est basé à Annecy, entre lacs et montagnes. Passez nous voir ou envoyez-nous un courrier, on
+            vous accueillera toujours avec le sourire.</p>
+        </div>
+      </div>
+      <iframe id="map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50984.85478461276!2d6.076803044724579!3d45.88735217460559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478b8ffa1c0551c9%3A0x42781681620534ba!2sAnnecy!5e0!3m2!1sfr!2sfr!4v1744722680317!5m2!1sfr!2sfr"
+        width="100%" height="600" style="border:0; margin-top: 100px; margin-bottom: 60px;" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+
+    </div>
+
+  </body>
+</template>
+
 <style scoped>
-@font-face {
-    font-family: "Monomaniac";
-    src: url(../assets/font/MonomaniacOne-Regular.ttf);
+body {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@font-face {
-    font-family: "Inter";
-    src: url(../assets/font/Inter_18pt-ExtraBold.ttf);
+#alignPage {
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
 }
 
-.contact-wrapper {
-    height: 100vh;
-    width: 100%;
-    background-image: url(../assets/pictures/BGcontactpage.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 1s ease-out;
+#alignPage h1 {
+  font-size: 4em;
+  font-family: "Inter";
 }
 
-.animated-header {
-    font-family: "Inter";
-    font-size: 3.5em;
-    color: white;
-    text-align: center;
-    opacity: 0;
-    animation: slideIn 1s ease-out forwards;
+#news h2 {
+  /* height: 30%; */
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #807f7f;
+  font-family: "monomaniac";
+  font-size: 2em;
+  border-bottom: 2px #B9B9B9 solid;
 }
 
-@keyframes slideIn {
-    0% {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+#tshirtNew {
+  width: 100%;
+  height: 60%;
 }
 
-.form-container {
-    width: 80%;
-    max-width: 600px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px;
-    border-radius: 10px;
-    color: white;
-    margin-top: 20px;
-    animation: fadeInUp 1s ease-out forwards;
+#formAndNews {
+  overflow: hidden;
+  padding: 10px;
+  width: 100%;
+  height: 70%;
+
+  display: flex;
+  gap: 30px;
 }
 
-@keyframes fadeInUp {
-    0% {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+#news {
+  width: 35%;
+  height: 45vh;
+  border: 3px solid #B9B9B9;
+  padding: 20px;
+  padding-top: 0;
+  overflow: hidden;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.form-section {
-    margin-bottom: 20px;
+
+form {
+  width: 60%;
 }
 
-.form-section label {
-    font-size: 1.2em;
-    font-family: "Monomaniac";
-    margin-bottom: 10px;
-    display: block;
-    opacity: 0;
-    animation: fadeIn 1s ease-out 0.5s forwards;
+.row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
-.form-section input,
-.form-section textarea {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.1em;
-    font-family: "Monomaniac", sans-serif;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    color: #333;
-    transition: all 0.3s ease;
-    opacity: 0;
-    animation: fadeIn 1s ease-out 1s forwards;
+.row input,
+.row textarea {
+  flex: 1;
+  min-width: 0;
 }
 
-.form-section input:focus,
-.form-section textarea:focus {
-    outline: none;
-    border-color: #73020C;
-    box-shadow: 0px 4px 12px rgba(115, 2, 12, 0.3);
+input,
+textarea {
+  padding: 10px;
+  border: 3px solid #B9B9B9;
+  border-radius: 4px;
+  width: 100%;
+  height: 80px;
+  box-sizing: border-box;
+  font-size: 1.5em;
+  font-family: "monomaniac";
+
 }
 
-.form-section input:hover,
-.form-section textarea:hover {
-    border-color: #73020C;
+textarea {
+  resize: vertical;
+  height: 200px;
+  margin-top: 20px;
 }
 
-#submit-btn {
-    width: 100%;
-    padding: 15px;
-    background-color: #73020C;
-    color: white;
-    font-size: 1.5em;
-    font-family: "Monomaniac";
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    opacity: 0;
-    animation: fadeIn 1s ease-out 1.5s forwards;
+button {
+  background-color: #73020C;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 100px;
+  width: 30%;
+  border: 5px black solid;
+
+  font-size: 1.8em;
+  font-family: "monomaniac";
 }
 
-.animated-btn:hover {
-    transform: scale(1.1);
-    background-color: #85091C;
+/* button:hover { */
+/* background-color: #0056b3; */
+/* } */
+
+#infoContact {
+  width: 100%;
+  height: 300px;
+  margin-top: 10%;
+
+  display: flex;
+  gap: 50px;
+  justify-content: center;
 }
 
-#contact-info {
-    margin-top: 40px;
-    text-align: center;
-    color: white;
-    opacity: 0;
-    animation: fadeIn 1s ease-out 2s forwards;
+.infoBox {
+  width: 30%;
+  height: 100%;
+  background-color: white;
+  padding: 30px;
+  padding-top: 10px;
+  color: #B9B9B9;
+  border: 3px #B9B9B9 solid;
+
+  overflow: hidden;
 }
 
-#contact-info ul {
-    list-style: none;
-    padding: 0;
+.infoBox>div:first-child {
+  height: 40%;
+  display: flex;
+  align-items: center;
+  gap: 10%;
 }
 
-#contact-info ul li {
-    font-size: 1.2em;
-    margin: 10px 0;
+.infoBox>div:first-child img {
+  width: 80px;
+  height: 80px;
+
 }
 
-#contact-info ul li a {
-    color: #73020C;
-    text-decoration: none;
-    transition: color 0.3s ease;
+.infoBox>div:first-child h2 {
+  font-size: 1.5em;
+  font-family: "monomaniac";
+  text-align: center;
 }
 
-#contact-info ul li a:hover {
-    color: #85091C;
+.infoBox p {
+  font-size: 1.4em;
+  text-align: center;
+  font-family: "monomaniac";
+  margin-top: 10px;
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+#map {
+  width: 100%;
+  height: 600px;
+  margin-top: 100px;
+  margin-bottom: 60px;
+  /* background-color: black; */
 }
 </style>

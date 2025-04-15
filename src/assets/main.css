@@ -2,9 +2,20 @@
 
 /* style css commun à plusieurs fichiers */
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%; 
-    width: 100%;  
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url(../assets/font/Inter_18pt-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "monomaniac";
+  src: url(../assets/font/MonomaniacOne-Regular.ttf);
+}

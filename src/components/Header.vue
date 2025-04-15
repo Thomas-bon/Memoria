@@ -21,7 +21,7 @@
             </RouterLink>
           </div>
           <div id="Contacts">
-            <RouterLink :to="'/#contact'">
+            <RouterLink :to="{ name: 'Contact' }">
               <h1>Contacts</h1>
             </RouterLink>
           </div>
