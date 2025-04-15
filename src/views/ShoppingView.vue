@@ -130,7 +130,7 @@ export default {
                     </div>
 
                     <div id="contact">
-                        <h2>UNE QUESTION ? <a id="contactUs" href="#">CONTACTEZ-NOUS</a></h2>
+                        <h2>UNE QUESTION ? <RouterLink :to="{ name: 'Contact' }"><a id="contactUs" href="#">CONTACTEZ-NOUS</a></RouterLink></h2>
                     </div>
                 </div>
 
@@ -480,7 +480,6 @@ input::placeholder {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    margin-top: 50px;
     justify-content: flex-start;
     margin-left: 105%;
 
