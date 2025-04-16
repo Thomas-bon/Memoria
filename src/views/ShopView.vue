@@ -25,6 +25,12 @@
       </div>
     </div>
 
+    <RouterLink :to="{ name: 'Game' }">
+      <div class="text-link-game">
+          <p>↳ Jeu Concours</p>
+      </div>
+    </RouterLink>
+
     <div id="title2">
       <h1>LES PARCOURS LES PLUS ÉDITÉS</h1>
     </div>
@@ -202,6 +208,18 @@ template {
   white-space: nowrap;
   font-family: 'Abel';
 }
+
+.text-link-game {
+  position: absolute;
+  top: 105%;
+  left: 8.5%;
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+  color: #000000;
+  font-family: 'Monomaniac One';
+  font-size: 1.8em;
+}
+ 
 
 #shiftWord {
   margin-left: 215px;
