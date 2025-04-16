@@ -1,10 +1,4 @@
-
 <template>
-  <h1>Jeu des cubes</h1>
-
-  <div :style="{ display: displayResult ? 'flex' : 'none' }" id="resultGame">
-
-  </div>
 
   <div :style="{ display: displayMenu ? 'flex' : 'none' }" id="startPage">
 
@@ -13,15 +7,32 @@
 
   </div>
   <div :style="{ display: displayGame ? 'block' : 'none' }" id="app">
-    <p>Score: {{ score }}</p>
-    <p>Chronomètre : {{ formattedTime }}</p>
+    <img src="../assets/pictures/game/scoreBoard.svg" alt="">
+    <p id="score">Score: {{ score }}</p>
+    <p id="chrono">{{ formattedTime }}</p>
+    <p id="time">S</p>
     <div class="game-board">
       <div v-for="(cube, index) in cubes" :key="cube.id" class="cube" :style="{
         width: cube.size + 'px',
         height: cube.size + 'px',
-        top: cube.y - ((cube.size - this.maxSize) /2)  + 'px',
+        top: cube.y - ((cube.size - this.maxSize) / 2) + 'px',
         left: cube.x - ((cube.size - this.maxSize) / 2) + 'px',
       }" @click="removeCube(cube.id)"></div>
+    </div>
+  </div>
+
+  <div :style="{ display: displayResult ? 'flex' : 'none' }" id="resultGame">
+    <div class="result-card">
+      <img src="../assets/pictures/game/victoryMedal.svg" alt="Score" class="result-image">
+      <h2>VICTOIRE !</h2>
+      <p>Bravo tu as gagner un code promo de 20% !</p>
+      <div id="promoCode">
+        <img src="../assets/pictures/game/horizontalArrow.svg" alt="">
+        <div id="codeContainer">
+          <p id="code">SRG8-645D-FGCX</p>
+        </div>
+      </div>
+      <!-- <button @click="startGame">Rejouer</button> -->
     </div>
   </div>
 </template>
@@ -78,22 +89,26 @@ export default {
 
     // Méthode pour générer un nouveau cube
     generateCube() {
-
       if (this.cubes.length >= 1) {
-        return
+        return;
       }
-      const size = this.maxSize;
-      const x = Math.random() * (window.innerWidth - size);
-      const y = Math.random() * ((window.innerHeight * 0.8) - size);
 
-      // Création d'un cube avec un ID unique
+      const gameBoard = document.querySelector('.game-board');
+      const rect = gameBoard.getBoundingClientRect();
+
+      const size = this.maxSize;
+
+      const x = Math.random() * (rect.width - size);
+      const y = Math.random() * (rect.height - size);
+
       this.cubes.push({
-        id: this.idCounter++,  // ID unique
+        id: this.idCounter++,
         x,
         y,
         size,
       });
     },
+
 
     // Méthode pour gérer le clic sur un cube
     removeCube(id) {
@@ -175,29 +190,72 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'Monomaniac One';
+  src: url('../assets/font/MonomaniacOne-Regular.ttf');
+}
+
+* {
+  font-family: 'Monomaniac One';
+}
+
 #app {
-  margin-top: 100px;
   text-align: center;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  background-color: #8AA7AE4D;
+  min-height: 100vh;
+  margin-top: 11vh;
+  background-image: url('../assets/pictures/game/backgroundGame.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .game-board {
   position: relative;
-  width: 100%;
-  height: 80vh;
-  /* background-color: #f0f0f0; */
+  justify-content: center;
+  width: 60%;
+  height: 60vh;
   overflow: hidden;
+  background-color: #FFFFFFB3;
+  border: #000000 solid 1px;
+  margin: 0 auto;
+}
+
+#score {
+  position: absolute;
+  top: 135px;
+  left: 45%;
+  font-size: 2.8rem;
+  color: #FFFFFF;
+}
+
+
+#chrono {
+  position: absolute;
+  top: 235px;
+  left: 45.5%;
+  font-size: 2.8rem;
+  color: #FFFFFF;
+}
+
+#time {
+  position: absolute;
+  top: 275px;
+  left: 53.5%;
+  font-size: 1.6rem;
+  color: #FFFFFF;
 }
 
 .cube {
-  background-image: url(../assets/pictures/run.png);
+  background-image: url(../components/Icons/shoesMemoria.svg);
   background-position: center;
   background-size: 80%;
   background-repeat: no-repeat;
 
   position: absolute;
-  background-color: #987eff;
-  box-shadow: 0px 0px 20px rgba(117, 119, 255, 0.934);
+  background-color: #A8BFCA;
+  /* box-shadow: 0px 0px 20px rgba(117, 119, 255, 0.934); */
   border-radius: 70%;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
@@ -215,12 +273,70 @@ export default {
 #resultGame {
   justify-content: center;
   align-items: center;
-
+  margin-top: 11vh;
   width: 100%;
   height: 80vh;
-  margin-top: 10vh;
-  /* background-color: red; */
+  background-color: #8AA7AE4D;
+  background-image: url('../assets/pictures/game/backgroundGameFinish.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
+
+.result-card {
+  background-color: #FFFFFFDE;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-image {
+  width: 100px;
+}
+
+.result-card h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #F3B568;
+}
+
+.result-card p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+#promoCode {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+#codeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #DCEFFA;
+  border-radius: 10px;
+  height: 50px;
+  min-width: 250px;
+}
+
+#codeContainer>p {
+  color: #73020C;
+  font-size: 1.7rem;
+  padding: 15px;
+}
+
 
 
 
@@ -251,6 +367,4 @@ button:active {
   transform: translateY(1px);
   box-shadow: 0px 2px 10px rgba(124, 117, 255, 0.5);
 }
-
 </style>
-
