@@ -4,14 +4,14 @@
 
 
 <template>
-  
+
   <div class="Container">
     <div id="title">
       <h1>BOUTIQUE</h1>
     </div>
 
     <img id="tshirtperch" src="../assets/pictures/tshirtperch.svg" alt="">
-    <RouterLink :to="{ name: 'Product' }">
+    <RouterLink :to="{ name: 'Personalize' }">
       <div class="text-top-left">
         T-shirt personnaliser<br>
         ↳ découvrir
@@ -45,9 +45,11 @@
       <div class="tshirtsAnnecy">
 
         <div id="tshirtAnnecyBlack">
-          <div id="Personalize">
-            ↳ Voir le produit
-          </div>
+          <RouterLink :to="{ name: 'Product' }">
+            <div id="Personalize">
+              ↳ Voir le produit
+            </div>
+          </RouterLink>
           <img src="../assets/pictures/tshirt/tshirt_annecy_ black_1.svg" alt="">
           <div id="Price">
             €40
@@ -55,15 +57,16 @@
         </div>
 
         <div id="tshirtAnnecyWhite">
-          <div id="Personalize">
-            ↳ Voir le produit
-          </div>
+          <RouterLink :to="{ name: 'Product' }">
+            <div id="Personalize">
+              ↳ Voir le produit
+            </div>
+          </RouterLink>
           <img src="../assets/pictures/tshirt/tshirt_annecy_white_1.svg" alt="">
           <div id="Price">
             €40
           </div>
         </div>
-
       </div>
 
 
@@ -81,9 +84,11 @@
       <div class="tshirtsSeville">
 
         <div id="tshirtSevilleBlack">
-          <div id="Personalize">
-            ↳ Voir le produit
-          </div>
+          <RouterLink :to="{ name: 'Product' }">
+            <div id="Personalize">
+              ↳ Voir le produit
+            </div>
+          </RouterLink>
           <img src="../assets/pictures/tshirt/tshirt_seville_black_1.svg" alt="">
           <div id="Price">
             €40
@@ -91,9 +96,11 @@
         </div>
 
         <div id="tshirtSevilleWhite">
-          <div id="Personalize">
-            ↳ Voir le produit
-          </div>
+          <RouterLink :to="{ name: 'Product' }">
+            <div id="Personalize">
+              ↳ Voir le produit
+            </div>
+          </RouterLink>
           <img src="../assets/pictures/tshirt/tshirt_seville_white_1.svg" alt="">
           <div id="Price">
             €40
@@ -124,7 +131,7 @@
   src: url('../assets/font/Abel-Regular.ttf');
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -207,11 +214,13 @@ template {
   align-items: center;
   text-align: center;
 }
+
 #txt {
   font-size: 1.9em;
   font-family: 'Monomaniac One';
   color: #000000;
 }
+
 #imgAnnecy {
   display: flex;
   justify-content: center;
@@ -229,6 +238,7 @@ template {
   text-align: center;
 
 }
+
 #imgSeville {
   display: flex;
   justify-content: center;
@@ -237,6 +247,7 @@ template {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
+
 .tshirtsAnnecy {
   display: flex;
   flex-direction: column;
@@ -249,7 +260,7 @@ template {
   background-color: #A8BFCA;
 }
 
-#tshirtAnnecyBlack > img{
+#tshirtAnnecyBlack>img {
   height: 283px;
   width: 374px;
   padding: 20px;
@@ -259,7 +270,7 @@ template {
   background-color: #704347;
 }
 
-#tshirtAnnecyWhite > img{
+#tshirtAnnecyWhite>img {
   height: 283px;
   width: 374px;
   padding: 20px;
@@ -277,7 +288,7 @@ template {
   background-color: #A8BFCA;
 }
 
-#tshirtSevilleBlack > img{
+#tshirtSevilleBlack>img {
   height: 283px;
   width: 374px;
   padding: 20px;
@@ -287,7 +298,7 @@ template {
   background-color: #704347;
 }
 
-#tshirtSevilleWhite > img{
+#tshirtSevilleWhite>img {
   height: 283px;
   width: 374px;
   padding: 20px;
