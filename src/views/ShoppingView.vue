@@ -55,7 +55,7 @@ export default {
 
         <div class="steps">
             <div class="Step" :class="{ activeStep: currentStep === 1 }">
-                <h1>1.</h1>
+                <h1>1.&nbsp;</h1>
                 <p>panier</p>
             </div>
             <div class="Step" :class="{ activeStep: currentStep === 2 }">
