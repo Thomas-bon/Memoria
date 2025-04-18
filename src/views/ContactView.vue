@@ -19,7 +19,7 @@
             <textarea name="message" placeholder="Votre message..." required></textarea>
           </div>
 
-          <button type="submit">Envoyer</button>
+          <button type="submit"><span>Envoyer</span></button>
 
 
         </form>
@@ -168,19 +168,45 @@ textarea {
 }
 
 button {
+  width: 250px;
+  height: 100px;
   background-color: #73020C;
   color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+  border: 2px solid #000000;
+  font-family: "MonoManiac One";
+  font-size: 40px;
+  overflow: hidden;
   cursor: pointer;
-  height: 100px;
-  width: 30%;
-  border: 5px black solid;
-
-  font-size: 1.8em;
-  font-family: "monomaniac";
+  position: relative;
+  z-index: 1;
 }
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 1;
+  transition: left 0.4s ease;
+}
+
+button:hover::before {
+  left: 0;
+}
+
+button span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+button:hover span {
+  color: #73020C;
+}
+
 
 /* button:hover { */
 /* background-color: #0056b3; */

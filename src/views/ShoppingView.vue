@@ -55,7 +55,7 @@ export default {
 
         <div class="steps">
             <div class="Step" :class="{ activeStep: currentStep === 1 }">
-                <h1>1.</h1>
+                <h1>1.&nbsp;</h1>
                 <p>panier</p>
             </div>
             <div class="Step" :class="{ activeStep: currentStep === 2 }">
@@ -69,7 +69,7 @@ export default {
         </div>
 
         <div class="content">
-            <!-- Zone Panier -->
+            
             <div class="youritems">
                 <div id="purchase">
                     <div id="item">
@@ -102,7 +102,7 @@ export default {
                 </div>
             </div>
 
-            <!-- Zone Paiement / Livraison -->
+            
             <div class="rightPane">
                 <div class="payment" v-if="!showPaymentForm && !showBankForm">
                     <div class="totalPrices">
@@ -122,15 +122,17 @@ export default {
                     </div>
 
                     <div class="paymentButton">
-                        <button id="confirm" @click="validateOrder">
-                            <h1>VALIDER MA COMMANDE</h1>
+                        <button id="confirm" class="button-animated" @click="validateOrder">
+                            <span>VALIDER MA COMMANDE</span>
                         </button>
                         <br>
                         <h2>LIVRAISON OFFERTE DÈS 100€ D'ACHATS</h2>
                     </div>
 
                     <div id="contact">
-                        <h2>UNE QUESTION ? <RouterLink :to="{ name: 'Contact' }"><a id="contactUs" href="#">CONTACTEZ-NOUS</a></RouterLink></h2>
+                        <h2>UNE QUESTION ? <RouterLink :to="{ name: 'Contact' }"><a id="contactUs"
+                                    href="#">CONTACTEZ-NOUS</a></RouterLink>
+                        </h2>
                     </div>
                 </div>
 
@@ -144,7 +146,9 @@ export default {
                         <input type="number" placeholder="Code Postal" required>
                         <input type="text" placeholder="Ville" required>
                         <input type="tel" v-model="phoneNumber" @blur="formatPhone" placeholder="Téléphone" required>
-                        <button type="button" @click="confirmShipping">Confirmer la livraison</button>
+                        <button type="button" class="button-animated" @click="confirmShipping">
+                            <span>Confirmer la livraison</span>
+                        </button>
                     </form>
                 </div>
 
@@ -189,7 +193,9 @@ export default {
                             <input type="text" id="country" required>
                         </div>
 
-                        <button type="submit">Payer</button>
+                        <button type="submit" class="button-animated">
+                            <span>Payer</span>
+                        </button>
                     </form>
                 </div>
 
@@ -233,14 +239,14 @@ template {
 }
 
 .content {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-top: 50px;
-  max-width: 1400px;
-  width: 100%;
-  margin: 50px auto 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 50px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 50px auto 0 auto;
 }
 
 
@@ -465,6 +471,45 @@ input::placeholder {
     font-size: 1.2em;
     color: #000000;
 }
+
+.button-animated {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #73020C;
+    color: white;
+    font-family: "Monomaniac One";
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.button-animated::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1;
+    transition: left 0.4s ease;
+}
+
+.button-animated:hover::before {
+    left: 0;
+}
+
+.button-animated span {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.button-animated:hover span {
+    color: #73020C;
+}
+
+
 
 #contact {
     display: flex;

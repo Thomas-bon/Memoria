@@ -10,7 +10,7 @@
       <h1>BOUTIQUE</h1>
     </div>
 
-    <img id="tshirtperch" src="../assets/pictures/tshirtperch.svg" alt="">
+    <img id="tshirtperch" src="../assets/pictures/tshirtperch.png" alt="">
     <RouterLink :to="{ name: 'Personalize' }">
       <div class="text-top-left">
         T-shirt personnaliser<br>
