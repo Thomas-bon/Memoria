@@ -560,7 +560,7 @@ input::placeholder {
 .shippingForm button {
     background: #73020C;
     color: white;
-    border: none;
+    border: 2px solid #000000;
     cursor: pointer;
     margin-top: 10px;
 }
@@ -593,7 +593,7 @@ input::placeholder {
 .bankForm button {
     background: #73020C;
     color: white;
-    border: none;
+    border: 2px solid #000000;
     cursor: pointer;
 }
 
