@@ -78,6 +78,17 @@
                     <p :style="{ opacity: isChecked ? 1 : 0.29 }">Broderie</p>
                 </div>
 
+                <!-- IMPRESSION -->
+                <div id="hem">
+                    <p>Ourlet</p>
+
+                    <label class="switch">
+                        <input type="checkbox" v-model="withHem" />
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
 
             </div>
         </div>
@@ -92,9 +103,13 @@
                 </div>
 
                 <div class="shirt-container">
-                    <img :src="tshirtSrc" alt="T-shirt" />
+                    <img :src="finalTshirtSrc" alt="T-shirt" />
                     <p>{{ tshirtValue }}</p>
-                    <p v-if="tshirtValue === 2" id="chronoTshirt">{{ `${inputMinute} ' ${inputSeconde}` }}</p>
+
+                    <p v-if="tshirtValue === 2" id="chronoTshirt"
+                        :style="{ color: tshirtColor === 'black' ? 'white' : 'black' }">
+                        {{ `${inputMinute} ' ${inputSeconde}` }}
+                    </p>
 
                 </div>
 
@@ -119,6 +134,7 @@ export default {
     data() {
         return {
             isChecked: false,
+            withHem: false,
             showColorClicked: false,
             showParkourClicked: false,
             showChronoClicked: false,
@@ -213,6 +229,25 @@ export default {
             this.checkTshirtValue();
         },
     },
+    computed: {
+        finalTshirtSrc() {
+            // Décompose le nom de fichier
+            const parts = this.tshirtSrc.split('/');
+            const fileName = parts.pop(); // ex: "tshirt_default_black_1.svg"
+
+            // On modifie juste la partie "default"/"hem"
+            const updatedFileName = this.withHem
+                ? fileName.replace('default', 'hem')
+                : fileName.replace('hem', 'default');
+
+            return [...parts, updatedFileName].join('/');
+        },
+        tshirtColor() {
+            if (this.tshirtSrc.includes('white')) return 'white';
+            if (this.tshirtSrc.includes('black')) return 'black';
+            return 'unknown';
+        },
+    },
 
 
     beforeUnmount() {
@@ -233,6 +268,12 @@ export default {
     src: url(../assets/font/Inter_18pt-ExtraBold.ttf);
 }
 
+@font-face {
+    font-family: "tshirt";
+    src: url(../assets/font/Maxlock.ttf);
+}
+
+
 template {
     height: 90vh;
     width: 100%;
@@ -245,6 +286,9 @@ template {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
+
+    margin-top: 10vh;
+
 }
 
 .wrapper h1 {
@@ -278,7 +322,8 @@ template {
     padding-left: 5%;
     position: absolute;
     top: 0;
-    height: 100%;
+    height: 90%;
+    margin-top: 5%;
     width: 0%;
     z-index: 1;
 }
@@ -362,7 +407,7 @@ template {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     z-index: 100;
     position: relative;
 }
@@ -376,6 +421,8 @@ template {
     text-align: center;
     color: white;
     font-size: 3.5em;
+    font-family: "tshirt";
+    gap: 0;
 }
 
 .shirt-container {
@@ -514,6 +561,12 @@ template {
 
 #embroidery p:nth-of-type(2) {
     opacity: 29%;
+}
+
+#hem p {
+    font-family: "Monomaniac";
+    font-size: 1.5em;
+    margin-top: 0;
 }
 
 /* Style pour la checkbox de style Apple */

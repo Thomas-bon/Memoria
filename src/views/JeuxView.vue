@@ -226,7 +226,7 @@ export default {
   position: absolute;
   top: 135px;
   left: 45%;
-  font-size: 2.8rem;
+  font-size: 3rem;
   color: #FFFFFF;
 }
 

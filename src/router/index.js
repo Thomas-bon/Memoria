@@ -6,6 +6,7 @@ import ShopppingView from '../views/ShoppingView.vue'
 import ProductView from '../views/ProductView.vue'
 import PersonalizeView from '../views/PersonalizeView.vue'
 import JeuxView from '../views/JeuxView.vue'
+import POC from '../views/POCparkourView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/Game',
       name: 'Game',
       component: JeuxView,
+    },
+    {
+      path: '/POC',
+      name: 'POC',
+      component: POC,
     },
   ],
 
