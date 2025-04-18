@@ -93,7 +93,7 @@ export default {
                 <div id="Personalize">
                     <div class="price">€{{ totalPrice }}</div>
                     <RouterLink :to="{ name: 'Personalize' }">
-                        <button class="customize">Personnalisé</button>
+                        <button class="customize"><span>Personnalisé</span></button>
                     </RouterLink>
                 </div>
 
@@ -253,23 +253,52 @@ template {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     justify-content: flex-start;
     gap: 60px;
 
 }
 
-.customize {
-    background: #73020C;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    height: 9vh;
-    width: 15vw;
-    font-size: 1.8em;
+button.customize {
+  width: 250px;
+  height: 75px;
+  background-color: #73020C;
+  color: white;
+  font-family: "MonoManiac One";
+  font-size: 40px;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
+
+button.customize::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 1;
+  transition: left 0.4s ease;
+}
+
+button.customize:hover::before {
+  left: 0;
+}
+
+button.customize span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+button.customize:hover span {
+  color: #73020C;
+}
+
 
 .InfoProduct {
     margin-top: 20px;
