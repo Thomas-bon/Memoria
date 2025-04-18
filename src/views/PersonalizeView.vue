@@ -104,7 +104,7 @@
 
                 <div class="shirt-container">
                     <img :src="finalTshirtSrc" alt="T-shirt" />
-                    <p>{{ tshirtValue }}</p>
+                    <!-- <p>{{ tshirtValue }}</p> -->
 
                     <p v-if="tshirtValue === 2" id="chronoTshirt"
                         :style="{ color: tshirtColor === 'black' ? 'white' : 'black' }">
@@ -123,7 +123,7 @@
         </div>
 
         <RouterLink :to="{ name: 'Shopping' }">
-            <button id="store"><span>Ajouter à mon panier d'achats</span></button>
+            <button id="store"><span>Ajouter au panier</span></button>
         </RouterLink>
 
     </div>
@@ -448,18 +448,18 @@ template {
 
 #store {
     width: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 80px;
+    padding-right: 80px;
     height: 80px;
     background-color: #73020C;
     color: white;
     font-family: "MonoManiac One";
     font-size: 40px;
-    border: none;
+    border: solid 2px #000000;
     overflow: hidden;
     cursor: pointer;
     position: absolute;
-    top: 85%;
+    top: 95%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
@@ -479,7 +479,6 @@ template {
 
 #store:hover::before {
     left: 0;
-    border: 3px #73020C solid;
 }
 
 #store span {
