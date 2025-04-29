@@ -1,11 +1,40 @@
 <script>
-
+export default {
+  data() {
+    return {
+      showPopup: true,
+    };
+  },
+  methods: {
+    closePopup() {
+      this.showPopup = false;
+    }
+  }
+}
 </script>
 
 
 <template>
 
   <div class="Container">
+
+    <div v-if="showPopup" class="popup-overlay">
+      <div class="popup-content">
+        <img @click="closePopup" id="crossClosePopup" src="../components/Icons/croix.svg" alt="">
+        <div class="text-popup">
+          <h1>Jusqu'à 20% sur ta <br>commande</h1>
+          <p>Découvrez notre mini-jeu exclusif <br> et tentez de remporter une <br> réduction personnalisée.</p>
+
+          <RouterLink :to="{ name: 'Game' }">
+            <button id="playGameButton"><span>Jouer</span></button>
+          </RouterLink>
+        </div>
+        <div class="imgTshirt">
+          <img id="popUpTshirt" src="../assets/pictures/tshirt/popUp_tshirt.png" alt="">
+        </div>
+      </div>
+    </div>
+
     <div id="title">
       <h1>BOUTIQUE</h1>
     </div>
@@ -19,17 +48,17 @@
     </RouterLink>
     <div class="text-center">
       fixez vos<br>
-      exploit sur la<br>
+      exploits sur la<br>
       <div id="shiftWord">
         toile
       </div>
     </div>
 
-    <RouterLink :to="{ name: 'Game' }">
+    <!-- <RouterLink :to="{ name: 'Game' }">
       <div class="text-link-game">
-          <p>↳ Jeu Concours</p>
+        <p>↳ Jeu Concours</p>
       </div>
-    </RouterLink>
+    </RouterLink> -->
 
     <div id="title2">
       <h1>LES PARCOURS LES PLUS ÉDITÉS</h1>
@@ -155,6 +184,113 @@ template {
   width: 100%;
 }
 
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: row;
+  background-color: #DCEFFA;
+  text-align: center;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  font-family: 'Abel';
+}
+
+#crossClosePopup {
+  position: absolute;
+  margin: 0;
+  top: 80px;
+  left: 265px;
+  cursor: pointer;
+}
+
+.text-popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 90px;
+  padding: 40px;
+}
+
+.text-popup h1 {
+  font-size: 2.5em;
+  font-family: 'Inter ExtraBold';
+  color: #000000;
+  margin: 0;
+}
+
+.text-popup p {
+  font-size: 2.1em;
+  font-family: 'Abel';
+  color: #000000;
+  margin: 0;
+  line-height: 1.7;
+}
+
+#playGameButton {
+  padding: 20px 100px;
+  background-color: #73020C;
+  color: white;
+  font-family: "MonoManiac One";
+  font-size: 2.8em;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+
+  /* Centrage */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#playGameButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 1;
+  transition: left 0.4s ease;
+}
+
+#playGameButton:hover::before {
+  left: 0;
+}
+
+#playGameButton span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+#playGameButton:hover span {
+  color: #73020C;
+}
+
+#popUpTshirt {
+  width: 100%;
+  height: 100%;
+}
+
+
 #title {
   display: flex;
   justify-content: center;
@@ -209,7 +345,7 @@ template {
   font-family: 'Abel';
 }
 
-.text-link-game {
+/* .text-link-game {
   position: absolute;
   top: 105%;
   left: 8.5%;
@@ -218,8 +354,8 @@ template {
   color: #000000;
   font-family: 'Monomaniac One';
   font-size: 1.8em;
-}
- 
+} */
+
 
 #shiftWord {
   margin-left: 215px;
