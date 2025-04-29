@@ -205,7 +205,7 @@ export default {
   background-color: #8AA7AE4D;
   min-height: 100vh;
   margin-top: 11vh;
-  background-image: url('../assets/pictures/game/backgroundGame.svg');
+  background-image: url('../assets/pictures/game/backgroundGame.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
