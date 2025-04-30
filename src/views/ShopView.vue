@@ -205,13 +205,15 @@ template {
   text-align: center;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
   font-family: 'Abel';
+
+  position: relative;
 }
 
 #crossClosePopup {
   position: absolute;
   margin: 0;
-  top: 80px;
-  left: 265px;
+  top: 20px;
+  left: 20px;
   cursor: pointer;
 }
 

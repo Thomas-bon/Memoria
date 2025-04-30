@@ -151,7 +151,7 @@ export default {
 }
 
 #SecondView {
-  padding: 25rem 0;
+  padding: 10rem 0;
   z-index: 2;
 }
 
@@ -169,7 +169,7 @@ export default {
   background-color: #fff;
   border-top: #cecece 8px solid;
   border-bottom: #cecece 8px solid;
-  padding: 3rem 0;
+  padding: 1rem 0;
   width: 100%;
 }
 

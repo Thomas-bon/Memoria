@@ -117,10 +117,9 @@ footer {
 
 .iconSocialMedia {
     background-color: white;
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    padding: 15px;
+    border-radius: 100%;
+    width: 30px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
