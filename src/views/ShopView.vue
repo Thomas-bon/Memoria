@@ -80,19 +80,19 @@ export default {
       <div class="tshirtsAnnecy">
 
         <div id="tshirtAnnecyBlack">
-          <RouterLink :to="{ name: 'Product' }">
+          <RouterLink :to="{ name: 'Product', params: { id: 'annecy-black' } }">
             <div id="Personalize">
               ↳ Voir le produit
             </div>
           </RouterLink>
-          <img src="../assets/pictures/tshirt/tshirt_annecy_ black_1.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_annecy_black_1.svg" alt="">
           <div id="Price">
             €40
           </div>
         </div>
 
         <div id="tshirtAnnecyWhite">
-          <RouterLink :to="{ name: 'Product' }">
+          <RouterLink :to="{ name: 'Product', params: { id: 'annecy-white' } }">
             <div id="Personalize">
               ↳ Voir le produit
             </div>
@@ -119,7 +119,7 @@ export default {
       <div class="tshirtsSeville">
 
         <div id="tshirtSevilleBlack">
-          <RouterLink :to="{ name: 'Product' }">
+          <RouterLink :to="{ name: 'Product', params: { id: 'seville-black' } }">
             <div id="Personalize">
               ↳ Voir le produit
             </div>
@@ -131,7 +131,7 @@ export default {
         </div>
 
         <div id="tshirtSevilleWhite">
-          <RouterLink :to="{ name: 'Product' }">
+          <RouterLink :to="{ name: 'Product', params: { id: 'seville-white' } }">
             <div id="Personalize">
               ↳ Voir le produit
             </div>
