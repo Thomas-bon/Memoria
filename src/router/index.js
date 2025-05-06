@@ -51,6 +51,11 @@ const router = createRouter({
       name: 'POC',
       component: POC,
     },
+    {
+      path: '/product/:id',
+      name: 'Product',
+      component: ProductView,
+    }
   ],
 
   scrollBehavior(to, from, savedPosition) {

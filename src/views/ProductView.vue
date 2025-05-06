@@ -1,31 +1,80 @@
 <script>
 export default {
+    name: 'Product',
     data() {
         return {
-            unitPrice: 40,
+            product: null,
+            unitPrice: 0,
             quantity: 1,
             selectedSize: null,
-            defaultImage: new URL('../assets/pictures/tshirt/tshirt_seville_white_1.svg', import.meta.url).href,
-            hoverImage: new URL('../assets/pictures/tshirt/tshirt_seville_white_2.svg', import.meta.url).href,
             currentImage: ''
         }
     },
     created() {
-        this.currentImage = this.defaultImage
-    },
+        const productId = this.$route.params.id;
+
+        const products = [
+            {
+                id: 'annecy-black',
+                name: 'T-shirt Annecy Noir',
+                price: 40,
+                img1: new URL('../assets/pictures/tshirt/tshirt_annecy_black_1.svg', import.meta.url).href,
+                img2: new URL('../assets/pictures/tshirt/tshirt_annecy_black_2.svg', import.meta.url).href,
+                description1: "Ce t-shirt de sport à la fois sobre et percutant a été conçu pour rendre hommage à ta participation au Marathon d’Annecy, l’un des marathons les plus pittoresques de France. L’élégance du noir rencontre l’énergie du tracé pour une pièce à la fois stylée et symbolique.",
+                description2: "Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la date de votre performance. Vous pouvez également y ajouter votre temps ou tout autre détail personnalisé pour un souvenir unique et durable.",
+            },
+            {
+                id: 'annecy-white',
+                name: 'T-shirt Annecy Blanc',
+                price: 40,
+                img1: new URL('../assets/pictures/tshirt/tshirt_annecy_white_1.svg', import.meta.url).href,
+                img2: new URL('../assets/pictures/tshirt/tshirt_annecy_white_2.svg', import.meta.url).href,
+                description1: "Ce t-shirt de sport blanc et léger est une création unique, pensée pour marquer ta participation au Marathon d’Annecy, l’un des plus beaux parcours de France, longeant les eaux turquoise du lac et traversant les paysages alpins. Garde un souvenir de ton parcours mémorable.",
+                description2: "Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la date de votre performance. Vous pouvez également y ajouter votre temps ou tout autre détail personnalisé pour un souvenir unique et durable.",
+            },
+            {
+                id: 'seville-black',
+                name: 'T-shirt Seville Noir',
+                price: 40,
+                img1: new URL('../assets/pictures/tshirt/tshirt_seville_black_1.svg', import.meta.url).href,
+                img2: new URL('../assets/pictures/tshirt/tshirt_seville_black_2.svg', import.meta.url).href,
+                description1: "Ce t-shirt de sport au design unique a été spécialement conçu pour célébrer ta participation au Marathon de Séville. Fabriqué dans une matière technique respirante, il allie confort  et style pour accompagner tes performances.",
+                description2: "Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la date de votre performance. Vous pouvez également y ajouter votre temps ou tout autre détail personnalisé pour un souvenir unique et durable.",
+            },
+            {
+                id: 'seville-white',
+                name: 'T-shirt Seville Blanc',
+                price: 40,
+                img1: new URL('../assets/pictures/tshirt/tshirt_seville_white_1.svg', import.meta.url).href,
+                img2: new URL('../assets/pictures/tshirt/tshirt_seville_white_2.svg', import.meta.url).href,
+                description1: "Fabriqué dans une matière respirante et légère, ce t-shirt vous garantit un confort optimal même lors de vos plus longues courses. Le textile, doux au toucher et à séchage rapide, permet d’évacuer efficacement la transpiration pour rester au frais en toutes circonstances.",
+                description2: "Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la date de votre performance. Vous pouvez également y ajouter votre temps ou tout autre détail personnalisé pour un souvenir unique et durable.",
+            },
+        ];
+
+        this.product = products.find(p => p.id === productId);
+
+        if (!this.product) {
+            this.$router.push('/404');
+            return;
+        }
+
+        this.unitPrice = this.product.price;
+        this.defaultImage = this.product.img1;
+        this.hoverImage = this.product.img2;
+        this.currentImage = this.defaultImage;
+    }
+
+    ,
     methods: {
         selectSize(size) {
-            if (this.selectedSize === size) {
-                this.selectedSize = null; // si je clique encore dessus ça annule
-            } else {
-                this.selectedSize = size;
-            }
+            this.selectedSize = this.selectedSize === size ? null : size;
         },
         changeImage() {
-            this.currentImage = this.hoverImage;
+            this.currentImage = this.product.img2;
         },
         resetImage() {
-            this.currentImage = this.defaultImage;
+            this.currentImage = this.product.img1;
         },
         increaseQuantity() {
             this.quantity++;
@@ -42,10 +91,7 @@ export default {
         }
     }
 }
-
 </script>
-
-
 
 <template>
     <div class="Product">
@@ -55,20 +101,10 @@ export default {
         <div class="content">
             <div class="Descriptionproduct">
                 <div id="txtDescription">
-                    <p>Fabriqué dans une matière respirante et légère, ce t-shirt vous garantit un confort optimal même
-                        lors
-                        de vos plus longues courses. Le textile, doux au toucher et
-                        à séchage rapide, permet d’évacuer
-                        efficacement la transpiration pour
-                        rester au frais en toutes circonstances.</p>
+                    <p>{{ product.description1 }}</p>
                 </div>
-
                 <div id="txtDescription">
-                    <p>Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la
-                        date
-                        de votre performance. Vous pouvez également
-                        y ajouter votre temps ou tout autre détail personnalisé pour un souvenir unique et durable.
-                    </p>
+                    <p>{{ product.description2 }}</p>
                 </div>
             </div>
 
@@ -96,11 +132,11 @@ export default {
                         <button class="customize"><span>Personnalisé</span></button>
                     </RouterLink>
                 </div>
-
             </div>
         </div>
     </div>
 </template>
+
 
 <style scoped>
 @font-face {
@@ -184,7 +220,7 @@ template {
 
 .price {
     font-size: 5em;
-    min-width: 180px; /* ou width: 200px; selon ce que tu préfères */
+    min-width: 180px;
 }
 
 .quantity {
@@ -260,43 +296,43 @@ template {
 }
 
 button.customize {
-  width: 250px;
-  height: 75px;
-  background-color: #73020C;
-  color: white;
-  font-family: "MonoManiac One";
-  font-size: 40px;
-  border: none;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
+    width: 250px;
+    height: 75px;
+    background-color: #73020C;
+    color: white;
+    font-family: "MonoManiac One";
+    font-size: 40px;
+    border: none;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 button.customize::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  z-index: 1;
-  transition: left 0.4s ease;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1;
+    transition: left 0.4s ease;
 }
 
 button.customize:hover::before {
-  left: 0;
+    left: 0;
 }
 
 button.customize span {
-  position: relative;
-  z-index: 2;
-  transition: color 0.3s ease;
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
 }
 
 button.customize:hover span {
-  color: #73020C;
+    color: #73020C;
 }
 
 
