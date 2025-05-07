@@ -153,7 +153,7 @@ export default {
                 },
                 embroidery: false,
                 hem: false,
-                img: tshirtSrc,
+                img: '',
             },
         };
     },
@@ -295,7 +295,10 @@ export default {
             return 'unknown';
         },
     },
-
+    
+    mounted() {
+        this.customization.img = this.finalTshirtSrc;
+    },
 
     watch: {
 
