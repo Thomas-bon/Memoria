@@ -1,42 +1,44 @@
-import { reactive, computed } from 'vue'
+// store.js
+import { createStore } from 'vuex';
 
-const state = reactive({
-    items: []
-})
-
-function addToCart(product) {
-    const existing = state.items.find(item => item.id === product.id);
-
-    if (existing) {
-        existing.quantity += 1;
-
-    } else {
-        existing.push({ ...product, quantity: 1 });
-
-    };
-};
-
-function removeFromCart(productID) {
-    state.items.filter(item => item.id !== productID);
-};
-
-function clearCart() {
-    state.items = [];
-};
-
-const totalItems = computed(() =>
-    state.items.reduce((sum, item) => sum + item.quantity, 0)
-);
-
-const totalPrice = computed(() =>
-    state.items.reduce((sum, item) => sum + item.quantity * item.price, 0)
-);
-
-export default {
-    state,
-    addToCart,
-    removeFromCart,
-    clearCart,
-    totalItems,
-    totalPrice,
-};
+export default createStore({
+    state: {
+        pendingState: {
+            id: null,
+            name: '',
+            price: 0,
+            quantity: 0,
+            size: null,
+            image: '',
+            customization: null,
+        }
+    },
+    mutations: {
+        setPendingProduct(state, product) {
+            state.pendingState = { ...product };
+        },
+        updateQuantity(state, quantity) {
+            state.pendingState.quantity = quantity;
+        },
+        updateSize(state, size) {
+            state.pendingState.size = size;
+        },
+        updateCustomization(state, customization) {
+            state.pendingState.customization = customization;
+        }
+    },
+    actions: {
+        savePendingProduct({ commit }, product) {
+            commit('setPendingProduct', product);
+        },
+        changeQuantity({ commit }, quantity) {
+            commit('updateQuantity', quantity);
+        },
+        changeSize({ commit }, size) {
+            commit('updateSize', size);
+        },
+        updateCustomization({ commit }, customization) {
+            commit('updateCustomization', customization);
+        }
+    }
+});

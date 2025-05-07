@@ -68,14 +68,14 @@
 
                 <!-- IMPRESSION -->
                 <div id="embroidery">
-                    <p :style="{ opacity: !isChecked ? 1 : 0.29 }">Impression</p>
+                    <p :style="{ opacity: !withEmbroidery ? 1 : 0.29 }">Impression</p>
 
                     <label class="switch">
-                        <input type="checkbox" v-model="isChecked" />
+                        <input type="checkbox" v-model="withEmbroidery" />
                         <span class="slider"></span>
                     </label>
 
-                    <p :style="{ opacity: isChecked ? 1 : 0.29 }">Broderie</p>
+                    <p :style="{ opacity: withEmbroidery ? 1 : 0.29 }">Broderie</p>
                 </div>
 
                 <!-- IMPRESSION -->
@@ -122,18 +122,19 @@
             </div>
         </div>
 
-        <RouterLink :to="{ name: 'Shopping' }">
-            <button id="store"><span>Ajouter au panier</span></button>
-        </RouterLink>
+        <button id="store" @click="addToCart"><span>Ajouter au panier</span></button>
 
     </div>
 </template>
 
 <script>
+
+import cartStore from '@/stores/cartStore'
+
 export default {
     data() {
         return {
-            isChecked: false,
+            withEmbroidery: false,
             withHem: false,
             showColorClicked: false,
             showParkourClicked: false,
@@ -142,9 +143,54 @@ export default {
             tshirtValue: '1',
             inputMinute: '',
             inputSeconde: '',
+
+
+            customization: {
+                color: 'Black',
+                chrono: {
+                    minute: '00',
+                    seconde: '00',
+                },
+                embroidery: false,
+                hem: false,
+                img: tshirtSrc,
+            },
         };
     },
     methods: {
+        addToCart() {
+            const pendingProduct = this.$store.state && this.$store.state.pendingState;
+
+            if (!pendingProduct) {
+                console.error('Le produit en attente est introuvable dans le store!');
+                return;
+            }
+
+            const product = {
+                id: pendingProduct.id,
+                name: pendingProduct.name,
+                size: pendingProduct.size,
+                quantity: pendingProduct.quantity,
+                price: pendingProduct.price,
+                image: pendingProduct.image,
+                customization: this.customization,
+            }
+
+            cartStore.addToCart(product);
+            this.$router.push({ name: 'Shopping' });
+        },
+
+        updateChrono() {
+            this.customization.chrono.minute = this.inputMinute;
+            this.customization.chrono.seconde = this.inputSeconde;
+        },
+        toggleEmbroidery() {
+            this.customization.embroidery = !this.customization.embroidery;
+        },
+        toggleHem() {
+            this.customization.hem = !this.customization.hem;
+        },
+
         checkTshirtValue() {
             if (this.tshirtSrc.endsWith('2.svg')) {
                 this.tshirtValue = 2;
@@ -220,6 +266,7 @@ export default {
 
         },
         changeColor(newColor) {
+            this.customization.color = newColor;
             if (newColor === "white") {
                 this.tshirtSrc = this.tshirtSrc.replace('black', newColor);
             }
@@ -249,6 +296,28 @@ export default {
         },
     },
 
+
+    watch: {
+
+        inputMinute(newValue) {
+            this.updateChrono();  // Met à jour chrono à chaque changement de minute
+            // console.log("Le flocage des minutes à été mis à jour !")
+        },
+        inputSeconde(newValue) {
+            this.updateChrono();  // Met à jour chrono à chaque changement de seconde
+            // console.log("Le flocage des secondes à été mis à jour !")
+        },
+
+        withEmbroidery(newValue) {
+            this.customization.embroidery = newValue;
+            // console.log("Broderie changée:", newValue);
+        },
+
+        withHem(newValue) {
+            this.customization.hem = newValue;
+            // console.log("Ourlet changé:", newValue);
+        }
+    },
 
     beforeUnmount() {
         // Nettoie l'écouteur d'événement si la composant est détruit

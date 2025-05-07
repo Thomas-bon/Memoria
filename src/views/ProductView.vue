@@ -1,4 +1,7 @@
 <script>
+import cartStore from '../stores/cartStore';
+import pendingProduct from '../stores/store'
+
 export default {
     name: 'Product',
     data() {
@@ -83,7 +86,27 @@ export default {
             if (this.quantity > 1) {
                 this.quantity--;
             }
-        }
+        },
+        addtoCart() {
+            if (this.selectedSize === null) {
+                alert("Choisissez une taille !");
+                return;
+            }
+
+            const productToAdd = {
+                id: this.product.id,
+                name: this.product.name,
+                price: this.unitPrice,
+                quantity: this.quantity,
+                size: this.selectSize,
+                image: this.product.img,
+                customization: null,
+            };
+
+            pendingProduct.dispatch('savePendingProduct', productToAdd)
+            console.log("Le produit à bien été enregistré !")
+            this.$router.push({ name: 'Personalize' });
+        },
     },
     computed: {
         totalPrice() {
@@ -128,9 +151,7 @@ export default {
 
                 <div id="Personalize">
                     <div class="price">€{{ totalPrice }}</div>
-                    <RouterLink :to="{ name: 'Personalize' }">
-                        <button class="customize"><span>Personnalisé</span></button>
-                    </RouterLink>
+                    <button class="customize" @click="addtoCart"><span>Personnalisé</span></button>
                 </div>
             </div>
         </div>

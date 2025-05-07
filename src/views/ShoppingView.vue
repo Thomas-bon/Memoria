@@ -43,7 +43,11 @@ export default {
         validateCVC() {
             this.cvc = this.cvc.replace(/\D/g, '').slice(0, 3);
         }
-    }
+    },
+    mounted() {
+        const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+        this.cartItems = cartData;
+    },
 };
 </script>
 
@@ -69,7 +73,7 @@ export default {
         </div>
 
         <div class="content">
-            
+
             <div class="youritems">
                 <div id="purchase">
                     <div id="item">
@@ -102,7 +106,7 @@ export default {
                 </div>
             </div>
 
-            
+
             <div class="rightPane">
                 <div class="payment" v-if="!showPaymentForm && !showBankForm">
                     <div class="totalPrices">
