@@ -295,8 +295,16 @@ export default {
             return 'unknown';
         },
     },
-    
+
+
     mounted() {
+        const pendingProduct = this.$store.state && this.$store.state.pendingState;
+
+        if (pendingProduct && pendingProduct.image) {
+            this.tshirtSrc = pendingProduct.image;
+            this.customization.img = pendingProduct.image;
+        }
+        
         this.customization.img = this.finalTshirtSrc;
     },
 

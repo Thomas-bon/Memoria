@@ -99,7 +99,7 @@ export default {
                 price: this.unitPrice,
                 quantity: this.quantity,
                 size: this.selectSize,
-                image: this.product.img,
+                image: this.currentImage,
                 customization: null,
             };
 
