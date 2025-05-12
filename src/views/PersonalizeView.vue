@@ -353,6 +353,21 @@ export default {
     src: url(../assets/font/Maxlock.ttf);
 }
 
+@font-face {
+    font-family: "InterRegular";
+    src: url(../assets/font/Inter_18pt-Regular.ttf);
+}
+
+@font-face {
+    font-family: "InterSemiBold";
+    src: url(../assets/font/Inter_18pt-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: "InterMedium";
+    src: url(../assets/font/Inter_18pt-Medium.ttf);
+}
+
 
 template {
     height: 90vh;
