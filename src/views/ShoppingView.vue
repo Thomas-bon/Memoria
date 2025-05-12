@@ -90,20 +90,11 @@ export default {
 
                 <div id="line"></div>
 
-                <div id="moreItems" v-if="!showPaymentForm && !showBankForm">
-                    <h1 id="encadre">ET SI ON LE COMPLÉTAIT <br> AVEC VOS EXPLOITS ?</h1>
-                </div>
-
                 <div id="moreItems" v-if="showBankForm">
                     <h2>Livraison gratuite dès le premier achat</h2>
                     <h1>MERCI !</h1>
                 </div>
 
-                <div class="gridOthersItems" v-if="!showPaymentForm && !showBankForm">
-                    <img src="../assets/pictures/tshirt/tshirt_annecy_white_1.svg" alt="">
-                    <img src="../assets/pictures/tshirt/tshirt_annecy_black_1.svg" alt="">
-                    <img src="../assets/pictures/tshirt/tshirt_seville_white_1.svg" alt="">
-                </div>
             </div>
 
 
@@ -111,10 +102,10 @@ export default {
                 <div class="payment" v-if="!showPaymentForm && !showBankForm">
                     <div class="totalPrices">
                         <div id="prices">
-                            <h2>montant du panier</h2><span>40€</span>
+                            <h2>Montant du panier</h2><span>40€</span>
                         </div>
                         <div id="shipping">
-                            <h2>livraison</h2><span>10€</span>
+                            <h2>Livraison</h2><span>10€</span>
                         </div>
                         <div id="total">
                             <h1>TOTAL</h1><span>50€</span>
@@ -122,7 +113,7 @@ export default {
                     </div>
 
                     <div id="promoCode">
-                        <input id="inputCode" type="text" placeholder="CODE PROMO">
+                        <input id="inputCode" type="text" placeholder="CODE PROMO :">
                     </div>
 
                     <div class="paymentButton">
@@ -139,7 +130,6 @@ export default {
                         </h2>
                     </div>
                 </div>
-
 
                 <div class="shippingForm" v-if="showPaymentForm">
                     <h2>Coordonnées de Livraison</h2>
@@ -206,7 +196,19 @@ export default {
             </div>
 
         </div>
+        <div class="OthersItems" v-if="!showPaymentForm && !showBankForm">
+            <div id="moreItems" v-if="!showPaymentForm && !showBankForm">
+                <h1 id="encadre">ET SI ON LE COMPLÉTAIT AVEC VOS EXPLOITS ?</h1>
+            </div>
+            <div class="gridOthersItems" v-if="!showPaymentForm && !showBankForm">
+                <img src="../assets/pictures/tshirt/tshirt_annecy_white_1.svg" alt="">
+                <img src="../assets/pictures/tshirt/tshirt_annecy_black_1.svg" alt="">
+                <img src="../assets/pictures/tshirt/tshirt_seville_white_1.svg" alt="">
+            </div>
+        </div>
     </div>
+
+
 </template>
 
 
@@ -214,6 +216,31 @@ export default {
 @font-face {
     font-family: 'Monomaniac One';
     src: url('../assets/font/MonomaniacOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url(../assets/font/Inter_18pt-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: "InterRegular";
+    src: url(../assets/font/Inter_18pt-Regular.ttf);
+}
+
+@font-face {
+    font-family: "InterSemiBold";
+    src: url(../assets/font/Inter_18pt-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: "InterMedium";
+    src: url(../assets/font/Inter_18pt-Medium.ttf);
+}
+
+@font-face {
+    font-family: "InterLight";
+    src: url(../assets/font/Inter_18pt-Light.ttf);
 }
 
 * {
@@ -275,6 +302,10 @@ template {
     font-weight: bold;
     text-transform: uppercase;
     background-color: #D9D9D9;
+}
+
+.steps p{
+    font-family: "InterRegular";
 }
 
 .Step {
@@ -348,13 +379,13 @@ template {
 #moreItems {
     font-size: 1em;
     font-weight: bold;
-
 }
 
 #encadre {
     border: 2px solid black;
-    padding: 10px;
+    padding: 15px;
     display: inline-block;
+    font-family: "InterMedium";
 }
 
 .payment {
@@ -379,12 +410,16 @@ template {
     width: 100%;
     padding: 10px;
     font-size: 1.1em;
+}
 
+#prices>h2 {
+    font-size: 1.3em;
+    font-family: "InterMedium";
 }
 
 #prices>span {
     font-size: 1.3em;
-    font-weight: bold;
+    font-family: "InterRegular";
 }
 
 #shipping {
@@ -397,9 +432,14 @@ template {
     font-size: 1.1em;
 }
 
+#shipping>h2 {
+    font-size: 1.3em;
+    font-family: "InterMedium";
+}
+
 #shipping>span {
     font-size: 1.3em;
-    font-weight: bold;
+    font-family: "InterRegular";
 }
 
 
@@ -413,17 +453,22 @@ template {
     font-size: 1.3em;
 }
 
+#total>h1 {
+    font-size: 1.5em;
+    font-family: "Inter";
+}
+
 #total>span {
     font-size: 1.5em;
-    font-weight: bold;
+    font-family: "Inter";
 }
 
 #inputCode {
     border-color: #000000;
-    text-align: center;
+    text-align: flex-start;
     padding: 5px;
     width: 100%;
-    background-color: transparent;
+    background-color: #FFFFFF;
 }
 
 input[type=text] {
@@ -474,6 +519,7 @@ input::placeholder {
     align-items: flex-start;
     font-size: 1.2em;
     color: #000000;
+    font-family: "InterLight";
 }
 
 .button-animated {
@@ -519,24 +565,37 @@ input::placeholder {
     display: flex;
     align-items: flex-start;
     font-size: 0.7em;
+    font-family: "InterLight";
+}
+
+#contact h2 {
+    font-family: "InterLight";
 }
 
 #contactUs {
     color: #000000;
 }
 
+.OthersItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    width: 100%;
+    margin-top: 100px;
+}
+
 .gridOthersItems {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    justify-content: flex-start;
-    margin-left: 105%;
 
 }
 
 .gridOthersItems>img {
-    height: 35vh;
-    width: 33vh;
+    height: 45vh;
+    width: 43vh;
     background-color: #92B0C0;
     padding: 20px;
 }
