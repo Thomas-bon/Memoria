@@ -98,7 +98,7 @@ export default {
                 name: this.product.name,
                 price: this.unitPrice,
                 quantity: this.quantity,
-                size: this.selectSize,
+                size: this.selectedSize,
                 image: this.currentImage,
                 customization: null,
             };

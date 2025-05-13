@@ -1,56 +1,58 @@
-import { reactive, computed } from 'vue'
+    import { reactive, computed } from 'vue'
 
 
-const saveCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const saveCart = JSON.parse(localStorage.getItem('cart')) || [];
 
-const state = reactive({
-    items: saveCart
-})
+    const state = reactive({
+        items: saveCart
+    })
 
-function keepUpdateCart() {
-    localStorage.setItem('cart', JSON.stringify(state.items));
-}
+    function keepUpdateCart() {
+        localStorage.setItem('cart', JSON.stringify(state.items));
+    }
 
-function addToCart(product) {
-    const existing = state.items.find(
-        item => item.id === product.id && item.size === product.size);
+    function addToCart(product) {
+        const existing = state.items.find(
+            item => item.id === product.id && item.size === product.size);
 
-    if (existing) {
-        existing.quantity += product.quantity;
+        if (existing) {
+            existing.quantity += product.quantity;
 
-    } else {
-        state.items.push({ ...product });
+        } else {
+            state.items.push({ ...product });
 
+        };
+        // console.log(state.items)
+        keepUpdateCart();
     };
-    // console.log(state.items)
-    keepUpdateCart();
-};
 
-function removeFromCart(productID) {
-    state.items = state.items.filter(item => item.id !== productID);
+    function removeFromCart(product) {
+        const index = state.items.findIndex(item => item.id === product.id && item.size === product.size && item.customization?.color === product.customization?.color);
+        if (index !== -1) {
+            state.items.splice(index, 1);
+            keepUpdateCart();
+        }
+    };
 
-    keepUpdateCart();
-};
+    function clearCart() {
+        state.items = [];
 
-function clearCart() {
-    state.items = [];
+        keepUpdateCart();
+    };
 
-    keepUpdateCart();
-};
+    const totalItems = computed(() =>
+        state.items.reduce((sum, item) => sum + item.quantity, 0)
+    );
 
-const totalItems = computed(() =>
-    state.items.reduce((sum, item) => sum + item.quantity, 0)
-);
+    const totalPrice = computed(() =>
+        state.items.reduce((sum, item) => sum + item.quantity * item.price, 0)
+    );
 
-const totalPrice = computed(() =>
-    state.items.reduce((sum, item) => sum + item.quantity * item.price, 0)
-);
-
-export default {
-    state,
-    addToCart,
-    removeFromCart,
-    clearCart,
-    totalItems,
-    totalPrice,
-};
+    export default {
+        state,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        totalItems,
+        totalPrice,
+    };

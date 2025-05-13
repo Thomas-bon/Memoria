@@ -1,4 +1,6 @@
 <script>
+import cartStore from '@/stores/cartStore';
+
 export default {
     data() {
         return {
@@ -6,7 +8,9 @@ export default {
             showBankForm: false,
             currentStep: 1,
             phoneNumber: '',
-            cvc: ''
+            cvc: '',
+
+            cartItems: [],
         };
     },
     methods: {
@@ -42,6 +46,31 @@ export default {
         },
         validateCVC() {
             this.cvc = this.cvc.replace(/\D/g, '').slice(0, 3);
+        },
+        increaseQuantity(index) {
+            this.cartItems[index].quantity++;
+            this.updateLocalStorage();
+        },
+        decreaseQuantity(index) {
+            if (this.cartItems[index].quantity > 1) {
+                this.cartItems[index].quantity--;
+                this.updateLocalStorage();
+            }
+        },
+        updateLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(this.cartItems));
+        },
+        removeItem(product) {
+            cartStore.removeFromCart(product);
+            this.cartItems = this.cartItems.filter(item => item != product)
+            this.updateLocalStorage();
+        },
+    },
+    computed: {
+        totalPrice() {
+            return this.cartItems.reduce((sum, item) => {
+                return sum + item.price * item.quantity;
+            }, 0);
         }
     },
     mounted() {
@@ -75,17 +104,37 @@ export default {
         <div class="content">
 
             <div class="youritems">
-                <div id="purchase">
-                    <div id="item">
-                        <img src="../assets/pictures/tshirt/tshirt_seville_black_1.svg" alt="">
+                <div v-if="cartItems.length > 0">
+                    <div v-for="(item, index) in cartItems" :key="index" id="purchase">
+                        <div id="item">
+                            <img :src="item.image" alt="">
+                        </div>
+                        <div id="iteminfo">
+                            <h2>T-SHIRT PERSONNALISÉ</h2>
+                            <h1>{{ item.name }}</h1>
+                            <h3>COULEUR {{ item.customization.color }}</h3>
+                            <div>
+                                <h3>TAILLE {{ item.size }}</h3>
+
+                            </div>
+
+                            <h1>€{{ item.price }}</h1>
+                        </div>
+                        <div id="deleteAndQuantity">
+                            <div id="deleteitem" @click="removeItem(item)">🗑️</div>
+                            <div id="quantity">
+                                <div class="quantity-buttons">
+                                    <button @click="decreaseQuantity(index)">-</button>
+                                    <span>{{ item.quantity }}</span>
+                                    <button @click="increaseQuantity(index)">+</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="iteminfo">
-                        <h2>T-SHIRT PERSONNALISÉ</h2>
-                        <h1>MARATHON DE SEVILLE</h1>
-                        <h3>COULEUR NOIRE</h3>
-                        <h3>TAILLE S</h3>
-                        <h1>€40</h1>
-                    </div>
+                </div>
+
+                <div v-if="cartItems.length === 0">
+                    <h1>Le panier est vide !</h1>
                 </div>
 
                 <div id="line"></div>
@@ -102,7 +151,7 @@ export default {
                 <div class="payment" v-if="!showPaymentForm && !showBankForm">
                     <div class="totalPrices">
                         <div id="prices">
-                            <h2>Montant du panier</h2><span>40€</span>
+                            <h2>Montant du panier</h2><span>{{ totalPrice }}€</span>
                         </div>
                         <div id="shipping">
                             <h2>Livraison</h2><span>10€</span>
@@ -304,7 +353,7 @@ template {
     background-color: #D9D9D9;
 }
 
-.steps p{
+.steps p {
     font-family: "InterRegular";
 }
 
@@ -317,25 +366,26 @@ template {
 .youritems {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 55px;
     margin-top: 50px;
+    max-width: 800px;
+    flex: 1;
 }
 
-.youritems,
 .rightPane {
-    flex: 1;
     max-width: 500px;
 }
 
 #purchase {
     display: flex;
     flex-direction: row;
-    gap: 30px;
-    justify-content: center;
+    gap: 50px;
+    justify-content: flex-start;
     align-items: flex-start;
-
+    width: 800px;
+    margin-bottom: 80px;
 }
 
 
@@ -355,25 +405,28 @@ template {
     align-items: flex-start;
     gap: 5px;
     font-size: 0.7em;
-    max-width: 250px;
+    /* max-width: 700px; */
+    width: 30%;
     word-break: break-word;
 }
 
 #iteminfo h1 {
     font-size: 1.8em;
     font-weight: bold;
+    text-align: left;
 
 }
 
 #iteminfo h2 {
     margin-bottom: 5px;
+    text-align: left;
 }
 
 #line {
-    width: 150%;
+    width: 100%;
     height: 1px;
     background-color: #000000;
-    margin-left: 50%;
+    /* margin-left: 50%; */
 }
 
 #moreItems {
@@ -737,5 +790,60 @@ label {
 
 #cardCode {
     margin-bottom: 0;
+}
+
+#deleteAndQuantity {
+    width: 10%;
+    margin-left: 30%;
+    position: relative;
+    min-height: 150px;
+}
+
+#deleteitem {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    cursor: pointer;
+}
+
+#quantity {
+
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 24px;
+    background-color: #D9D9D9;
+    padding: 7px;
+    min-width: 120px;
+    height: 40px;
+}
+
+.quantity-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    font-size: 1.6em;
+}
+
+.quantity-buttons>button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
 }
 </style>

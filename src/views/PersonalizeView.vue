@@ -290,8 +290,8 @@ export default {
             return [...parts, updatedFileName].join('/');
         },
         tshirtColor() {
-            if (this.tshirtSrc.includes('white')) return 'white';
-            if (this.tshirtSrc.includes('black')) return 'black';
+            if (this.tshirtSrc.includes('white')) return 'WHITE';
+            if (this.tshirtSrc.includes('black')) return 'BLACK';
             return 'unknown';
         },
     },
@@ -304,8 +304,12 @@ export default {
             this.tshirtSrc = pendingProduct.image;
             this.customization.img = pendingProduct.image;
         }
-        
+
         this.customization.img = this.finalTshirtSrc;
+
+        if (this.tshirtSrc.includes('white')) {
+            this.customization.color = 'WHITE';
+        } 
     },
 
     watch: {
