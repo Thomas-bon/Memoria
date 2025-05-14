@@ -1,5 +1,7 @@
 <script>
 import cartStore from '@/stores/cartStore';
+import emailjs from 'emailjs-com';
+
 
 export default {
     data() {
@@ -9,8 +11,20 @@ export default {
             currentStep: 1,
             phoneNumber: '',
             cvc: '',
+            // totalPriceWithTravel: 0,
+            delivery: 10,
 
             cartItems: [],
+
+            deliveryForm: {
+                firstName: '',
+                lastName: '',
+                address: '',
+                postalCode: '',
+                city: '',
+                phone: '',
+            },
+            email: '',
         };
     },
     methods: {
@@ -24,6 +38,11 @@ export default {
             this.currentStep = 3;
         },
         finalizePayment() {
+            this.sendOrderEmail();
+            localStorage.removeItem('cart');
+            this.cartItems = [];
+            // Optionnel : notifier l'utilisateur
+            alert("Merci pour votre commande !");
             this.currentStep = 1;
             this.showBankForm = false;
             this.$router.push('/');
@@ -65,12 +84,43 @@ export default {
             this.cartItems = this.cartItems.filter(item => item != product)
             this.updateLocalStorage();
         },
+        sendOrderEmail() {
+            const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalPrice = this.totalPriceWithTravel;
+            const shippingAddress = this.deliveryForm;
+
+            const emailParams = {
+                to_email: this.email,
+                subject: "Confirmation de commande",
+                name: `${shippingAddress.firstName} ${shippingAddress.lastName}`,
+                address: shippingAddress.address,
+                postalCode: shippingAddress.postalCode,
+                city: shippingAddress.city,
+                phone: this.phoneNumber,
+                cartItems: cartData.map(item => `${item.name} (x${item.quantity}) - €${item.price}`).join(', '),
+                totalPrice: totalPrice,
+            };
+
+            // Remplacer 'service_id', 'template_id' et 'user_id' par tes informations EmailJS
+            emailjs.send('service_zfk821x', 'order_confirm', emailParams, 'GV6VngNDO771mOLpQ')
+                .then(response => {
+                    console.log('Email envoyé avec succès:', response);
+                })
+                .catch(error => {
+                    console.error('Erreur d\'envoi de l\'email:', error);
+                });
+        },
     },
     computed: {
         totalPrice() {
             return this.cartItems.reduce((sum, item) => {
                 return sum + item.price * item.quantity;
             }, 0);
+        },
+        totalPriceWithTravel() {
+            const shippingCost = this.totalPrice + this.delivery;
+            console.log(shippingCost);
+            return shippingCost;
         }
     },
     mounted() {
@@ -157,7 +207,7 @@ export default {
                             <h2>Livraison</h2><span>10€</span>
                         </div>
                         <div id="total">
-                            <h1>TOTAL</h1><span>50€</span>
+                            <h1>TOTAL</h1><span>{{ totalPriceWithTravel }}€</span>
                         </div>
                     </div>
 
@@ -180,20 +230,22 @@ export default {
                     </div>
                 </div>
 
+
                 <div class="shippingForm" v-if="showPaymentForm">
                     <h2>Coordonnées de Livraison</h2>
                     <form>
-                        <input type="text" placeholder="Nom" required>
-                        <input type="text" placeholder="Prénom" required>
-                        <input type="text" placeholder="Adresse" required>
-                        <input type="number" placeholder="Code Postal" required>
-                        <input type="text" placeholder="Ville" required>
+                        <input type="text" v-model="deliveryForm.firstName" placeholder="Nom" required>
+                        <input type="text" v-model="deliveryForm.lastName" placeholder="Prénom" required>
+                        <input type="text" v-model="deliveryForm.address" placeholder="Adresse" required>
+                        <input type="number" v-model="deliveryForm.postalCode" placeholder="Code Postal" required>
+                        <input type="text" v-model="deliveryForm.city" placeholder="Ville" required>
                         <input type="tel" v-model="phoneNumber" @blur="formatPhone" placeholder="Téléphone" required>
                         <button type="button" class="button-animated" @click="confirmShipping">
                             <span>Confirmer la livraison</span>
                         </button>
                     </form>
                 </div>
+
 
 
                 <div class="bankForm" v-if="showBankForm">
@@ -210,7 +262,7 @@ export default {
                     <form @submit.prevent="finalizePayment">
                         <div class="form-group">
                             <label for="mail">E-mail</label>
-                            <input type="email" id="mail" required>
+                            <input type="email" id="mail" v-model="email" required>
                         </div>
 
                         <div class="form-group">
