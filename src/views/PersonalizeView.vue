@@ -50,7 +50,7 @@
 
 
                 <!-- PARKOUR -->
-                <div v-show="!showParkourClicked" class="option" id="parkour"
+                <div v-if="!showParkourClicked && showParkourButton" class="option" id="parkour"
                     @click="toggleState('showParkourClicked', $event)">
                     <div class="illustrationOptions">
                         <img src="../assets/pictures/parkour_button.svg" alt="">
@@ -58,7 +58,7 @@
 
                     <p>Tracé</p>
                 </div>
-                <div v-show="showParkourClicked" class="option" id="parkourClicked" ref="parkourClicked">
+                <div v-if="showParkourClicked && showParkourButton" class="option" id="parkourClicked" ref="parkourClicked">
                     <div class="illustrationOptionsClicked" id="basebuttonParkour">
                         <img src="../assets/pictures/parkour_button.svg" alt="">
                         <p>Tracé</p>
@@ -107,7 +107,7 @@
                     <!-- <p>{{ tshirtValue }}</p> -->
 
                     <p v-if="tshirtValue === 2" id="chronoTshirt"
-                        :style="{ color: tshirtColor === 'black' ? 'white' : 'black' }">
+                        :style="{ color: tshirtColor === 'BLACK' ? 'WHITE' : 'BLACK' }">
                         {{ `${inputMinute} ' ${inputSeconde}` }}
                     </p>
 
@@ -139,7 +139,7 @@ export default {
             showColorClicked: false,
             showParkourClicked: false,
             showChronoClicked: false,
-            tshirtSrc: '/src/assets/pictures/tshirt/tshirt_default_black_1.svg',
+            tshirtSrc: '/src/assets/pictures/tshirt/tshirt_default_black_1.png',
             tshirtValue: '1',
             inputMinute: '',
             inputSeconde: '',
@@ -192,7 +192,7 @@ export default {
         },
 
         checkTshirtValue() {
-            if (this.tshirtSrc.endsWith('2.svg')) {
+            if (this.tshirtSrc.endsWith('2.png')) {
                 this.tshirtValue = 2;
             } else {
                 this.tshirtValue = 1;
@@ -259,10 +259,13 @@ export default {
             let newNumber = direction === 'left' ? currentNumber - 1 : currentNumber + 1;
             newNumber = Math.max(1, Math.min(newNumber, 2));
             const newFileName = baseName.replace(/\d+$/, newNumber);
-            const newTshirtSrc = this.tshirtSrc.replace(currentFileName, `${newFileName}.svg`);
+            const newTshirtSrc = this.tshirtSrc.replace(currentFileName, `${newFileName}.png`);
 
             this.tshirtSrc = newTshirtSrc;
             this.checkTshirtValue();
+            console.log(this.tshirtSrc)
+            console.log(this.tshirtValue)
+            console.log(this.direction)
 
         },
         changeColor(newColor) {
@@ -294,6 +297,9 @@ export default {
             if (this.tshirtSrc.includes('black')) return 'BLACK';
             return 'unknown';
         },
+        showParkourButton() {
+            return this.tshirtSrc.includes("tshirt_default_black") || this.tshirtSrc.includes("tshirt_default_white");
+        },
     },
 
 
@@ -310,6 +316,10 @@ export default {
         if (this.tshirtSrc.includes('white')) {
             this.customization.color = 'WHITE';
         } 
+
+        console.log("tshirtSrc:", this.tshirtSrc);
+console.log("FINAL:", this.finalTshirtSrc);
+
     },
 
     watch: {
@@ -513,7 +523,7 @@ template {
 
 #chronoTshirt {
     position: absolute;
-    top: 10px;
+    top: 0px;
     z-index: 1000;
     height: 20px;
     width: 100%;

@@ -304,7 +304,7 @@ export default {
             <div class="gridOthersItems" v-if="!showPaymentForm && !showBankForm">
                 <img src="../assets/pictures/tshirt/tshirt_annecy_white_1.svg" alt="">
                 <img src="../assets/pictures/tshirt/tshirt_annecy_black_1.svg" alt="">
-                <img src="../assets/pictures/tshirt/tshirt_seville_white_1.svg" alt="">
+                <img src="../assets/pictures/tshirt/tshirt_seville_default_white_1.svg" alt="">
             </div>
         </div>
     </div>

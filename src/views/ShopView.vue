@@ -85,7 +85,7 @@ export default {
               ↳ Voir le produit
             </div>
           </RouterLink>
-          <img src="../assets/pictures/tshirt/tshirt_annecy_black_1.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_annecy_default_black_1.png" alt="">
           <div id="Price">
             €40
           </div>
@@ -97,7 +97,7 @@ export default {
               ↳ Voir le produit
             </div>
           </RouterLink>
-          <img src="../assets/pictures/tshirt/tshirt_annecy_white_1.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_annecy_default_white_1.png" alt="">
           <div id="Price">
             €40
           </div>
@@ -124,7 +124,7 @@ export default {
               ↳ Voir le produit
             </div>
           </RouterLink>
-          <img src="../assets/pictures/tshirt/tshirt_seville_black_1.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_seville_default_black_1.png" alt="">
           <div id="Price">
             €40
           </div>
@@ -136,7 +136,7 @@ export default {
               ↳ Voir le produit
             </div>
           </RouterLink>
-          <img src="../assets/pictures/tshirt/tshirt_seville_white_1.svg" alt="">
+          <img src="../assets/pictures/tshirt/tshirt_seville_default_white_1.png" alt="">
           <div id="Price">
             €40
           </div>
@@ -404,6 +404,30 @@ template {
   filter: grayscale(100%);
 }
 
+#tshirtAnnecyBlack > img,
+#tshirtAnnecyWhite > img,
+#tshirtSevilleBlack > img,
+#tshirtSevilleWhite > img {
+  height: 283px;
+  width: auto;
+  padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#tshirtAnnecyBlack,
+#tshirtAnnecyWhite,
+#tshirtSevilleBlack,
+#tshirtSevilleWhite {
+  width: 360px;
+  height: 383px;
+
+  position: relative;
+}
+
 .tshirtsAnnecy {
   display: flex;
   flex-direction: column;
@@ -416,21 +440,21 @@ template {
   background-color: #A8BFCA;
 }
 
-#tshirtAnnecyBlack>img {
+/* #tshirtAnnecyBlack>img {
   height: 283px;
   width: 374px;
   padding: 20px;
-}
+} */
 
 #tshirtAnnecyWhite {
   background-color: #704347;
 }
 
-#tshirtAnnecyWhite>img {
+/* #tshirtAnnecyWhite>img {
   height: 283px;
   width: 374px;
   padding: 20px;
-}
+} */
 
 .tshirtsSeville {
   display: flex;
@@ -444,21 +468,21 @@ template {
   background-color: #A8BFCA;
 }
 
-#tshirtSevilleBlack>img {
+/* #tshirtSevilleBlack>img {
   height: 283px;
   width: 374px;
   padding: 20px;
-}
+} */
 
 #tshirtSevilleWhite {
   background-color: #704347;
 }
 
-#tshirtSevilleWhite>img {
+/* #tshirtSevilleWhite>img {
   height: 283px;
   width: 374px;
   padding: 20px;
-}
+} */
 
 
 .GridProducts {
