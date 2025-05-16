@@ -171,7 +171,9 @@ export default {
                             <h1>€{{ item.price }}</h1>
                         </div>
                         <div id="deleteAndQuantity">
-                            <div id="deleteitem" @click="removeItem(item)">🗑️</div>
+                            <div id="deleteitem" @click="removeItem(item)">
+                                <img src="../assets/pictures/trashIcon.svg" alt="">
+                            </div>
                             <div id="quantity">
                                 <div class="quantity-buttons">
                                     <button @click="decreaseQuantity(index)">-</button>
@@ -190,7 +192,7 @@ export default {
                 <div id="line"></div>
 
                 <div id="moreItems" v-if="showBankForm">
-                    <h2>Livraison gratuite dès le premier achat</h2>
+                    <h2>Livraison sous 10 jours ouverts</h2>
                     <h1>MERCI !</h1>
                 </div>
 
@@ -302,9 +304,9 @@ export default {
                 <h1 id="encadre">ET SI ON LE COMPLÉTAIT AVEC VOS EXPLOITS ?</h1>
             </div>
             <div class="gridOthersItems" v-if="!showPaymentForm && !showBankForm">
-                <img src="../assets/pictures/tshirt/tshirt_annecy_white_1.svg" alt="">
-                <img src="../assets/pictures/tshirt/tshirt_annecy_black_1.svg" alt="">
-                <img src="../assets/pictures/tshirt/tshirt_seville_default_white_1.svg" alt="">
+                <img src="../assets/pictures/tshirt/tshirt_annecy_default_white_1.png" alt="">
+                <img src="../assets/pictures/tshirt/tshirt_annecy_default_black_1.png" alt="">
+                <img src="../assets/pictures/tshirt/tshirt_seville_default_white_1.png" alt="">
             </div>
         </div>
     </div>
@@ -447,8 +449,8 @@ template {
 }
 
 #item>img {
-    height: 12vh;
-    width: 12vh;
+    height: 17vh;
+    /* width: 12vh; */
 }
 
 #iteminfo {
@@ -700,9 +702,9 @@ input::placeholder {
 
 .gridOthersItems>img {
     height: 45vh;
-    width: 43vh;
+    /* width: 43vh; */
     background-color: #92B0C0;
-    padding: 20px;
+    padding: 40px;
 }
 
 .shippingForm {
@@ -857,8 +859,12 @@ label {
     top: 0;
     width: 50px;
     height: 50px;
-    background-color: red;
+    /* background-color: red; */
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #quantity {
