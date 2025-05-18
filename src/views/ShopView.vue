@@ -253,8 +253,7 @@ template {
   cursor: pointer;
   position: relative;
   z-index: 1;
-
-  /* Centrage */
+  border: solid 3px #000000;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -3,7 +3,7 @@
   <div :style="{ display: displayMenu ? 'flex' : 'none' }" id="startPage">
 
 
-    <button @click="startGame"><span>Jouer au jeux !</span></button>
+    <button @click="startGame"><span>Jouer au jeu !</span></button>
 
   </div>
   <div :style="{ display: displayGame ? 'block' : 'none' }" id="app">
@@ -264,7 +264,6 @@ export default {
 #startPage {
   justify-content: center;
   align-items: center;
-
   width: 100%;
   height: 80vh;
   margin-top: 10vh;
