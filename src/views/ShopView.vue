@@ -42,7 +42,7 @@ export default {
     <img id="tshirtperch" src="../assets/pictures/tshirtperch.png" alt="">
     <RouterLink :to="{ name: 'Product', params: { id: 'default-black' } }">
       <div class="text-top-left">
-        T-shirt personnaliser<br>
+        T-shirt personnalisé<br>
         ↳ découvrir
       </div>
     </RouterLink>
