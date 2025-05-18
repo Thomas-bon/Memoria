@@ -2,9 +2,11 @@
 
   <div :style="{ display: displayMenu ? 'flex' : 'none' }" id="startPage">
 
-
-    <button @click="startGame"><span>Jouer au jeu !</span></button>
-
+    <div class="startGamePage">
+      <h1>Règles du jeu :</h1>
+      <h2>CLIQUE SUR LES LOGOS QUI APPARAISSENT À L'ÉCRAN POUR TENTER DE GAGNER UNE SUPRISE !</h2>
+      <button @click="startGame"><span>Jouer au jeu !</span></button>
+    </div>
   </div>
   <div :style="{ display: displayGame ? 'block' : 'none' }" id="app">
     <img src="../assets/pictures/game/scoreBoard.svg" alt="">
@@ -269,6 +271,25 @@ export default {
   margin-top: 10vh;
 }
 
+.startGamePage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #DCEFFA;
+  border: #000000 solid 1px;
+  padding: 3rem;
+}
+
+.startGamePage h1 {
+  font-size: 4rem;
+}
+
+.startGamePage h2 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
 #resultGame {
   justify-content: center;
   align-items: center;
@@ -385,5 +406,4 @@ button span {
 button:hover span {
   color: #73020C;
 }
-
 </style>
