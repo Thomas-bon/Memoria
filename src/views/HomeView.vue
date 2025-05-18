@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      mots: ["DISCIPLINE  INSPIRANT", "DÉCOUVERTE  LÉGENDAIRE"],
+      mots: ["DÉCOUVERTE / EXPLOIT / DISCIPLINE"],
       motActuel: 0,
     };
   },
@@ -23,16 +23,18 @@ export default {
   <div id="brand">
 
     <section class="View" id="FirstView">
-    <img id="logoHome" src="../assets/pictures/logo.svg" alt="Logo de chaussure memoria" />
+      <img id="logoHome" src="../assets/pictures/logo.svg" alt="Logo de chaussure memoria" />
+    </section>
 
-      <RouterLink :to="{ name: 'Shop' }">
-        <button id="store"><span>Shop Now</span></button>
+    <div class="HomeStart">
+      <section class="View" id="SecondView">
+        <p>TRANSFORMEZ VOS MARATHONS EN SOUVENIRS INOUBLIABLES</p>
+      </section>
+
+      <RouterLink :to="{ name: 'Shop' }" class="store-link">
+        <span>Shop Now</span>
       </RouterLink>
-    </section>
-
-    <section class="View" id="SecondView">
-      <p>TRANSFORMEZ VOS MARATHONS EN SOUVENIRS INOUBLIABLES</p>
-    </section>
+    </div>
 
     <section class="View" id="MotivationSlide">
       <div class="marquee-container">
@@ -41,18 +43,29 @@ export default {
     </section>
 
     <section class="View" id="ThirdView">
-      <img src="../assets/pictures/MEMORIA_home_page.svg" alt="">
-      <p>Nous créons des t-shirts personnalisés affichant le tracé exact de votre marathon, la date et votre temps,
-        pour que vous puissiez porter fièrement votre performance.</p>
+      <h1>Nos engagements</h1>
+      <p>Nous créons des t-shirts personnalisés <br>affichant le tracé exact de votre marathon,<br> la date et votre
+        temps,
+        pour que vous puissiez <br>porter fièrement votre performance.</p>
     </section>
 
     <section class="View" id="FourView">
-      <h1>Nos engagements</h1>
-      <p>Conçus en matière technique respirante et confortable, nos t-shirts allient style et performance.
-        Avec Mémoria, chaque course devient un souvenir à afficher et une fierté à porter.</p>
+      <div class="img-positions">
+        <div id="confort">
+          <img src="../assets/pictures/confort_logo.png" alt="">
+        </div>
+        <div id="leger">
+          <img src="../assets/pictures/leger_logo.png" alt="">
+        </div>
+        <div id="performant">
+          <img src="../assets/pictures/performant_logo.png" alt="">
+        </div>
+      </div>
     </section>
+
   </div>
 </template>
+
 
 <style scoped>
 @font-face {
@@ -68,6 +81,32 @@ export default {
 @font-face {
   font-family: "Abel";
   src: url(../assets/font/Abel-Regular.ttf);
+}
+
+
+@font-face {
+  font-family: "Inter";
+  src: url(../assets/font/Inter_18pt-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: "InterRegular";
+  src: url(../assets/font/Inter_18pt-Regular.ttf);
+}
+
+@font-face {
+  font-family: "InterSemiBold";
+  src: url(../assets/font/Inter_18pt-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "InterMedium";
+  src: url(../assets/font/Inter_18pt-Medium.ttf);
+}
+
+@font-face {
+  font-family: "InterLight";
+  src: url(../assets/font/Inter_18pt-Light.ttf);
 }
 
 * {
@@ -102,12 +141,12 @@ export default {
 
 #FirstView {
   justify-content: flex-end;
-  padding: 20rem 0;
-  
-  
+  padding: 20rem 0 10rem 0;
+
+
 }
 
-#FirstView button {
+.store-link {
   width: 250px;
   height: 100px;
   background-color: #73020C;
@@ -117,14 +156,16 @@ export default {
   border: none;
   overflow: hidden;
   cursor: pointer;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10000;
+  margin: 4rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  /* Enlève le soulignement */
+  position: relative;
 }
 
-#FirstView button::before {
+.store-link::before {
   content: '';
   position: absolute;
   top: 0;
@@ -136,33 +177,50 @@ export default {
   transition: left 0.4s ease;
 }
 
-#FirstView button:hover::before {
+.store-link:hover::before {
   left: 0;
 }
 
-#FirstView button span {
+.store-link span {
   position: relative;
   z-index: 2;
   transition: color 0.3s ease;
 }
 
-#FirstView button:hover span {
+.store-link:hover span {
   color: #73020C;
 }
 
+
+.HomeStart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  transform: translateY(-50%);
+  margin-top: 170px;
+}
+
 #SecondView {
-  padding: 10rem 0;
+  padding: 0 0 1.5rem 0;
   z-index: 2;
 }
 
 #SecondView p {
-  font-size: clamp(2rem, 5vw, 6rem);
+  font-size: clamp(2rem, 3.3vw, 6rem);
   text-align: center;
-  font-family: "MonoManiac One";
+  font-family: "InterSemiBold";
   font-style: italic;
-  color: white;
-  opacity: 0.8;
+  color: #FFFFFF;
+  opacity: 0.66;
   z-index: 5;
+  text-shadow:
+    1px 1px 0 #000,
+    2px 2px 0 #000,
+    3px 3px 0 #000,
+    4px 4px 0 #000;
 }
 
 #MotivationSlide {
@@ -171,6 +229,8 @@ export default {
   border-bottom: #cecece 8px solid;
   padding: 1rem 0;
   width: 100%;
+  transform: translateY(110%);
+
 }
 
 .marquee-container {
@@ -184,24 +244,25 @@ export default {
 
 .marquee-text {
   font-size: clamp(4rem, 15vw, 12em);
-  font-family: "Fight";
-  color: #73020C;
+  font-family: "Inter";
+  color: #000;
   white-space: nowrap;
-  animation: marquee 15s linear infinite;
+  animation: marquee 30s linear infinite;
   display: inline-block;
 }
 
 @keyframes marquee {
   0% {
-    transform: translateX(160%);
+    transform: translateX(40%);
   }
+
   100% {
     transform: translateX(-110%);
   }
 }
 
 #ThirdView {
-  gap: 2rem;
+  gap: 2.3rem;
   text-align: center;
   font-family: "Abel";
   padding: 4rem 0;
@@ -212,9 +273,31 @@ export default {
   height: auto;
 }
 
+#ThirdView h1 {
+  font-family: "InterSemiBold";
+  font-size: 3.7em;
+  padding-top: 275px;
+}
+
 #ThirdView p {
-  font-size: 1.5rem;
+  font-size: 2.1em;
   max-width: 800px;
+  font-family: "InterRegular";
+  line-height: 1.7;
+}
+
+.img-positions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 55px;
+}
+
+#confort,
+#performant {
+  margin-bottom: 155px;
 }
 
 #FourView {

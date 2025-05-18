@@ -53,6 +53,15 @@ export default {
                 description1: "Fabriqué dans une matière respirante et légère, ce t-shirt vous garantit un confort optimal même lors de vos plus longues courses. Le textile, doux au toucher et à séchage rapide, permet d’évacuer efficacement la transpiration pour rester au frais en toutes circonstances.",
                 description2: "Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la date de votre performance. Vous pouvez également y ajouter votre temps ou tout autre détail personnalisé pour un souvenir unique et durable.",
             },
+            {
+                id: 'default-black',
+                name: 'T-shirt Défaut Noir',
+                price: 40,
+                img1: new URL('../assets/pictures/tshirt/tshirt_default_black_1.png', import.meta.url).href,
+                img2: new URL('../assets/pictures/tshirt/tshirt_default_black_2.png', import.meta.url).href,
+                description1: "Fabriqué dans une matière respirante et légère, ce t-shirt vous garantit un confort optimal même lors de vos plus longues courses. Le textile, doux au toucher et à séchage rapide, permet d’évacuer efficacement la transpiration pour rester au frais en toutes circonstances.",
+                description2: "Le motif, imprimé en haute définition, représente le tracé exact de votre marathon ainsi que la date de votre performance. Vous pouvez également y ajouter votre temps ou tout autre détail personnalisé pour un souvenir unique et durable.",
+            },
         ];
 
         this.product = products.find(p => p.id === productId);
