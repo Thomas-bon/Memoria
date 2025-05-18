@@ -1,121 +1,118 @@
 <template>
-    <div class="wrapper">
-        <h1>PERSONNALISER</h1>
+  <div class="wrapper">
+    <h1>PERSONNALISER</h1>
 
-        <div id="alignOptions">
-            <div id="options">
+    <div id="alignOptions">
+      <div id="options">
 
-                <!-- COULEUR -->
-                <div v-show="!showColorClicked" class="option" id="color"
-                    @click="toggleState('showColorClicked', $event)">
-                    <div class="illustrationOptions">
-                        <img src="../assets/pictures/color_button.svg" alt="" />
-                    </div>
-                    <p>Couleur</p>
-                </div>
-                <div v-show="showColorClicked" class="option" id="colorClicked" ref="colorClicked">
-                    <div class="illustrationOptionsClicked">
-                        <img src="../assets/pictures/color_button.svg" alt="" />
-                        <p>Couleur</p>
-                    </div>
-                    <div class="illustrationOptionsClicked" @click="changeColor('white')">
-                        <img src="../assets/pictures/color_white_button.svg" alt="" />
-                        <p>Blanc</p>
-                    </div>
-                    <div class="illustrationOptionsClicked" @click="changeColor('black')">
-                        <img src="../assets/pictures/color_black_button.svg" alt="" />
-                        <p>Noir</p>
-                    </div>
-                </div>
-
-                <!-- CHRONO -->
-                <div v-show="!showChronoClicked" class="option" id="chrono"
-                    @click="toggleState('showChronoClicked', $event), changeTshirtSrc('right')">
-                    <div class="illustrationOptions">
-                        <img src="../assets/pictures/chrono_button.svg" alt="" />
-                    </div>
-                    <p>Chrono</p>
-                </div>
-                <div v-show="showChronoClicked" class="option" id="chronoClicked" ref="chronoClicked">
-                    <input type="text" name="minute" id="minute" maxlength="2" placeholder="00" v-model="inputMinute" />
-                    <p>:</p>
-                    <input type="text" name="seconde" id="seconde" maxlength="2" placeholder="00"
-                        v-model="inputSeconde" />
-                </div>
-
-                <!-- PARKOUR -->
-                <div class="option" id="parkour" @click="toggleState('showParkourClicked', $event)">
-                    <div class="illustrationOptions">
-                        <img src="../assets/pictures/parkour_button.svg" alt="" />
-                    </div>
-                    <p>Tracé</p>
-                </div>
-
-                <!-- IMPRESSION -->
-                <div id="embroidery">
-                    <p :style="{ opacity: !withEmbroidery ? 1 : 0.29 }">Impression</p>
-                    <label class="switch">
-                        <input type="checkbox" v-model="withEmbroidery" />
-                        <span class="slider"></span>
-                    </label>
-                    <p :style="{ opacity: withEmbroidery ? 1 : 0.29 }">Broderie</p>
-                </div>
-
-                <!-- OURLET -->
-                <div id="hem">
-                    <p>Ourlet</p>
-                    <label class="switch">
-                        <input type="checkbox" v-model="withHem" />
-                        <span class="slider"></span>
-                    </label>
-                </div>
-
-            </div>
+        <!-- COULEUR -->
+        <div v-show="!showColorClicked" class="option" id="color" @click="toggleState('showColorClicked', $event)">
+          <div class="illustrationOptions">
+            <img src="../assets/pictures/color_button.svg" alt="" />
+          </div>
+          <p>Couleur</p>
+        </div>
+        <div v-show="showColorClicked" class="option" id="colorClicked" ref="colorClicked">
+          <div class="illustrationOptionsClicked">
+            <img src="../assets/pictures/color_button.svg" alt="" />
+            <p>Couleur</p>
+          </div>
+          <div class="illustrationOptionsClicked" @click="changeColor('white')">
+            <img src="../assets/pictures/color_white_button.svg" alt="" />
+            <p>Blanc</p>
+          </div>
+          <div class="illustrationOptionsClicked" @click="changeColor('black')">
+            <img src="../assets/pictures/color_black_button.svg" alt="" />
+            <p>Noir</p>
+          </div>
         </div>
 
-        <div id="alignTshirt">
-            <div id="tshirt">
-                <div class="navtshirt">
-                    <div class="nav-btn" @click="changeTshirtSrc('left')">
-                        <img src="../assets/pictures/arrow_left.svg" alt="" />
-                    </div>
-                    <p>Avant</p>
-                </div>
-
-                <div class="shirt-container">
-                    <img :src="finalTshirtSrc" alt="T-shirt" />
-                    <p v-if="tshirtValue === 2" id="chronoTshirt"
-                        :style="{ color: tshirtColor === 'BLACK' ? 'WHITE' : 'BLACK' }">
-                        {{ `${inputMinute} ' ${inputSeconde}` }}
-                    </p>
-                </div>
-
-                <div class="navtshirt">
-                    <div class="nav-btn" @click="changeTshirtSrc('right')">
-                        <img src="../assets/pictures/arrow_right.svg" alt="" />
-                    </div>
-                    <p>Arrière</p>
-                </div>
-            </div>
+        <!-- CHRONO -->
+        <div v-show="!showChronoClicked" class="option" id="chrono" @click="toggleState('showChronoClicked', $event), changeTshirtSrc('right')">
+          <div class="illustrationOptions">
+            <img src="../assets/pictures/chrono_button.svg" alt="" />
+          </div>
+          <p>Chrono</p>
+        </div>
+        <div v-show="showChronoClicked" class="option" id="chronoClicked" ref="chronoClicked">
+          <input type="text" name="minute" id="minute" maxlength="2" placeholder="00" v-model="inputMinute" />
+          <p>:</p>
+          <input type="text" name="seconde" id="seconde" maxlength="2" placeholder="00" v-model="inputSeconde" />
         </div>
 
-        <div v-if="showParkourClicked && showParkourButton" id="parkourButtonClicked">
-            <div id="window">
-                <div id="closeParkourMenu" @click="closeParkourMenu"></div>
-                <h2>Choisissez un tracé !</h2>
-                <div id="listOfParkour">
-                    <div v-for="(src, name) in parkours" :key="name">
-                        <img :src="src" :alt="name" class="parkoursOnFrontTshirt" />
-                    </div>
-                </div>
-            </div>
+        <!-- PARKOUR -->
+        <div class="option" id="parkour" @click="toggleState('showParkourClicked', $event)">
+          <div class="illustrationOptions">
+            <img src="../assets/pictures/parkour_button.svg" alt="" />
+          </div>
+          <p>Tracé</p>
         </div>
 
-        <button id="store" @click="addToCart"><span>Ajouter au panier</span></button>
+        <!-- IMPRESSION -->
+        <div id="embroidery">
+          <p :style="{ opacity: !withEmbroidery ? 1 : 0.29 }">Impression</p>
+          <label class="switch">
+            <input type="checkbox" v-model="withEmbroidery" />
+            <span class="slider"></span>
+          </label>
+          <p :style="{ opacity: withEmbroidery ? 1 : 0.29 }">Broderie</p>
+        </div>
+
+        <!-- OURLET -->
+        <div id="hem">
+          <p>Ourlet</p>
+          <label class="switch">
+            <input type="checkbox" v-model="withHem" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+      </div>
     </div>
+
+    <div id="alignTshirt">
+      <div id="tshirt">
+        <div class="navtshirt">
+          <div class="nav-btn" @click="changeTshirtSrc('left')">
+            <img src="../assets/pictures/arrow_left.svg" alt="" />
+          </div>
+          <p>Avant</p>
+        </div>
+
+        <div class="shirt-container">
+          <img :src="finalTshirtSrc" alt="T-shirt" />
+          <p v-if="tshirtValue === 2" id="chronoTshirt" :style="{ color: tshirtColor === 'BLACK' ? 'WHITE' : 'BLACK' }">
+            {{ `${inputMinute} ' ${inputSeconde}` }}
+          </p>
+        </div>
+
+        <div class="navtshirt">
+          <div class="nav-btn" @click="changeTshirtSrc('right')">
+            <img src="../assets/pictures/arrow_right.svg" alt="" />
+          </div>
+          <p>Arrière</p>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="showParkourClicked && showParkourButton" id="parkourButtonClicked">
+      <div id="window">
+        <div id="closeParkourMenu" @click="closeParkourMenu"></div>
+        <h2>Choisissez un tracé !</h2>
+        <div id="listOfParkour">
+          <div v-for="(src, name) in parkours" :key="name">
+            <img :src="src" :alt="name" class="parkoursOnFrontTshirt" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="store" @click="addToCart"><span>Ajouter au panier</span></button>
+  </div>
 </template>
 
 <script>
+
 import cartStore from '@/stores/cartStore'
 
 export default {
@@ -126,6 +123,8 @@ export default {
             showColorClicked: false,
             showParkourClicked: false,
             showChronoClicked: false,
+            tshirtSrc: '/src/assets/pictures/tshirt/tshirt_default_black_1.png',
+            tshirtValue: '1',
             inputMinute: '',
             inputSeconde: '',
 
@@ -145,66 +144,17 @@ export default {
                 img: '',
             },
 
-            tshirtAttributes: {
-                color: 'black', // black or white
-                type: 'default', // default or hem
-                side: 1, // 1 = front, 2 = back
-            },
-
             parkoutPageOn: true,
         };
     },
-
-    computed: {
-        finalTshirtSrc() {
-            const { color, type, side } = this.tshirtAttributes;
-            const path = `/src/assets/pictures/tshirt/tshirt_${type}_${color}_${side}.png`;
-
-            // Optionnel : pré-vérification si tu as une liste d’images valides
-            const validPaths = [
-                'tshirt_default_black_1.png',
-                'tshirt_default_black_2.png',
-                'tshirt_default_white_1.png',
-                'tshirt_default_white_2.png',
-                'tshirt_hem_black_1.png',
-                'tshirt_hem_black_2.png',
-                'tshirt_hem_white_1.png',
-                'tshirt_hem_white_2.png'
-            ];
-
-            const file = path.split('/').pop();
-            if (!validPaths.includes(file)) {
-                console.warn(`Image non trouvée : ${path}`);
-                return '/src/assets/pictures/tshirt/tshirt_default_black_1.png'; // fallback
-            }
-
-            return path;
-        },
-
-
-        tshirtColor() {
-            return this.tshirtAttributes.color.toUpperCase();
-        },
-
-        tshirtValue() {
-            return this.tshirtAttributes.side;
-        },
-
-        showParkourButton() {
-            const { type, color } = this.tshirtAttributes;
-            return type === 'default' && (color === 'black' || color === 'white');
-        },
-    },
-
     methods: {
         addToCart() {
             const pendingProduct = this.$store.state && this.$store.state.pendingState;
+
             if (!pendingProduct) {
                 console.error('Le produit en attente est introuvable dans le store!');
                 return;
             }
-
-            this.customization.img = this.finalTshirtSrc;
 
             const product = {
                 id: pendingProduct.id,
@@ -224,26 +174,51 @@ export default {
             this.customization.chrono.minute = this.inputMinute;
             this.customization.chrono.seconde = this.inputSeconde;
         },
+        toggleEmbroidery() {
+            this.customization.embroidery = !this.customization.embroidery;
+        },
+        toggleHem() {
+            this.customization.hem = !this.customization.hem;
+        },
 
+        checkTshirtValue() {
+            if (this.tshirtSrc.endsWith('2.png')) {
+                this.tshirtValue = 2;
+            } else {
+                this.tshirtValue = 1;
+            }
+        },
         toggleState(stateName, event) {
             const newState = !this[stateName];
 
-            this.showColorClicked = stateName === 'showColorClicked' ? newState : false;
-            this.showChronoClicked = stateName === 'showChronoClicked' ? newState : false;
-            this.showParkourClicked = stateName === 'showParkourClicked' ? newState : false;
+            // Si on clique sur un bouton déjà ouvert
+            if (newState) {
+                // Ferme toutes les autres sections avant d'ouvrir celle demandée
+                this.showColorClicked = stateName === 'showColorClicked' ? newState : false;
+                this.showChronoClicked = stateName === 'showChronoClicked' ? newState : false;
+                this.showParkourClicked = stateName === 'showParkourClicked' ? newState : false;
 
-            if (newState) this.addClickListener();
-            else this.removeClickListener();
+                // Ajoute l'événement global pour fermer la section quand on clique à l'extérieur
+                this.addClickListener();
+            } else {
+                // Si la section est fermée, on retire l'écouteur d'événement global
+                this.removeClickListener();
+            }
 
+            // Met à jour l'état de la section qui a été cliquée
             this[stateName] = newState;
+
+            // Empêche la propagation de l'événement afin de ne pas déclencher handleClickOutside
             event.stopPropagation();
         },
 
         addClickListener() {
+            // Ajoute l'événement click pour fermer les sections à l'extérieur
             document.addEventListener('click', this.handleClickOutside);
         },
 
         removeClickListener() {
+            // Retire l'événement click
             document.removeEventListener('click', this.handleClickOutside);
         },
 
@@ -252,78 +227,123 @@ export default {
             const chronoClicked = this.$refs.chronoClicked;
             const parkourClicked = this.$refs.parkourClicked;
 
+            // Vérifie si les refs existent avant de les utiliser
             if (
-                (!colorClicked || !colorClicked.contains(event.target)) &&
-                (!chronoClicked || !chronoClicked.contains(event.target)) &&
-                (!parkourClicked || !parkourClicked.contains(event.target))
+                (colorClicked && !colorClicked.contains(event.target)) &&
+                (chronoClicked && !chronoClicked.contains(event.target)) &&
+                (parkourClicked && !parkourClicked.contains(event.target))
             ) {
+                // Ferme toutes les sections
                 this.showColorClicked = false;
                 this.showChronoClicked = false;
                 this.showParkourClicked = false;
+
+                // Retire l'écouteur d'événement
                 this.removeClickListener();
             }
         },
-
         changeTshirtSrc(direction) {
-            const current = this.tshirtAttributes.side;
-            this.tshirtAttributes.side = direction === 'left'
-                ? Math.max(1, current - 1)
-                : Math.min(2, current + 1);
-        },
+            const currentFileName = this.tshirtSrc.split('/').pop();
+            const baseName = currentFileName.split('.')[0];
+            const currentNumber = parseInt(baseName.match(/\d+$/)[0]);
+            let newNumber = direction === 'left' ? currentNumber - 1 : currentNumber + 1;
+            newNumber = Math.max(1, Math.min(newNumber, 2));
+            const newFileName = baseName.replace(/\d+$/, newNumber);
+            const newTshirtSrc = this.tshirtSrc.replace(currentFileName, `${newFileName}.png`);
 
+            this.tshirtSrc = newTshirtSrc;
+            this.checkTshirtValue();
+            console.log(this.tshirtSrc)
+            console.log(this.tshirtValue)
+            console.log(this.direction)
+
+        },
         changeColor(newColor) {
-            this.tshirtAttributes.color = newColor;
-            this.customization.color = newColor.toUpperCase();
+            this.customization.color = newColor;
+            if (newColor === "white") {
+                this.tshirtSrc = this.tshirtSrc.replace('black', newColor);
+            }
+            if (newColor === "black") {
+                this.tshirtSrc = this.tshirtSrc.replace('white', newColor);
+            }
+            this.checkTshirtValue();
         },
-
         closeParkourMenu() {
             this.showParkourClicked = false;
             this.removeClickListener();
         },
     },
+    computed: {
+        finalTshirtSrc() {
+            // Décompose le nom de fichier
+            const parts = this.tshirtSrc.split('/');
+            const fileName = parts.pop(); // ex: "tshirt_default_black_1.svg"
 
-    watch: {
-        inputMinute() {
-            this.updateChrono();
+            // On modifie juste la partie "default"/"hem"
+            const updatedFileName = this.withHem
+                ? fileName.replace('default', 'hem')
+                : fileName.replace('hem', 'default');
+
+            return [...parts, updatedFileName].join('/');
         },
-        inputSeconde() {
-            this.updateChrono();
+        tshirtColor() {
+            if (this.tshirtSrc.includes('white')) return 'WHITE';
+            if (this.tshirtSrc.includes('black')) return 'BLACK';
+            return 'unknown';
         },
-        withEmbroidery(newValue) {
-            this.customization.embroidery = newValue;
-        },
-        withHem(newValue) {
-            this.customization.hem = newValue;
-            this.tshirtAttributes.type = newValue ? 'hem' : 'default';
+        showParkourButton() {
+            return this.tshirtSrc.includes("tshirt_default_black") || this.tshirtSrc.includes("tshirt_default_white");
         },
     },
+
 
     mounted() {
         const pendingProduct = this.$store.state && this.$store.state.pendingState;
 
         if (pendingProduct && pendingProduct.image) {
-            const fileName = pendingProduct.image.split('/').pop();
-            const match = fileName.match(/tshirt_(default|hem)_(black|white)_(1|2)\.png/);
+            this.tshirtSrc = pendingProduct.image;
+            this.customization.img = pendingProduct.image;
+        }
 
-            if (match) {
-                this.tshirtAttributes = {
-                    type: match[1],
-                    color: match[2],
-                    side: parseInt(match[3]),
-                };
-            }
+        this.customization.img = this.finalTshirtSrc;
 
-            this.customization.img = this.finalTshirtSrc;
-            this.customization.color = this.tshirtAttributes.color.toUpperCase();
+        if (this.tshirtSrc.includes('white')) {
+            this.customization.color = 'WHITE';
+        }
+
+        console.log("tshirtSrc:", this.tshirtSrc);
+        console.log("FINAL:", this.finalTshirtSrc);
+
+    },
+
+    watch: {
+
+        inputMinute(newValue) {
+            this.updateChrono();  // Met à jour chrono à chaque changement de minute
+            // console.log("Le flocage des minutes à été mis à jour !")
+        },
+        inputSeconde(newValue) {
+            this.updateChrono();  // Met à jour chrono à chaque changement de seconde
+            // console.log("Le flocage des secondes à été mis à jour !")
+        },
+
+        withEmbroidery(newValue) {
+            this.customization.embroidery = newValue;
+            // console.log("Broderie changée:", newValue);
+        },
+
+        withHem(newValue) {
+            this.customization.hem = newValue;
+            // console.log("Ourlet changé:", newValue);
         }
     },
 
     beforeUnmount() {
+        // Nettoie l'écouteur d'événement si la composant est détruit
         this.removeClickListener();
     },
 };
 </script>
-
 
 <style scoped>
 @font-face {
@@ -737,7 +757,9 @@ input:checked+.slider:before {
     align-items: center;
 }
 
-#window h2 {}
+/* #window h2 {
+
+} */
 
 #listOfParkour {
     display: flex;
@@ -755,9 +777,9 @@ input:checked+.slider:before {
 
 
 
-.parkoursOnFrontTshirt {
+ .parkoursOnFrontTshirt {
     width: 20%;
-    border: 2px solid black;
+    border: 2px solid black; 
     border-radius: 30px;
-}
+ }
 </style>
