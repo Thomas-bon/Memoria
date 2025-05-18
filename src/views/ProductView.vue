@@ -160,7 +160,7 @@ export default {
 
                 <div id="Personalize">
                     <div class="price">€{{ totalPrice }}</div>
-                    <button class="customize" @click="addtoCart"><span>Personnalisé</span></button>
+                    <button class="customize" @click="addtoCart"><span>Personnaliser</span></button>
                 </div>
             </div>
         </div>
