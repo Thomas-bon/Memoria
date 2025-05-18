@@ -25,7 +25,7 @@
         </form>
         <div id="news">
           <h2>Nos nouveautés</h2>
-          <a href=""><img src="../assets/pictures/tshirt/tshirt_seville_black_1.svg" alt="" id="tshirtNew"></a>
+          <a href=""><img src="../assets/pictures/tshirt/tshirt_seville_default_black_1.png" alt="" id="tshirtNew"></a>
         </div>
       </div>
       <div id="infoContact">

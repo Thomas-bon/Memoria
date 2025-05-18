@@ -50,21 +50,21 @@
 
 
                 <!-- PARKOUR -->
-                <div v-if="!showParkourClicked && showParkourButton" class="option" id="parkour"
-                    @click="toggleState('showParkourClicked', $event)">
+                <div class="option" id="parkour" @click="toggleState('showParkourClicked', $event)">
                     <div class="illustrationOptions">
                         <img src="../assets/pictures/parkour_button.svg" alt="">
                     </div>
 
                     <p>Tracé</p>
                 </div>
-                <div v-if="showParkourClicked && showParkourButton" class="option" id="parkourClicked" ref="parkourClicked">
+                <!-- <div v-if="showParkourClicked && showParkourButton" class="option" id="parkourClicked"
+                    ref="parkourClicked">
                     <div class="illustrationOptionsClicked" id="basebuttonParkour">
                         <img src="../assets/pictures/parkour_button.svg" alt="">
                         <p>Tracé</p>
                     </div>
 
-                </div>
+                </div> -->
 
                 <!-- IMPRESSION -->
                 <div id="embroidery">
@@ -122,6 +122,18 @@
             </div>
         </div>
 
+        <div v-if="showParkourClicked && showParkourButton" id="parkourButtonClicked">
+            <div id="window">
+                <div id="closeParkourMenu" @click="closeParkourMenu"></div>
+                <h2>Choisissez un tracé !</h2>
+                <div id="listOfParkour">
+                    <div  v-for="(src, name) in parkours" :key="name">
+                        <img :src="src" :alt="name" class="parkoursOnFrontTshirt">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <button id="store" @click="addToCart"><span>Ajouter au panier</span></button>
 
     </div>
@@ -144,6 +156,10 @@ export default {
             inputMinute: '',
             inputSeconde: '',
 
+            parkours: {
+                parkour1: '/src/assets/pictures/parkours/parkour1.webp',
+                parkour2: '/src/assets/pictures/parkours/parkour2.webp',
+            },
 
             customization: {
                 color: 'Black',
@@ -155,6 +171,8 @@ export default {
                 hem: false,
                 img: '',
             },
+
+            parkoutPageOn: true,
         };
     },
     methods: {
@@ -278,6 +296,10 @@ export default {
             }
             this.checkTshirtValue();
         },
+        closeParkourMenu() {
+            this.showParkourClicked = false;
+            this.removeClickListener();
+        },
     },
     computed: {
         finalTshirtSrc() {
@@ -315,10 +337,10 @@ export default {
 
         if (this.tshirtSrc.includes('white')) {
             this.customization.color = 'WHITE';
-        } 
+        }
 
         console.log("tshirtSrc:", this.tshirtSrc);
-console.log("FINAL:", this.finalTshirtSrc);
+        console.log("FINAL:", this.finalTshirtSrc);
 
     },
 
@@ -500,9 +522,13 @@ template {
     justify-content: center;
     align-items: center;
     z-index: 2000;
+
 }
 
 .illustrationOptionsClicked {
+
+
+
     width: 30%;
     display: flex;
     flex-direction: column;
@@ -724,4 +750,64 @@ input:checked+.slider:before {
     transform: translateX(90px);
     background-color: white;
 }
+
+#parkourButtonClicked {
+    width: 100vw;
+    height: 110vh;
+    background-color: rgba(134, 136, 139, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(10px);
+
+
+
+    position: absolute;
+    top: 0;
+    z-index: 100000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#window {
+    width: 70%;
+    height: 80%;
+    border-radius: 30px;
+
+    background-color: white;
+    border: black 1px solid;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#window h2 {
+
+}
+
+#listOfParkour {
+    display: flex;
+}
+
+#closeParkourMenu {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+
+    width: 40px;
+    height: 40px;
+    background-color: red;
+}
+
+
+
+ .parkoursOnFrontTshirt {
+    width: 20%;
+    border: 2px solid black; 
+    border-radius: 30px;
+ }
 </style>
