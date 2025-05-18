@@ -3,7 +3,7 @@
   <div :style="{ display: displayMenu ? 'flex' : 'none' }" id="startPage">
 
 
-    <button @click="startGame">Jouer au jeux !</button>
+    <button @click="startGame"><span>Jouer au jeux !</span></button>
 
   </div>
   <div :style="{ display: displayGame ? 'block' : 'none' }" id="app">
@@ -343,28 +343,48 @@ export default {
 
 
 button {
-  background: linear-gradient(135deg, #987eff, #8c75ff);
+  width: 250px;
+  height: 100px;
+  background-color: #73020C;
   color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 15px 30px;
+  font-family: "MonoManiac One";
+  font-size: 40px;
   border: none;
-  border-radius: 50px;
+  overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.3s;
-  outline: none;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  box-shadow: 0px 5px 15px rgba(117, 129, 255, 0.4);
+  margin: 4rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: solid 3px #000000;
+  position: relative;
 }
 
-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 10px 20px rgba(117, 119, 255, 0.6);
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 1;
+  transition: left 0.4s ease;
 }
 
-button:active {
-  transform: translateY(1px);
-  box-shadow: 0px 2px 10px rgba(124, 117, 255, 0.5);
+button:hover::before {
+  left: 0;
 }
+
+button span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+button:hover span {
+  color: #73020C;
+}
+
 </style>
