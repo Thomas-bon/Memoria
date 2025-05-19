@@ -175,12 +175,15 @@ export default {
     },
   },
   mounted() {
-    // Démarre le chronomètre
+    const isOnGamePage = this.$route.name === 'Game';
+    if (isOnGamePage) {
+      this.interval = setInterval(() => {
+        if (this.displayGame) {
+          this.generateCube();
+        }
+      }, 200);
+    }
 
-    // Génère des cubes toutes les secondes
-    this.interval = setInterval(() => {
-      this.generateCube();
-    }, 200);
 
   },
   beforeDestroy() {
@@ -271,7 +274,7 @@ export default {
   margin-top: 10vh;
 }
 
-.startGamePage{
+.startGamePage {
   display: flex;
   flex-direction: column;
   justify-content: center;
