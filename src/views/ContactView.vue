@@ -102,8 +102,14 @@ body {
 }
 
 #tshirtNew {
-  width: 100%;
-  height: 60%;
+  width: 70%;
+  height: auto;
+}
+
+#news a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #formAndNews {
