@@ -25,6 +25,9 @@ export default {
                 phone: '',
             },
             email: '',
+
+            promoCode: '',
+            discountPercent: 0,
         };
     },
     methods: {
@@ -39,7 +42,8 @@ export default {
         },
         finalizePayment() {
             this.sendOrderEmail();
-            localStorage.removeItem('cart');
+            cartStore.clearCart();
+            localStorage.removeItem('reduceCode');
             this.cartItems = [];
             // Optionnel : notifier l'utilisateur
             alert("Merci pour votre commande !");
@@ -110,6 +114,30 @@ export default {
                     console.error('Erreur d\'envoi de l\'email:', error);
                 });
         },
+
+        applyPromoCode() {
+            if (this.promoCode === 'SRG8-645D-FGCX') {
+                this.discountPercent = 10;
+                alert('Code promo appliqué ! 10% de réduction.');
+            }else if (this.promoCode === '8GRV-902I-OPED') {
+                this.discountPercent = 20;
+                alert('Code promo appliqué ! 20% de réduction.');   
+            }else {
+                this.discountPercent = 0;
+                alert('Code promo invalide.');
+            }
+
+        },
+
+        getTheCodeFromStorage() {
+            let reducecode = localStorage.getItem("reduceCode");
+
+            if (reducecode && reducecode.length > 0) {
+                this.promoCode = reducecode;
+                this.applyPromoCode();
+            }
+
+        }
     },
     computed: {
         totalPrice() {
@@ -117,15 +145,28 @@ export default {
                 return sum + item.price * item.quantity;
             }, 0);
         },
+        totalAfterDiscount() {
+            if (this.discountPercent > 0) {
+                return this.totalPrice * (1 - this.discountPercent / 100);
+            }
+            return this.totalPrice;
+        },
+        shippingCost() {
+            // Livraison gratuite si le total après réduction atteint 100 €
+            return this.totalAfterDiscount >= 100 ? 0 : this.delivery;
+        },
         totalPriceWithTravel() {
-            const shippingCost = this.totalPrice + this.delivery;
-            console.log(shippingCost);
-            return shippingCost;
+            const total = this.totalAfterDiscount + this.shippingCost;
+            return total.toFixed(2);
         }
     },
+
+
     mounted() {
         const cartData = JSON.parse(localStorage.getItem('cart')) || [];
         this.cartItems = cartData;
+
+        this.getTheCodeFromStorage();
     },
 };
 </script>
@@ -205,8 +246,11 @@ export default {
                         <div id="prices">
                             <h2>Montant du panier</h2><span>{{ totalPrice }}€</span>
                         </div>
-                        <div id="shipping">
-                            <h2>Livraison</h2><span>10€</span>
+                        <div class="shipping">
+                            <h2>Livraison</h2><span>{{ shippingCost }}€</span>
+                        </div>
+                        <div class="shipping">
+                            <h2>Réduction</h2><span>{{ discountPercent }}%</span>
                         </div>
                         <div id="total">
                             <h1>TOTAL</h1><span>{{ totalPriceWithTravel }}€</span>
@@ -214,7 +258,8 @@ export default {
                     </div>
 
                     <div id="promoCode">
-                        <input id="inputCode" type="text" placeholder="CODE PROMO :">
+                        <input id="inputCode" type="text" placeholder="CODE PROMO :" v-model="promoCode"
+                            @blur="applyPromoCode">
                     </div>
 
                     <div class="paymentButton">
@@ -530,7 +575,7 @@ template {
     font-family: "InterRegular";
 }
 
-#shipping {
+.shipping {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -540,12 +585,12 @@ template {
     font-size: 1.1em;
 }
 
-#shipping>h2 {
+.shipping>h2 {
     font-size: 1.3em;
     font-family: "InterMedium";
 }
 
-#shipping>span {
+.shipping>span {
     font-size: 1.3em;
     font-family: "InterRegular";
 }

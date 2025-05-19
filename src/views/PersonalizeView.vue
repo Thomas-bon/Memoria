@@ -89,8 +89,7 @@
 
                         <!-- Affiche le parkour uniquement si sélectionné et sur la face avant -->
                         <img v-if="selectedParkour && tshirtValue === 1" :src="selectedParkour" alt="Parkour"
-                            class="parkour-overlay"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none;" />
+                            class="parkour-overlay" />
 
                         <p v-if="tshirtValue === 2" id="chronoTshirt"
                             :style="{ color: tshirtColor === 'BLACK' ? 'WHITE' : 'BLACK' }">
@@ -142,8 +141,11 @@ export default {
             inputSeconde: '',
 
             parkours: {
-                parkour1: '/src/assets/pictures/parkours/parkour1.webp',
-                parkour2: '/src/assets/pictures/parkours/parkour2.webp',
+                Lyon: '/src/assets/pictures/parkours/Lyon.png',
+                Nantes: '/src/assets/pictures/parkours/Nantes.png',
+                Paris: '/src/assets/pictures/parkours/Paris.png',
+                Toulouse: '/src/assets/pictures/parkours/Toulouse.png',
+
             },
 
             customization: {
@@ -176,7 +178,7 @@ export default {
                 size: pendingProduct.size,
                 quantity: pendingProduct.quantity,
                 price: pendingProduct.price,
-                image: pendingProduct.image,
+                image: this.tshirtSrc,
                 customization: this.customization,
             }
 
@@ -795,7 +797,9 @@ input:checked+.slider:before {
 
     width: 40px;
     height: 40px;
-    background-color: red;
+    /* background-color: red; */
+
+
 }
 
 
@@ -814,5 +818,17 @@ input:checked+.slider:before {
     opacity: 100%;
     width: 250px;
     height: 250px;
+}
+
+.parkour-overlay {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 40%;
+    height: 40%;
+    object-fit: contain;
+    pointer-events: none;
 }
 </style>

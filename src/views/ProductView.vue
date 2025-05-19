@@ -19,7 +19,7 @@ export default {
         const products = [
             {
                 id: 'annecy-black',
-                name: 'T-shirt Annecy Noir',
+                name: 'T-shirt Annecy',
                 price: 40,
                 img1: new URL('../assets/pictures/tshirt/tshirt_annecy_default_black_1.png', import.meta.url).href,
                 img2: new URL('../assets/pictures/tshirt/tshirt_annecy_default_black_2.png', import.meta.url).href,
@@ -28,7 +28,7 @@ export default {
             },
             {
                 id: 'annecy-white',
-                name: 'T-shirt Annecy Blanc',
+                name: 'T-shirt Annecy',
                 price: 40,
                 img1: new URL('../assets/pictures/tshirt/tshirt_annecy_default_white_1.png', import.meta.url).href,
                 img2: new URL('../assets/pictures/tshirt/tshirt_annecy_default_white_2.png', import.meta.url).href,
@@ -37,7 +37,7 @@ export default {
             },
             {
                 id: 'seville-black',
-                name: 'T-shirt Seville Noir',
+                name: 'T-shirt Seville',
                 price: 40,
                 img1: new URL('../assets/pictures/tshirt/tshirt_seville_default_black_1.png', import.meta.url).href,
                 img2: new URL('../assets/pictures/tshirt/tshirt_seville_default_black_2.png', import.meta.url).href,
@@ -46,7 +46,7 @@ export default {
             },
             {
                 id: 'seville-white',
-                name: 'T-shirt Seville Blanc',
+                name: 'T-shirt Seville',
                 price: 40,
                 img1: new URL('../assets/pictures/tshirt/tshirt_seville_default_white_1.png', import.meta.url).href,
                 img2: new URL('../assets/pictures/tshirt/tshirt_seville_default_white_2.png', import.meta.url).href,
@@ -55,7 +55,7 @@ export default {
             },
             {
                 id: 'default-black',
-                name: 'T-shirt Défaut Noir',
+                name: 'T-shirt Mémoria',
                 price: 40,
                 img1: new URL('../assets/pictures/tshirt/tshirt_default_black_1.png', import.meta.url).href,
                 img2: new URL('../assets/pictures/tshirt/tshirt_default_black_2.png', import.meta.url).href,

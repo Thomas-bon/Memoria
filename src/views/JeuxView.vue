@@ -24,17 +24,29 @@
   </div>
 
   <div :style="{ display: displayResult ? 'flex' : 'none' }" id="resultGame">
-    <div class="result-card">
-      <img src="../assets/pictures/game/victoryMedal.svg" alt="Score" class="result-image">
-      <h2>VICTOIRE !</h2>
-      <p>Bravo tu as gagner un code promo de 20% !</p>
-      <div id="promoCode">
-        <img src="../assets/pictures/game/horizontalArrow.svg" alt="">
-        <div id="codeContainer">
-          <p id="code">SRG8-645D-FGCX</p>
+    <div v-if="percentReduce > 0">
+      <div class="result-card">
+        <img src="../assets/pictures/game/victoryMedal.svg" alt="Score" class="result-image">
+
+        <h2>VICTOIRE !</h2>
+        <p>Bravo tu as gagner un code promo de {{ percentReduce }}% !</p>
+        <div id="promoCode">
+          <img src="../assets/pictures/game/horizontalArrow.svg" alt="">
+          <div id="codeContainer">
+            <p id="code">{{ codeReduce }}</p>
+          </div>
         </div>
       </div>
       <!-- <button @click="startGame">Rejouer</button> -->
+    </div>
+
+    <div v-if="percentReduce <= 0">
+      <div class="result-card">
+
+        <h2>Essais encore !</h2>
+        <p>Dommage... Réessayez pour tenter de gagner 20% de réduction !</p>
+
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +67,8 @@ export default {
       displayGame: false,
       displayMenu: true,
       displayResult: false,
+      percentReduce: 0,
+      codeReduce: '',
     };
   },
   computed: {
@@ -85,6 +99,7 @@ export default {
       this.displayMenu = false;
       this.displayGame = false;
       this.displayResult = true;
+      this.whatReduceForScore();
       this.stopTimer();
       clearInterval(this.cubeInterval);
     },
@@ -161,7 +176,7 @@ export default {
     // Réinitialiser le chronomètre
     resetTimer() {
       this.stopTimer();
-      this.time = 25;
+      this.time = 12;
     },
 
     startGeneratingCubes() {
@@ -172,6 +187,19 @@ export default {
           this.updateCubes();
         }
       }, 200);
+    },
+
+    whatReduceForScore() {
+      if (this.score >= 5) {
+        this.percentReduce = 10
+        this.codeReduce = 'SRG8-645D-FGCX'
+      }
+      if (this.score >= 15) {
+        this.percentReduce = 20
+        this.codeReduce = '8GRV-902I-OPED'
+      } 
+
+      localStorage.setItem("reduceCode", this.codeReduce)
     },
   },
   mounted() {
