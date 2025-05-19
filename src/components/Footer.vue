@@ -6,13 +6,13 @@
         <div id="privacyFooter">
             <div></div>
             <div id="terms_cookies_privacy">
-                <a href="" class="privacy">Terms</a>
-                <a href="" class="privacy">Privacy</a>
+                <a href="" class="privacy">Termes</a>
+                <a href="" class="privacy">Confidentialité</a>
                 <a href="" class="privacy">Cookies</a>
             </div>
         </div>
         <div id="linkFooter">
-            <h2>Follow us</h2>
+            <h2>Rejoignez nous</h2>
             <div id="allSocialMedia">
                 <a href="" class="iconSocialMedia">
                     <img src="../assets/pictures/logo_Social_Media/Facebook.svg" alt="Facebook">
@@ -104,6 +104,7 @@ footer {
     text-align: start;
     font-family: "Inter";
     font-weight: 400;
+    font-size: 1.2em;
 }
 
 #allSocialMedia {

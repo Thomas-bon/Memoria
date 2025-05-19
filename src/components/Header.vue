@@ -22,7 +22,7 @@
           </div>
           <div id="Contacts">
             <RouterLink :to="{ name: 'Contact' }">
-              <h1>Contacts</h1>
+              <h1>Contact</h1>
             </RouterLink>
           </div>
         </div>

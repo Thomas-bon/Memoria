@@ -405,6 +405,7 @@ template {
     font-weight: bold;
     text-transform: uppercase;
     background-color: #D9D9D9;
+    width: 90px;
 }
 
 .steps p {
