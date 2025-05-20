@@ -37,6 +37,9 @@
                         <p>Chrono</p>
                     </div>
                     <div v-show="showChronoClicked" class="option" id="chronoClicked" ref="chronoClicked">
+                        <input type="text" name="hour" id="hour" maxlength="2" placeholder="00"
+                            v-model="inputHour" />
+                        <p>:</p>
                         <input type="text" name="minute" id="minute" maxlength="2" placeholder="00"
                             v-model="inputMinute" />
                         <p>:</p>
@@ -87,13 +90,12 @@
                     <div class="shirt-container" style="position: relative;">
                         <img :src="finalTshirtSrc" alt="T-shirt" />
 
-                        <!-- Affiche le parkour uniquement si sélectionné et sur la face avant -->
                         <img v-if="selectedParkour && tshirtValue === 1" :src="selectedParkour" alt="Parkour"
                             class="parkour-overlay" />
 
                         <p v-if="tshirtValue === 2" id="chronoTshirt"
                             :style="{ color: tshirtColor === 'BLACK' ? 'WHITE' : 'BLACK' }">
-                            {{ `${inputMinute} ' ${inputSeconde}` }}
+                            {{ `${inputHour}'${inputMinute}'${inputSeconde}` }}
                         </p>
                     </div>
 
@@ -139,6 +141,7 @@ export default {
             tshirtValue: '1',
             inputMinute: '',
             inputSeconde: '',
+            inputHour: '',
 
             parkours: {
                 Lyon: '/src/assets/pictures/parkours/Lyon.png',
@@ -151,6 +154,7 @@ export default {
             customization: {
                 color: 'Black',
                 chrono: {
+                    hour: '00',
                     minute: '00',
                     seconde: '00',
                 },
@@ -187,6 +191,7 @@ export default {
         },
 
         updateChrono() {
+            this.customization.chrono.hour = this.inputHour;
             this.customization.chrono.minute = this.inputMinute;
             this.customization.chrono.seconde = this.inputSeconde;
         },
@@ -349,6 +354,9 @@ export default {
             this.updateChrono();  // Met à jour chrono à chaque changement de seconde
             // console.log("Le flocage des secondes à été mis à jour !")
         },
+        inputHour(newValue) {
+            this.updateChrono();
+        },
 
         withEmbroidery(newValue) {
             this.customization.embroidery = newValue;
@@ -464,7 +472,7 @@ template {
 }
 
 #chronoClicked {
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -533,7 +541,7 @@ template {
 
 #options {
     height: 80%;
-    width: 380px;
+    /* width: 380px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -799,9 +807,17 @@ input:checked+.slider:before {
     height: 40px;
     /* background-color: red; */
 
+    background-image: url(../components/Icons/croix.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
 
+    transition: transform 0.6s ease-in-out;
 }
 
+#closeParkourMenu:hover {
+   transform: rotate(90deg);
+}
 
 
 .parkoursOnFrontTshirt {
