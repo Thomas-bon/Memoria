@@ -36,6 +36,27 @@ export default {
             this.currentStep = 2;
         },
         confirmShipping() {
+            // Vérifie que tous les champs sont remplis
+            const {
+                firstName,
+                lastName,
+                address,
+                postalCode,
+                city
+            } = this.deliveryForm;
+
+            if (
+                !firstName.trim() ||
+                !lastName.trim() ||
+                !address.trim() ||
+                !postalCode.toString().trim() ||
+                !city.trim() ||
+                !this.phoneNumber.trim()
+            ) {
+                alert("Veuillez remplir tous les champs de livraison.");
+                return;
+            }
+
             this.showPaymentForm = false;
             this.showBankForm = true;
             this.currentStep = 3;
@@ -102,6 +123,7 @@ export default {
                 city: shippingAddress.city,
                 phone: this.phoneNumber,
                 cartItems: cartData.map(item => `${item.name} (x${item.quantity}) - €${item.price}`).join(', '),
+                deliveryPrice: this.delivery,
                 totalPrice: totalPrice,
             };
 
@@ -119,10 +141,10 @@ export default {
             if (this.promoCode === 'SRG8-645D-FGCX') {
                 this.discountPercent = 10;
                 alert('Code promo appliqué ! 10% de réduction.');
-            }else if (this.promoCode === '8GRV-902I-OPED') {
+            } else if (this.promoCode === '8GRV-902I-OPED') {
                 this.discountPercent = 20;
-                alert('Code promo appliqué ! 20% de réduction.');   
-            }else {
+                alert('Code promo appliqué ! 20% de réduction.');
+            } else {
                 this.discountPercent = 0;
                 alert('Code promo invalide.');
             }

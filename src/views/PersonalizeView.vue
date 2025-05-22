@@ -37,8 +37,7 @@
                         <p>Chrono</p>
                     </div>
                     <div v-show="showChronoClicked" class="option" id="chronoClicked" ref="chronoClicked">
-                        <input type="text" name="hour" id="hour" maxlength="2" placeholder="00"
-                            v-model="inputHour" />
+                        <input type="text" name="hour" id="hour" maxlength="2" placeholder="00" v-model="inputHour" />
                         <p>:</p>
                         <input type="text" name="minute" id="minute" maxlength="2" placeholder="00"
                             v-model="inputMinute" />
@@ -175,6 +174,12 @@ export default {
                 console.error('Le produit en attente est introuvable dans le store!');
                 return;
             }
+            console.log(this.tshirtSrc)
+
+            let imageSrc = this.tshirtSrc;
+            if (imageSrc.endsWith('2.png')) {
+                imageSrc = imageSrc.replace('2.png','1.png')
+            }
 
             const product = {
                 id: pendingProduct.id,
@@ -182,7 +187,7 @@ export default {
                 size: pendingProduct.size,
                 quantity: pendingProduct.quantity,
                 price: pendingProduct.price,
-                image: this.tshirtSrc,
+                image: imageSrc,
                 customization: this.customization,
             }
 
@@ -633,7 +638,7 @@ template {
     display: flex;
     align-items: center;
     gap: 80px;
-    z-index: 50;
+    /* z-index: 50; */
 }
 
 .navtshirt {
@@ -816,7 +821,7 @@ input:checked+.slider:before {
 }
 
 #closeParkourMenu:hover {
-   transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 
