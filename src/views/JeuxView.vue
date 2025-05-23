@@ -29,7 +29,7 @@
         <img src="../assets/pictures/game/victoryMedal.svg" alt="Score" class="result-image">
 
         <h2>VICTOIRE !</h2>
-        <p>Bravo tu as gagner un code promo de {{ percentReduce }}% !</p>
+        <p>Bravo tu as gagné un code promo de {{ percentReduce }}% !</p>
         <div id="promoCode">
           <img src="../assets/pictures/game/horizontalArrow.svg" alt="">
           <div id="codeContainer">
@@ -190,7 +190,7 @@ export default {
     },
 
     whatReduceForScore() {
-      if (this.score >= 5) {
+      if (this.score >= 2) {
         this.percentReduce = 10
         this.codeReduce = 'SRG8-645D-FGCX'
       }
